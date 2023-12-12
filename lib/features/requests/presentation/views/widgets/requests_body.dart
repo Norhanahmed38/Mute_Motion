@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:intl/intl.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
 
 class RequestsBody extends StatefulWidget {
@@ -15,7 +16,7 @@ class RequestsBody extends StatefulWidget {
 }
 
 class _RequestsBodyState extends State<RequestsBody> {
-    bool btnPressed = false;
+  bool btnPressed = false;
 
   static var formKey = GlobalKey<FormState>();
   var locationController = TextEditingController();
@@ -100,7 +101,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                               onPressed: () {
                                 navigateTo(context, Requests());
                               },
-                              child:  Column(
+                              child: Column(
                                 children: [
                                   SizedBox(
                                     height: 8,
@@ -143,7 +144,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                                 backgroundColor: kPrimaryColor,
                               ),
                               onPressed: () {},
-                              child:  Column(
+                              child: Column(
                                 children: [
                                   SizedBox(
                                     height: 8,
@@ -312,22 +313,23 @@ class _RequestsBodyState extends State<RequestsBody> {
                 SizedBox(
                   height: 10,
                 ),
-                DropdownButtonFormField(
-                  dropdownColor: Colors.grey[200],
-                  value: dropdownvalue,
-                  icon: Icon(Icons.arrow_drop_down),
-                  items: items.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(items),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownvalue = newValue!;
-                    });
-                  },
-                ),
+                // DropdownButtonFormField(
+                //   dropdownColor: Colors.grey[200],
+                //   value: dropdownvalue,
+                //   icon: Icon(Icons.arrow_drop_down),
+                //   items: items.map((String items) {
+                //     return DropdownMenuItem(
+                //       value: items,
+                //       child: Text(items),
+                //     );
+                //   }).toList(),
+                //   onChanged: (String? newValue) {
+                //     setState(() {
+                //       dropdownvalue = newValue!;
+                //     });
+                //   },
+                // ),
+                CustomDropDownn(),
                 SizedBox(
                   height: 20,
                 ),
