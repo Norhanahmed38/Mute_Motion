@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../../constants.dart';
@@ -182,7 +182,7 @@ class _onBoardingState extends State<onBoardingViewBody> {
       ),
       bottomSheet: isLastPage
           ? BottomSheet(
-            onClosing:(() => navigateTo(context, LoginScreenView())),
+            onClosing:(() => navigateTo(context, RegisterScreenView())),
             
             builder:(context) => Padding(
               padding: const EdgeInsets.all(8.0),
@@ -197,7 +197,7 @@ class _onBoardingState extends State<onBoardingViewBody> {
                           borderRadius: BorderRadius.circular(15)),
                       child: MaterialButton(
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreenView()));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreenView()));
                           },
                           child:  Text(
                             "Get Started",

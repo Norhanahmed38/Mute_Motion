@@ -6,9 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 
-class LoginScreenViewBody extends StatelessWidget {
-  LoginScreenViewBody({super.key});
+class RegisterScreenViewBody extends StatelessWidget {
+  RegisterScreenViewBody({super.key});
   final TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -87,8 +88,24 @@ class LoginScreenViewBody extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                   TextButton(
+                          onPressed: () {
+                            navigateTo(context, LoginScreenView());
+                          },
+                          child: Text(
+                            'Already have an account',
+                            style: GoogleFonts.comfortaa(
+                              fontWeight: FontWeight.w600,
+                              color: kPrimaryColor,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
                  const SizedBox(
-                    height: 35,
+                    height: 15,
                   ),
                  Divider(),
                  Text(

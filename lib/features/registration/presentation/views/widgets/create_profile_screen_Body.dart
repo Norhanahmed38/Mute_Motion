@@ -27,7 +27,11 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
   final TextEditingController lastName = TextEditingController();
 
   final TextEditingController email = TextEditingController();
-
+  final TextEditingController pass = TextEditingController();
+  final TextEditingController verifPass = TextEditingController();
+  var formKey = GlobalKey<FormState>();
+  bool showPassword = true;
+  bool showVerifPassword = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +59,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Form(
+            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -74,7 +79,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                   height: 50,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.8,
+                  height: MediaQuery.of(context).size.height * 1,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -112,6 +117,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                 color: Colors.white,
                               ),
                               child: CustomTextField(
+                                obscureText: false,
                                 controller: firstName,
                                 hintText: 'First name',
                               )),
@@ -119,29 +125,137 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              child: CustomTextField(
-                                controller: lastName,
-                                hintText: 'Last name',
-                              )),
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            child: CustomTextField(
+                              obscureText: false,
+                              controller: lastName,
+                              hintText: 'Last name',
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              child: CustomTextField(
-                                keyboardType: TextInputType.emailAddress,
-                                controller: email,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              controller: email,
+                              validator: (value) {
+                                final bool emailValid = RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(value!);
+                                if (value!.isEmpty) {
+                                  return "Email can't be empty";
+                                } else if (emailValid == false) {
+                                  return "Email format not valid";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
                                 hintText: 'Email',
-                              )),
+                                hintStyle: GoogleFonts.comfortaa(
+                                  color: Colors.black.withOpacity(0.65),
+                                  fontSize: 12,
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            child: 
+                             CustomTextField(
+                                suffix: IconButton(
+                                  icon: Icon(showPassword
+                                      ? Icons.visibility_off
+                                      : Icons.visibility),
+                                  onPressed: () {
+                                    setState(() {
+                                      showPassword = !showPassword;
+                                    });
+                                  },
+                                ),
+                                obscureText: showPassword,
+                                keyboardType: TextInputType.visiblePassword,
+                                controller: pass,
+                                hintText: 'Password',
+                              ) 
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            child: TextFormField(
+                              obscureText: showVerifPassword,
+                              keyboardType: TextInputType.visiblePassword,
+                              controller: verifPass,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Can\'t be Empty';
+                                } else if (pass.text!= verifPass.text) {
+                                   return 'Passwords aren\'t identical';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(showVerifPassword
+                                      ? Icons.visibility_off
+                                      : Icons.visibility),
+                                  onPressed: () {
+                                    setState(() {
+                                      showVerifPassword = !showVerifPassword;
+                                    });
+                                  },
+                                ),
+                                hintText: 'Verify ypur password',
+                                hintStyle: GoogleFonts.comfortaa(
+                                  color: Colors.black.withOpacity(0.65),
+                                  fontSize: 12,
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                           
+                          ),
                         ),
                         CustomDropDown(),
                         Padding(
@@ -193,10 +307,12 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                       borderRadius: BorderRadius.circular(15)),
                   child: MaterialButton(
                       onPressed: () {
-                        navigateTo(
-                          context,
-                          MainMenuScreenView(),
-                        );
+                        if (formKey.currentState!.validate()) {
+                          navigateTo(
+                            context,
+                            MainMenuScreenView(),
+                          );
+                        }
                       },
                       child: Text(
                         "Done",

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
 
 import '../../../../../core/utils/widgets/custemOTPbar.dart';
 
@@ -24,7 +24,7 @@ class OTPScreenBody extends StatelessWidget {
             iconSize: 30,
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const LoginScreenView()));
+                  builder: (context) => const RegisterScreenView()));
             },
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -60,7 +60,7 @@ class OTPScreenBody extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const LoginScreenView()));
+                      builder: (context) => const RegisterScreenView()));
                 },
                 child: Text(
                   "Edit your mobile number",
