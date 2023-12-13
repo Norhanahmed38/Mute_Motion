@@ -22,13 +22,22 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon: const Icon(Icons.arrow_back_ios, color: kPrimaryColor,), onPressed: () {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CreateProfileScreenView()));
-        }),
+        leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: kPrimaryColor,
+            ),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => CreateProfileScreenView()));
+            }),
         title: const Text(
           'Setup Credit Card',
           style: TextStyle(
-              fontSize: 21, fontFamily: 'Lato', color: kPrimaryColor,),
+            fontSize: 21,
+            fontFamily: 'Lato',
+            color: kPrimaryColor,
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -182,7 +191,7 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
               const SizedBox(
                 height: 30,
               ),
-               Container(
+              Container(
                 width: double.infinity,
                 height: 58,
                 decoration: BoxDecoration(
@@ -190,13 +199,13 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
                     borderRadius: BorderRadius.circular(15)),
                 child: MaterialButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateProfileScreenView()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CreateProfileScreenView()));
                     },
-                    child:  Text(
+                    child: Text(
                       "Add Card",
                       style: GoogleFonts.comfortaa(
-                          fontSize: 20,
-                          color: Colors.white),
+                          fontSize: 20, color: Colors.white),
                     )),
               ),
             ],

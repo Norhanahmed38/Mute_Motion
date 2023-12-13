@@ -8,7 +8,7 @@ abstract class Styles {
     fontWeight: FontWeight.bold,
     color: kPrimaryColor,
   );
- static var textStyle12 = GoogleFonts.comfortaa(
+  static var textStyle12 = GoogleFonts.comfortaa(
     fontSize: 12,
     fontWeight: FontWeight.bold,
     color: kPrimaryColor,

@@ -128,28 +128,25 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child:  Container(
-                    height: 58,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: TextButton(
-                      
-                      onPressed: () {
-                        
-                      },
-                      child: Text(
-                        'Continue',
-                        style: GoogleFonts.comfortaa(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 20,
+                    child: Container(
+                      height: 58,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: kPrimaryColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Continue',
+                          style: GoogleFonts.comfortaa(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   ),
                 ]))));
   }

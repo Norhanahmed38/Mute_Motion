@@ -21,7 +21,6 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -32,7 +31,6 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
               const SizedBox(
                 height: 5,
               ),
-              
               const Center(
                   child: Text("Login",
                       style: TextStyle(
@@ -40,7 +38,7 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                           fontFamily: 'Comfortaa',
                           fontWeight: FontWeight.bold,
                           color: kPrimaryColor))),
-                          Divider(thickness: 2),
+              Divider(thickness: 2),
               const SizedBox(
                 height: 25,
               ),

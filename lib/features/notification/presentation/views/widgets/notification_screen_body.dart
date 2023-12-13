@@ -44,26 +44,30 @@ class NotificationScreenBody extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 20, fontFamily: 'Lato', color: kPrimaryColor),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 5,
                 ),
-                 Text(
+                Text(
                   'Check out your newest orders to take one of them',
                   style: TextStyle(
-                      fontSize: 16, fontFamily: 'Comfortaa', color: kPrimaryColor),
+                      fontSize: 16,
+                      fontFamily: 'Comfortaa',
+                      color: kPrimaryColor),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 5,
                 ),
                 Text(
                   '6:00 pm - 16 March',
                   style: TextStyle(
-                      fontSize: 12, fontFamily: 'Comfortaa', color: kPrimaryColor),
+                      fontSize: 12,
+                      fontFamily: 'Comfortaa',
+                      color: kPrimaryColor),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 10,
                 ),
-                 Divider(
+                Divider(
                   color: Colors.grey,
                   thickness: 1,
                   height: 30,
@@ -71,33 +75,35 @@ class NotificationScreenBody extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                 Text(
+                Text(
                   'Welcome to our team, Hassan!',
                   style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Lato',
+                      fontSize: 20, fontFamily: 'Lato', color: kPrimaryColor),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'We are happy to join with us, get your orders now.',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'Comfortaa',
                       color: kPrimaryColor),
                 ),
                 SizedBox(
                   height: 5,
                 ),
-                 Text(
-                  'We are happy to join with us, get your orders now.',
-                  style: TextStyle(
-                      fontSize: 16, fontFamily: 'Comfortaa', color: kPrimaryColor),
-                ),
-                 SizedBox(
-                  height: 5,
-                ),
-                 Text(
+                Text(
                   '8:00 pm - 15 March',
                   style: TextStyle(
-                      fontSize: 12, fontFamily: 'Comfortaa', color: kPrimaryColor),
+                      fontSize: 12,
+                      fontFamily: 'Comfortaa',
+                      color: kPrimaryColor),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 10,
                 ),
-                 Divider(
+                Divider(
                   color: Colors.grey,
                   thickness: 1,
                   height: 30,

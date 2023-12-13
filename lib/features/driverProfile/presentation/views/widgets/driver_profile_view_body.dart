@@ -86,125 +86,127 @@ class DriverProfileViewBody extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     FaIcon(FontAwesomeIcons.solidStar,
-                    color: Color(0xffF7B731),
-                    size: 15,),
+                    FaIcon(
+                      FontAwesomeIcons.solidStar,
+                      color: Color(0xffF7B731),
+                      size: 15,
+                    ),
                     Text(
-                  "4.9 (123 Reviewers)",
-                  style: GoogleFonts.comfortaa(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black.withOpacity(0.7),
-                  ),
-                ),
+                      "4.9 (123 Reviewers)",
+                      style: GoogleFonts.comfortaa(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black.withOpacity(0.7),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(
                   height: 34,
                 ),
-                  Container(
-                      margin:
-                            EdgeInsets.only(right: 22,left: 10),
-                            //padding: EdgeInsets.all(8),
-                    width: double.infinity,
-                    height: 110,
-                    decoration: BoxDecoration(
-                        color: const Color(0xff003248),
-                        borderRadius: BorderRadius.circular(15)),                     
-                        child: 
-                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                               children: [
-                                 Text(
-                                  "Toyota Corolla",
-                                  style: GoogleFonts.comfortaa(fontSize: 7, color: Colors.white),
-                        ),
-                        
-                        Text(
-                                  "Color: white   Model: 2020 ",
-                                  style: GoogleFonts.comfortaa(fontSize: 7, color: Colors.white),
-                        ),
-                         Text(
-                                  "( Automatic - Comfort - 4 seats)",
-                                  
-                                  style: GoogleFonts.comfortaa(fontSize: 7, color: Colors.white),
-                        ),
-                               ],
-                             ),
-                             Container(
-                              child: Image.asset('assets/images/car 1.png'),
-                             ),
-                           ],
-                         ),
+                Container(
+                  margin: EdgeInsets.only(right: 22, left: 10),
+                  //padding: EdgeInsets.all(8),
+                  width: double.infinity,
+                  height: 110,
+                  decoration: BoxDecoration(
+                      color: const Color(0xff003248),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Toyota Corolla",
+                            style: GoogleFonts.comfortaa(
+                                fontSize: 7, color: Colors.white),
+                          ),
+                          Text(
+                            "Color: white   Model: 2020 ",
+                            style: GoogleFonts.comfortaa(
+                                fontSize: 7, color: Colors.white),
+                          ),
+                          Text(
+                            "( Automatic - Comfort - 4 seats)",
+                            style: GoogleFonts.comfortaa(
+                                fontSize: 7, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        child: Image.asset('assets/images/car 1.png'),
+                      ),
+                    ],
                   ),
-                 const SizedBox(
+                ),
+                const SizedBox(
                   height: 34,
                 ),
-                  Container(
-                      height: 58,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
+                Container(
+                  height: 58,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const FaIcon(FontAwesomeIcons.solidEnvelope),
+                      const SizedBox(
+                        width: 5,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const FaIcon(FontAwesomeIcons.solidEnvelope),
-
-                         const SizedBox(width: 5,),
-                            Text(
-                              'hassan.mohamed@gmail.com',
-                              style: GoogleFonts.comfortaa(
-                                fontWeight: FontWeight.w600,
-                                color: kPrimaryColor,
-                                fontSize: 10,
-                              ),
-                            ),
-                          
-                        ],
+                      Text(
+                        'hassan.mohamed@gmail.com',
+                        style: GoogleFonts.comfortaa(
+                          fontWeight: FontWeight.w600,
+                          color: kPrimaryColor,
+                          fontSize: 10,
+                        ),
                       ),
-                    ),
-                   const SizedBox(
-                      height: 20,
-                    ),
-                   Container(
-                      height: 58,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 58,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const FaIcon(FontAwesomeIcons.phone),
+                      const SizedBox(
+                        width: 5,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const FaIcon(FontAwesomeIcons.phone),
-                          const SizedBox(width: 5,),
-                         Text(
-                              '0100123456',
-                              style: GoogleFonts.comfortaa(
-                                fontWeight: FontWeight.w600,
-                                color: kPrimaryColor,
-                                fontSize: 10,
-                              ),
-                            ),
-                         
-                        ],
+                      Text(
+                        '0100123456',
+                        style: GoogleFonts.comfortaa(
+                          fontWeight: FontWeight.w600,
+                          color: kPrimaryColor,
+                          fontSize: 10,
+                        ),
                       ),
-                    ),
-                   const SizedBox(
-                      height: 80,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                         Container(
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 80,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
                       height: 58,
                       width: 150,
                       decoration: BoxDecoration(
@@ -212,23 +214,21 @@ class DriverProfileViewBody extends StatelessWidget {
                         color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child:
-                         Center(
-                           child: TextButton(
-                            onPressed: (){},
-                             child: Text(
-                                  'Show Map',
-                                  style: GoogleFonts.comfortaa(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                           ),
-                         ),
-                       
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Show Map',
+                            style: GoogleFonts.comfortaa(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                     Container(
+                    Container(
                       height: 58,
                       width: 150,
                       decoration: BoxDecoration(
@@ -236,24 +236,22 @@ class DriverProfileViewBody extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      child:
-                         Center(
-                           child: TextButton(
-                            onPressed: (){},
-                             child: Text(
-                                  'Message',
-                                  style: GoogleFonts.comfortaa(
-                                    fontWeight: FontWeight.w600,
-                                    color: kPrimaryColor,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                           ),
-                         ),
-                       
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Message',
+                            style: GoogleFonts.comfortaa(
+                              fontWeight: FontWeight.w600,
+                              color: kPrimaryColor,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                      ],
-                    ),
+                  ],
+                ),
               ],
             ),
           ),

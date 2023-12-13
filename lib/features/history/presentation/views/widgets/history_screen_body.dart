@@ -7,7 +7,7 @@ import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_
 class HistoryScreenBody extends StatelessWidget {
   const HistoryScreenBody({super.key});
 
- @override
+  @override
   Widget build(BuildContext context) {
     int num = 1;
 
@@ -159,7 +159,7 @@ class HistoryScreenBody extends StatelessWidget {
                             ),
                             const Text(
                               'Elfath Street-Nasr City-Cairo',
-                              style:  TextStyle(
+                              style: TextStyle(
                                 color: kPrimaryColor,
                                 fontFamily: 'Comfortaa',
                                 fontSize: 14,
@@ -558,5 +558,4 @@ class HistoryScreenBody extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -85,28 +85,28 @@ class OTPScreenBody extends StatelessWidget {
               const SizedBox(
                 height: 79,
               ),
-             Container(
-                    height: 58,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: TextButton(
-                      
-                      onPressed: () {
-                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CreateProfileScreenView()));
-                      },
-                      child: Text(
-                        'Continue',
-                        style: GoogleFonts.comfortaa(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
+              Container(
+                height: 58,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const CreateProfileScreenView()));
+                  },
+                  child: Text(
+                    'Continue',
+                    style: GoogleFonts.comfortaa(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 20,
                     ),
                   ),
+                ),
+              ),
               const SizedBox(
                 height: 30,
               ),

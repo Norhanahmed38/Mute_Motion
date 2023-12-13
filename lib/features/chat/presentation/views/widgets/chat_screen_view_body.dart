@@ -50,7 +50,6 @@ class ChatScreenViewBody extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                 
                   children: const [
                     chatItem(text: 'Hello'),
                     SizedBox(
@@ -75,38 +74,38 @@ class ChatScreenViewBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 40,
-                  width: 240,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                  ),
-                  child: TextFormField(
-                    controller: msgController,
-                    decoration: InputDecoration(
-                      hintText: 'Message',
-                      hintStyle: GoogleFonts.comfortaa(
-                        color: Colors.black.withOpacity(0.65),
-                        fontSize: 12,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 240,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
                       ),
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
+                      child: TextFormField(
+                        controller: msgController,
+                        decoration: InputDecoration(
+                          hintText: 'Message',
+                          hintStyle: GoogleFonts.comfortaa(
+                            color: Colors.black.withOpacity(0.65),
+                            fontSize: 12,
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                IconButton(
-                    onPressed: () {},
-                    icon: const FaIcon(
-                      FontAwesomeIcons.solidPaperPlane,
-                      color: Colors.white,
-                    ))
-              ]),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const FaIcon(
+                          FontAwesomeIcons.solidPaperPlane,
+                          color: Colors.white,
+                        ))
+                  ]),
             ),
           ],
         ),

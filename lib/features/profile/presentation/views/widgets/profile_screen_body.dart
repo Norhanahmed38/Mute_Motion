@@ -5,7 +5,7 @@ import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 
 class ProfileScreenViewBody extends StatelessWidget {
-   ProfileScreenViewBody({super.key});
+  ProfileScreenViewBody({super.key});
 
   var nameController = TextEditingController();
   var emailController = TextEditingController();

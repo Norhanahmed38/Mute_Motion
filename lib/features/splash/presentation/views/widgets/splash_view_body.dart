@@ -21,29 +21,27 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     super.initState();
     navigateToOnboarding();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       color: kPrimaryColor,
-      child: Center(
-        child:Image.asset(AssetsData.logo)
-      ),
+      child: Center(child: Image.asset(AssetsData.logo)),
     );
   }
+
   void navigateToOnboarding() {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        
-       Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context)=> OnBoardingView())
-                  );
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => OnBoardingView()));
       },
     );
   }

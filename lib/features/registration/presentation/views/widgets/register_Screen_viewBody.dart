@@ -60,7 +60,6 @@ class RegisterScreenViewBody extends StatelessWidget {
                     decoration: const InputDecoration(
                       hintText: "+20 1111111111",
                       suffixIcon: Icon(Icons.person),
-                      
                     ),
                   ),
                   const SizedBox(
@@ -74,9 +73,9 @@ class RegisterScreenViewBody extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: TextButton(
-                      
                       onPressed: () {
-                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const OTPScreenView()));
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const OTPScreenView()));
                       },
                       child: Text(
                         'Continue',
@@ -91,34 +90,35 @@ class RegisterScreenViewBody extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                   TextButton(
-                          onPressed: () {
-                            navigateTo(context, LoginScreenView());
-                          },
-                          child: Text(
-                            'Already have an account',
-                            style: GoogleFonts.comfortaa(
-                              fontWeight: FontWeight.w600,
-                              color: kPrimaryColor,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                 const SizedBox(
+                  TextButton(
+                    onPressed: () {
+                      navigateTo(context, LoginScreenView());
+                    },
+                    child: Text(
+                      'Already have an account',
+                      style: GoogleFonts.comfortaa(
+                        fontWeight: FontWeight.w600,
+                        color: kPrimaryColor,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
                     height: 15,
                   ),
-                 Divider(),
-                 Text(
-                  'or',
-                        style: GoogleFonts.comfortaa(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black.withOpacity(0.5),
-                          fontSize: 15,
-                        ),),
-                 const SizedBox(
+                  Divider(),
+                  Text(
+                    'or',
+                    style: GoogleFonts.comfortaa(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black.withOpacity(0.5),
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(
                     height: 20,
                   ),
-                 Container(
+                  Container(
                     height: 58,
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -131,7 +131,6 @@ class RegisterScreenViewBody extends StatelessWidget {
                       children: [
                         FaIcon(FontAwesomeIcons.solidEnvelope),
                         TextButton(
-                          
                           onPressed: () {},
                           child: Text(
                             'Continue with Email',
@@ -145,10 +144,10 @@ class RegisterScreenViewBody extends StatelessWidget {
                       ],
                     ),
                   ),
-                 const SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                 Container(
+                  Container(
                     height: 58,
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -161,7 +160,6 @@ class RegisterScreenViewBody extends StatelessWidget {
                       children: [
                         FaIcon(FontAwesomeIcons.apple),
                         TextButton(
-                          
                           onPressed: () {},
                           child: Text(
                             'Continue with Apple',
@@ -175,10 +173,10 @@ class RegisterScreenViewBody extends StatelessWidget {
                       ],
                     ),
                   ),
-                 const SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                 Container(
+                  Container(
                     height: 58,
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -191,7 +189,6 @@ class RegisterScreenViewBody extends StatelessWidget {
                       children: [
                         FaIcon(FontAwesomeIcons.google),
                         TextButton(
-                          
                           onPressed: () {},
                           child: Text(
                             'Continue with Google',

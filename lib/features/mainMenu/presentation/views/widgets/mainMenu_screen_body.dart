@@ -15,7 +15,7 @@ class MainMenuScreenBody extends StatefulWidget {
 }
 
 class _MainMenuScreenBodyState extends State<MainMenuScreenBody> {
- int _selectedIndex = 0;
+  int _selectedIndex = 0;
   final _screens = [
     Requests(),
     HistoryScreenEmptyBody(),

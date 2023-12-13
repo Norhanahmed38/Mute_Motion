@@ -95,7 +95,7 @@ class NavDrawer extends StatelessWidget {
                   ),
                   trailing: IconButton(
                     onPressed: () {
-                      navigateTo(context,RequestsScreenView());
+                      navigateTo(context, RequestsScreenView());
                     },
                     icon: Icon(
                       Icons.play_arrow_rounded,
@@ -157,7 +157,7 @@ class NavDrawer extends StatelessWidget {
                   ),
                   trailing: IconButton(
                     onPressed: () {
-                      navigateTo(context,TranslatorView());
+                      navigateTo(context, TranslatorView());
                     },
                     icon: Icon(
                       Icons.play_arrow_rounded,

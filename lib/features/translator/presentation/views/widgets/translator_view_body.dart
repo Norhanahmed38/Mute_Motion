@@ -19,8 +19,7 @@ class TranslatorViewBody extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'Translator',
-          style:
-              GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
+          style: GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
         ),
         /* leading: const Icon(
           Icons.menu,
@@ -79,13 +78,13 @@ class TranslatorViewBody extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15)),
                 child: MaterialButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => TextToSign()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => TextToSign()));
                     },
-                    child:  Text(
+                    child: Text(
                       "Start Translation",
                       style: GoogleFonts.comfortaa(
-                          fontSize: 20,
-                          color: Colors.white),
+                          fontSize: 20, color: Colors.white),
                     )),
               ),
             ],

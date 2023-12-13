@@ -182,13 +182,12 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            child: 
-                             CustomTextField(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: CustomTextField(
                                 suffix: IconButton(
                                   icon: Icon(showPassword
                                       ? Icons.visibility_off
@@ -203,8 +202,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                 keyboardType: TextInputType.visiblePassword,
                                 controller: pass,
                                 hintText: 'Password',
-                              ) 
-                          ),
+                              )),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -221,8 +219,8 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Can\'t be Empty';
-                                } else if (pass.text!= verifPass.text) {
-                                   return 'Passwords aren\'t identical';
+                                } else if (pass.text != verifPass.text) {
+                                  return 'Passwords aren\'t identical';
                                 }
                                 return null;
                               },
@@ -254,7 +252,6 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                 ),
                               ),
                             ),
-                           
                           ),
                         ),
                         CustomDropDown(),

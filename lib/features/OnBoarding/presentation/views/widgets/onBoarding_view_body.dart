@@ -34,7 +34,7 @@ class _onBoardingState extends State<onBoardingViewBody> {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal:41),
+                padding: const EdgeInsets.symmetric(horizontal: 41),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -42,12 +42,11 @@ class _onBoardingState extends State<onBoardingViewBody> {
                       height: 60,
                     ),
                     const Image(
-                      width:348 ,
+                      width: 348,
                       height: 325,
-                      image:AssetImage(
-                          "assets/images/checkYourRide1.png",),
-                     
-                      
+                      image: AssetImage(
+                        "assets/images/checkYourRide1.png",
+                      ),
                     ),
                     const SizedBox(
                       height: 60,
@@ -69,13 +68,12 @@ class _onBoardingState extends State<onBoardingViewBody> {
                       child: Text(
                         "Keep track of where you are any time",
                         style: GoogleFonts.comfortaa(
-                         //fontWeight: FontWeight.bold,
+                          //fontWeight: FontWeight.bold,
                           color: kPrimaryColor,
                           fontSize: 15,
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
@@ -83,7 +81,7 @@ class _onBoardingState extends State<onBoardingViewBody> {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal:41),
+                padding: const EdgeInsets.symmetric(horizontal: 41),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -91,12 +89,12 @@ class _onBoardingState extends State<onBoardingViewBody> {
                       height: 60,
                     ),
                     const Image(
-                      width:348 ,
+                      width: 348,
                       height: 325,
-                      image:AssetImage(
-                          "assets/images/easyPayment2.png",),
-                     // borderRadius: BorderRadius.circular(10.0),
-                      
+                      image: AssetImage(
+                        "assets/images/easyPayment2.png",
+                      ),
+                      // borderRadius: BorderRadius.circular(10.0),
                     ),
                     const SizedBox(
                       height: 60,
@@ -118,13 +116,12 @@ class _onBoardingState extends State<onBoardingViewBody> {
                       child: Text(
                         "You don't have to use cash\n Simply use your visa card or any other method",
                         style: GoogleFonts.comfortaa(
-                         //fontWeight: FontWeight.bold,
+                          //fontWeight: FontWeight.bold,
                           color: kPrimaryColor,
                           fontSize: 15,
                         ),
                       ),
                     ),
-                   
                   ],
                 ),
               ),
@@ -132,7 +129,7 @@ class _onBoardingState extends State<onBoardingViewBody> {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal:41),
+                padding: const EdgeInsets.symmetric(horizontal: 41),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -140,12 +137,12 @@ class _onBoardingState extends State<onBoardingViewBody> {
                       height: 60,
                     ),
                     const Image(
-                      width:348 ,
+                      width: 348,
                       height: 325,
-                      image:AssetImage(
-                          "assets/images/carDrive3.png",),
-                     // borderRadius: BorderRadius.circular(10.0),
-                      
+                      image: AssetImage(
+                        "assets/images/carDrive3.png",
+                      ),
+                      // borderRadius: BorderRadius.circular(10.0),
                     ),
                     const SizedBox(
                       height: 30,
@@ -172,7 +169,6 @@ class _onBoardingState extends State<onBoardingViewBody> {
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
@@ -182,14 +178,13 @@ class _onBoardingState extends State<onBoardingViewBody> {
       ),
       bottomSheet: isLastPage
           ? BottomSheet(
-            onClosing:(() => navigateTo(context, RegisterScreenView())),
-            
-            builder:(context) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
+              onClosing: (() => navigateTo(context, RegisterScreenView())),
+              builder: (context) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
                       width: MediaQuery.of(context).size.width * 0.8,
                       height: 58,
                       decoration: BoxDecoration(
@@ -197,19 +192,19 @@ class _onBoardingState extends State<onBoardingViewBody> {
                           borderRadius: BorderRadius.circular(15)),
                       child: MaterialButton(
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreenView()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => RegisterScreenView()));
                           },
-                          child:  Text(
+                          child: Text(
                             "Get Started",
                             style: GoogleFonts.comfortaa(
-                                fontSize: 20,
-                                color: Colors.white),
+                                fontSize: 20, color: Colors.white),
                           )),
                     ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          )
+            )
           : Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
@@ -219,43 +214,46 @@ class _onBoardingState extends State<onBoardingViewBody> {
               child: Column(
                 children: [
                   Center(
-                          child: SmoothPageIndicator(
-                            controller: controller,
-                            count: 3,
-                            effect:  ExpandingDotsEffect(
-                              spacing: 16,
-                              dotColor: const Color(0xff003248).withOpacity(0.6),
-                              activeDotColor: kPrimaryColor,
-                            ),
-                            onDotClicked: (index) => controller.animateToPage(index,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeInOut),
-                          ),
-                        ),
+                    child: SmoothPageIndicator(
+                      controller: controller,
+                      count: 3,
+                      effect: ExpandingDotsEffect(
+                        spacing: 16,
+                        dotColor: const Color(0xff003248).withOpacity(0.6),
+                        activeDotColor: kPrimaryColor,
+                      ),
+                      onDotClicked: (index) => controller.animateToPage(index,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOut),
+                    ),
+                  ),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
                           onPressed: () => controller.jumpToPage(2),
-                          child:  Text("Skip",
-                          style: GoogleFonts.comfortaa(
+                          child: Text(
+                            "Skip",
+                            style: GoogleFonts.comfortaa(
                               fontWeight: FontWeight.w600,
                               color: kPrimaryColor,
                               fontSize: 18,
-                            ),),
+                            ),
+                          ),
                         ),
-                        
                         TextButton(
-                        onPressed: () => controller.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      ),
-                          child:  Text("Continue",
-                          style: GoogleFonts.comfortaa(
+                          onPressed: () => controller.nextPage(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          ),
+                          child: Text(
+                            "Continue",
+                            style: GoogleFonts.comfortaa(
                               fontWeight: FontWeight.w600,
                               color: Color(0xffe7ae00),
                               fontSize: 18,
-                            ),),
+                            ),
+                          ),
                         ),
                       ]),
                 ],

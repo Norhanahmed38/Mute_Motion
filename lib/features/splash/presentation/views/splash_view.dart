@@ -11,7 +11,7 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body:  SplashViewBody(),
+        body: SplashViewBody(),
       ),
     );
   }

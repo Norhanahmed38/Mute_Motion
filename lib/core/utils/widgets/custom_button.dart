@@ -23,16 +23,14 @@ class CustomButton extends StatelessWidget {
     return MaterialButton(
       color: kPrimaryColor,
       height: 58,
-      
       onPressed: onPressed,
-      child:  Text(
+      child: Text(
         text,
         style: GoogleFonts.comfortaa(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 22,
-                      ),
-       
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+          fontSize: 22,
+        ),
       ),
     );
   }

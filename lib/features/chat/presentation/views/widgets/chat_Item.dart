@@ -15,10 +15,11 @@ class chatItem extends StatelessWidget {
         color: Colors.white,
       ),
       child: TextButton(
-        onPressed: (){},
-        child: Text(text,
-        overflow: TextOverflow.ellipsis,
-         style: Styles.textStyle12,
+        onPressed: () {},
+        child: Text(
+          text,
+          overflow: TextOverflow.ellipsis,
+          style: Styles.textStyle12,
         ),
       ),
     );

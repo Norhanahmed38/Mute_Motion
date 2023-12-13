@@ -7,9 +7,9 @@ import '../../../../navdrawer/presentation/views/widgets/nav_drawer.dart';
 import '../../../../navdrawer/presentation/views/nav_drawer_view.dart';
 
 class ContactUsScreenBody extends StatelessWidget {
-   ContactUsScreenBody({super.key});
+  ContactUsScreenBody({super.key});
 
-    static var formKey = GlobalKey<FormState>();
+  static var formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();

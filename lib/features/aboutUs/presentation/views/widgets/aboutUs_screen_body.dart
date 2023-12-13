@@ -7,13 +7,13 @@ import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_
 class AboutUsScreenBody extends StatelessWidget {
   const AboutUsScreenBody({super.key});
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
       drawer: const NavDrawerView(),
       appBar: AppBar(
-        iconTheme:const IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           'About us',
           style:
@@ -49,7 +49,7 @@ class AboutUsScreenBody extends StatelessWidget {
                 height: 10,
               ),
               Image.asset('assets/images/US.jpg'),
-             const SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(

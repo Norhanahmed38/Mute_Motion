@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 const kPrimaryColor = Color(0xff003248);
 Widget myDivider() => Padding(
       padding: const EdgeInsetsDirectional.only(
@@ -75,7 +76,6 @@ Widget defaultFormFeild({
       ),
     );
 
-
- //Navigator.of(context).push(MaterialPageRoute(builder: (context) => TextToSign()));
-  //Navigator.of(context).pushReplacement(MaterialPageRoute(
-        //                builder: (context) => CreateProfileScreenView()));
+//Navigator.of(context).push(MaterialPageRoute(builder: (context) => TextToSign()));
+//Navigator.of(context).pushReplacement(MaterialPageRoute(
+//                builder: (context) => CreateProfileScreenView()));
