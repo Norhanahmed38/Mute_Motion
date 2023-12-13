@@ -4,6 +4,7 @@ import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 import 'package:intl/intl.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
 
 class Requests extends StatefulWidget {
   const Requests({super.key});
@@ -95,7 +96,7 @@ class _RequestsState extends State<Requests> {
                                 backgroundColor: kPrimaryColor,
                               ),
                               onPressed: () {},
-                              child:  Column(
+                              child: Column(
                                 children: [
                                   SizedBox(
                                     height: 8,
@@ -140,7 +141,7 @@ class _RequestsState extends State<Requests> {
                               onPressed: () {
                                 navigateTo(context, RequestsScreenView());
                               },
-                              child:  Column(
+                              child: Column(
                                 children: const [
                                   SizedBox(
                                     height: 8,
@@ -273,22 +274,23 @@ class _RequestsState extends State<Requests> {
                 SizedBox(
                   height: 10,
                 ),
-                DropdownButtonFormField(
-                  dropdownColor: Colors.grey[200],
-                  value: dropdownvalue,
-                  icon: Icon(Icons.arrow_drop_down),
-                  items: items.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(items),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownvalue = newValue!;
-                    });
-                  },
-                ),
+                // DropdownButtonFormField(
+                //   dropdownColor: Colors.grey[200],
+                //   value: dropdownvalue,
+                //   icon: Icon(Icons.arrow_drop_down),
+                //   items: items.map((String items) {
+                //     return DropdownMenuItem(
+                //       value: items,
+                //       child: Text(items),
+                //     );
+                //   }).toList(),
+                //   onChanged: (String? newValue) {
+                //     setState(() {
+                //       dropdownvalue = newValue!;
+                //     });
+                //   },
+                // ),
+                CustomDropDownn(),
                 SizedBox(
                   height: 20,
                 ),

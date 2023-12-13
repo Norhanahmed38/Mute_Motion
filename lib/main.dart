@@ -23,14 +23,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       /* theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: kPrimaryColor,
        
       ), */
       debugShowCheckedModeBanner: false,
-      home: LoginScreenView(),
+      home: SplashView(),
     );
   }
 }
+//home: Splach,
 
