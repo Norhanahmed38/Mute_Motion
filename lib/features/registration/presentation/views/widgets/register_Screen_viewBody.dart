@@ -10,7 +10,8 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/l
 
 class RegisterScreenViewBody extends StatelessWidget {
   RegisterScreenViewBody({super.key});
-  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +32,7 @@ class RegisterScreenViewBody extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Form(
+            key: formKey,
             child: Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +41,7 @@ class RegisterScreenViewBody extends StatelessWidget {
                     height: 25,
                   ),
                   Text(
-                    'Please enter your mobile number to contact us ',
+                    'Please enter your Email to contact us ',
                     style: GoogleFonts.comfortaa(
                       fontSize: 14.5,
                       color: kPrimaryColor,
@@ -49,16 +51,21 @@ class RegisterScreenViewBody extends StatelessWidget {
                     height: 25,
                   ),
                   TextFormField(
-                    controller: phoneController,
+                    controller: emailController,
                     validator: (value) {
+                      final bool emailValid = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value!);
                       if (value!.isEmpty) {
-                        return "Mobile Number can't be empty";
+                        return "Email can't be empty";
+                      } else if (emailValid == false) {
+                        return "Email format not valid";
                       }
                       return null;
                     },
                     keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(
-                      hintText: "+20 1111111111",
+                      hintText: "passenger@gmail.com",
                       suffixIcon: Icon(Icons.person),
                     ),
                   ),
@@ -74,8 +81,13 @@ class RegisterScreenViewBody extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const OTPScreenView()));
+                        if (formKey.currentState!.validate()) {
+                          setUserEmail(emailController.text);
+                          navigateTo(
+                            context,
+                            OTPScreenView(),
+                          );
+                        }
                       },
                       child: Text(
                         'Continue',

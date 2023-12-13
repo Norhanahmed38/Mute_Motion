@@ -75,7 +75,8 @@ Widget defaultFormFeild({
             : null,
       ),
     );
-
-//Navigator.of(context).push(MaterialPageRoute(builder: (context) => TextToSign()));
-//Navigator.of(context).pushReplacement(MaterialPageRoute(
-//                builder: (context) => CreateProfileScreenView()));
+String? userEmail;
+setUserEmail(String? mail) => userEmail = mail;
+String? getUserEmail() {
+  return userEmail;
+}

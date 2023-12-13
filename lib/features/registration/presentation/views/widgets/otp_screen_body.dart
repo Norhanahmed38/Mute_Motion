@@ -50,7 +50,7 @@ class OTPScreenBody extends StatelessWidget {
                 height: 56,
               ),
               Text(
-                "Please enter the 4-digit code sent via SMS on\n +20 012875576766",
+                "Please enter the 4-digit code sent via email on\n ${getUserEmail()}",
                 style:
                     GoogleFonts.comfortaa(color: kPrimaryColor, fontSize: 15),
               ),
@@ -63,7 +63,7 @@ class OTPScreenBody extends StatelessWidget {
                       builder: (context) => const RegisterScreenView()));
                 },
                 child: Text(
-                  "Edit your mobile number",
+                  "Edit your Email",
                   style: GoogleFonts.comfortaa(
                       color: kPrimaryColor,
                       fontSize: 16,

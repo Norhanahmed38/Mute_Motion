@@ -11,8 +11,8 @@ class UserModel extends Equatable {
   final String? profileImg;
   final String? password;
   final String? gender;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  final String? phone;
+  
 
   const UserModel({
     this.id,
@@ -25,8 +25,8 @@ class UserModel extends Equatable {
     this.profileImg,
     this.password,
     this.gender,
-    this.createdAt,
-    this.updatedAt,
+    this.phone,
+    
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -40,12 +40,8 @@ class UserModel extends Equatable {
         profileImg: json['profileImg'] as String?,
         password: json['password'] as String?,
         gender: json['gender'] as String?,
-        createdAt: json['createdAt'] == null
-            ? null
-            : DateTime.parse(json['createdAt'] as String),
-        updatedAt: json['updatedAt'] == null
-            ? null
-            : DateTime.parse(json['updatedAt'] as String),
+        phone: json['phone'] as String?,
+        
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,8 +55,8 @@ class UserModel extends Equatable {
         'profileImg': profileImg,
         'password': password,
         'gender': gender,
-        'createdAt': createdAt?.toIso8601String(),
-        'updatedAt': updatedAt?.toIso8601String(),
+        'phone': phone,
+        
       };
 
   @override
@@ -76,8 +72,8 @@ class UserModel extends Equatable {
       profileImg,
       password,
       gender,
-      createdAt,
-      updatedAt,
+      phone,
+      
     ];
   }
 }
