@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -10,10 +11,17 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/r
 import '../../../../../core/utils/widgets/custemOTPbar.dart';
 
 import '../../../../../core/utils/widgets/custemcodefield.dart';
+import '../../../data/repos/verification.dart';
 
 class OTPScreenBody extends StatelessWidget {
-  const OTPScreenBody({super.key});
-
+  OTPScreenBody({super.key});
+  String? email = getUserEmail();
+  final TextEditingController code1 = TextEditingController();
+  final TextEditingController code2 = TextEditingController();
+  final TextEditingController code3 = TextEditingController();
+  final TextEditingController code4 = TextEditingController();
+  String verifyCodeUrl =
+      'https://verifications.onrender.com/verifyCode';    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,11 +83,19 @@ class OTPScreenBody extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  custemcodefield(),
-                  custemcodefield(),
-                  custemcodefield(),
-                  custemcodefield()
+                children: [
+                  custemcodefield(
+                    controller: code1,
+                  ),
+                  custemcodefield(
+                    controller: code2,
+                  ),
+                  custemcodefield(
+                    controller: code3,
+                  ),
+                  custemcodefield(
+                    controller: code4,
+                  ),
                 ],
               ),
               const SizedBox(
@@ -94,8 +110,7 @@ class OTPScreenBody extends StatelessWidget {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const CreateProfileScreenView()));
+                     Verification().verifyCode(email: getUserEmail()!, code: '${code1.text}${code2.text}${code3.text}${code4.text}', context: context);
                   },
                   child: Text(
                     'Continue',
@@ -120,7 +135,9 @@ class OTPScreenBody extends StatelessWidget {
                           fontSize: 12,
                         )),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Verification().sendVerification(email: email!);
+                        },
                         child: Text(
                           "Resend OTP",
                           style: GoogleFonts.comfortaa(

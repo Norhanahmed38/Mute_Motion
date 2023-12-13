@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
+import 'package:mute_motion_passenger/features/registration/data/repos/verification.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 
@@ -82,6 +83,7 @@ class RegisterScreenViewBody extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
+                          Verification().sendVerification(email: emailController.text );
                           setUserEmail(emailController.text);
                           navigateTo(
                             context,

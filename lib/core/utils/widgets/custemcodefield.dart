@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class custemcodefield extends StatelessWidget {
-  const custemcodefield({super.key});
-
+   custemcodefield({super.key, required this.controller,});
+  TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,13 +11,20 @@ class custemcodefield extends StatelessWidget {
       decoration: BoxDecoration(
           color: Color(0xD9D9D9),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(color: Colors.black12, blurRadius: 1, spreadRadius: 2)
+          boxShadow: const [
+             BoxShadow(color: Colors.black12, blurRadius: 1, spreadRadius: 2)
           ]),
 
-      child: Padding(
+      child:  Padding(
         padding: const EdgeInsets.symmetric(horizontal: 13),
-        child: TextField(),
+        child: TextField(
+          controller: controller,
+          textAlign: TextAlign.center,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+             
+          ),
+        ),
       ),
     );
   }

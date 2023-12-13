@@ -26,7 +26,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
 
   final TextEditingController lastName = TextEditingController();
 
-  final TextEditingController email = TextEditingController();
+  final TextEditingController phone = TextEditingController();
   final TextEditingController pass = TextEditingController();
   final TextEditingController verifPass = TextEditingController();
   var formKey = GlobalKey<FormState>();
@@ -146,21 +146,17 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               color: Colors.white,
                             ),
                             child: TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              controller: email,
+                              keyboardType: TextInputType.phone,
+                              controller: phone,
                               validator: (value) {
-                                final bool emailValid = RegExp(
-                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                    .hasMatch(value!);
+                              
                                 if (value!.isEmpty) {
-                                  return "Email can't be empty";
-                                } else if (emailValid == false) {
-                                  return "Email format not valid";
-                                }
+                                  return "Phone can't be empty";
+                                } 
                                 return null;
                               },
                               decoration: InputDecoration(
-                                hintText: 'Email',
+                                hintText: 'Phone',
                                 hintStyle: GoogleFonts.comfortaa(
                                   color: Colors.black.withOpacity(0.65),
                                   fontSize: 12,
