@@ -64,7 +64,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 40,
+                  height: 30,
                 ),
                 Text(
                   'Welcome,',
@@ -87,7 +87,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                         20,
                       )),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -97,7 +97,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               AssetImage('assets/images/person.png'),
                           radius: 60,
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 10),
                         TextButton(
                           onPressed: () {},
                           child: Text(
