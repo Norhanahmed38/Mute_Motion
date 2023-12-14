@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/features/registration/data/repos/login_user.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
 
 import '../../../../mainMenu/presentation/views/mainMenu_screen_view.dart';
@@ -128,11 +129,10 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                     borderRadius: BorderRadius.circular(20)),
                 child: MaterialButton(
                     onPressed: () async {
+
+                      
                       if (formKey.currentState!.validate()) {
-                        navigateTo(
-                          context,
-                          MainMenuScreenView(),
-                        );
+                        LoginUserApi().userLogin(context: context, emailcont: emailCont, passcont: passCont);
                       }
                     },
                     child: const Text(
@@ -146,30 +146,33 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
               const SizedBox(
                 height: 15,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Don't have an account? ",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: 'Comfortaa',
-                      )),
-                  TextButton(
-                      onPressed: () {
-                        navigateTo(
-                          context,
-                          RegisterScreenView(),
-                        );
-                      },
-                      child: const Text(
-                        "Register now",
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account? ",
                         style: TextStyle(
-                            color: kPrimaryColor,
-                            fontSize: 16,
-                            fontFamily: 'Comfortaa',
-                            fontWeight: FontWeight.bold),
-                      )),
-                ],
+                          fontSize: 15,
+                          fontFamily: 'Comfortaa',
+                        )),
+                    TextButton(
+                        onPressed: () {
+                          navigateTo(
+                            context,
+                            RegisterScreenView(),
+                          );
+                        },
+                        child: const Text(
+                          "Register now",
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontSize: 16,
+                              fontFamily: 'Comfortaa',
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ],
+                ),
               )
             ],
           ),

@@ -18,6 +18,7 @@ class custemcodefield extends StatelessWidget {
       child:  Padding(
         padding: const EdgeInsets.symmetric(horizontal: 13),
         child: TextField(
+          maxLength: 1,
           controller: controller,
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,

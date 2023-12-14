@@ -21,7 +21,7 @@ class RegisterScreenViewBody extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          'Enter Mobile Number',
+          'Enter Email',
           style: GoogleFonts.lato(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class RegisterScreenViewBody extends StatelessWidget {
                       }
                       return null;
                     },
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       hintText: "passenger@gmail.com",
                       suffixIcon: Icon(Icons.person),
@@ -120,7 +120,7 @@ class RegisterScreenViewBody extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  Divider(),
+                  /* Divider(),
                   Text(
                     'or',
                     style: GoogleFonts.comfortaa(
@@ -215,7 +215,7 @@ class RegisterScreenViewBody extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
+                  ), */
                 ],
               ),
             ),

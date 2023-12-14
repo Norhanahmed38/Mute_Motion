@@ -110,7 +110,7 @@ class OTPScreenBody extends StatelessWidget {
                 ),
                 child: TextButton(
                   onPressed: () {
-                     Verification().verifyCode(email: getUserEmail()!, code: '${code1.text}${code2.text}${code3.text}${code4.text}', context: context);
+                     Verification().verifyCode(email: getUserEmail()!, code1: code1,code2: code2,code3: code3,code4: code4,context: context);
                   },
                   child: Text(
                     'Continue',
