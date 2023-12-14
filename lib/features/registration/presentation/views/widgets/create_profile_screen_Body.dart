@@ -76,10 +76,10 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                       .copyWith(fontSize: 12, color: kPrimaryColor),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 1,
+                  height: MediaQuery.of(context).size.height * 0.9,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -149,10 +149,9 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               keyboardType: TextInputType.phone,
                               controller: phone,
                               validator: (value) {
-                              
                                 if (value!.isEmpty) {
                                   return "Phone can't be empty";
-                                } 
+                                }
                                 return null;
                               },
                               decoration: InputDecoration(
@@ -288,7 +287,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 30,
                 ),
                 Container(
                   margin: EdgeInsets.only(right: 22, left: 10),
