@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
 import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
        
       ), */
       debugShowCheckedModeBanner: false,
-      home: SplashView(),
+      home: RegisterScreenView(),
     );
   }
 }
