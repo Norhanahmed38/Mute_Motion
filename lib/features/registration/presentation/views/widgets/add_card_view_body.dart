@@ -13,10 +13,11 @@ class AddCardViewBody extends StatefulWidget {
   State<AddCardViewBody> createState() => _AddCardViewBodyState();
 }
 
+TextEditingController cardNumberController = TextEditingController();
+TextEditingController expiryDateController = TextEditingController();
+TextEditingController cvvController = TextEditingController();
+
 class _AddCardViewBodyState extends State<AddCardViewBody> {
-  TextEditingController cardNumberController = TextEditingController();
-  TextEditingController expiryDateController = TextEditingController();
-  TextEditingController cvvController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
               color: kPrimaryColor,
             ),
             onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
+              Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CreateProfileScreenView()));
             }),
         title: const Text(

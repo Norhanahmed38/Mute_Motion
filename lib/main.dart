@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
        
       ), */
       debugShowCheckedModeBanner: false,
-      home: MainMenuScreenView(),
+      home: CreateProfileScreenView(),
     );
   }
 }

@@ -20,21 +20,23 @@ class LoginUserApi {
         'password': passcont.text,
       };
       Response response = await Dio().post("$loginUserUrl", data: requestBody);
-      if (response.statusCode == 200 || response.statusCode == 201){
-      print(response.data);
-      navigateTo(
-        context,
-        MainMenuScreenView(),
-      );
-      print(response.data["token"]);
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString("token", response.data["token"]);
-      String? token = prefs.getString("token");
-      print("Token is : $token");}
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print(response.data);
+        navigateTo(
+          context,
+          MainMenuScreenView(),
+        );
+        print(response.data["token"]);
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString("token", response.data["token"]);
+        String? token = prefs.getString("token");
+        print("Token is : $token");
+      }
     } catch (e) {
       if (e is DioException) {
         print(e.response?.data);
-        _showErrorDialog(context, 'Email or password aren\'t correct', emailcont, passcont);
+        _showErrorDialog(
+            context, 'Email or password aren\'t correct', emailcont, passcont);
       }
     }
   }
