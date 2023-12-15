@@ -88,7 +88,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                   height: 30,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 1,
+                  height: MediaQuery.of(context).size.height * 0.9,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -143,21 +143,6 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               obscureText: false,
                               controller: lastName,
                               hintText: 'Last name',
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            child: CustomTextField(
-                              obscureText: false,
-                              controller: email,
-                              hintText: 'E-mail',
                             ),
                           ),
                         ),
@@ -354,7 +339,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           Map<String, dynamic> requestData = {
                             "firstname": firstName.text,
                             "lastname": lastName.text,
-                            "email": email.text,
+                            "email": getUserEmail(),
                             "password": pass.text,
                             "passwordConfirm": verifPass.text,
                             "CardNumber": cardNumberController.text,
@@ -388,7 +373,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                   "Email Already Exist",
                                   firstName,
                                   lastName,
-                                  email,
+                                  // email,
                                   pass,
                                   verifPass,
                                   cardNumberController,
@@ -405,7 +390,6 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           }
                         }
                       },
-                     
                       child: Text(
                         "Done",
                         style: GoogleFonts.comfortaa(
@@ -426,7 +410,6 @@ void _showErrorDialog(
   String message,
   TextEditingController firstName,
   TextEditingController lastName,
-  TextEditingController email,
   TextEditingController pass,
   TextEditingController verifPass,
   TextEditingController cardNumberController,
@@ -460,7 +443,7 @@ void _showErrorDialog(
             onPressed: () {
               firstName.clear();
               lastName.clear();
-              email.clear();
+              // email.clear();
               verifPass.clear();
               cardNumberController.clear();
               expiryDateController.clear();
