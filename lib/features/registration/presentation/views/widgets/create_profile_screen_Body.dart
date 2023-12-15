@@ -14,6 +14,7 @@ import 'package:mute_motion_passenger/features/registration/data/models/user_mod
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/add_card_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/add_card_view_body.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/custom_drop_down.dart';
 import 'package:mute_motion_passenger/features/registration/data/repos/create_user.dart';
@@ -379,7 +380,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               print('Response: ${response.body}');
                               navigateTo(
                                 context,
-                                MainMenuScreenView(),
+                                LoginScreenView(),
                               );
                             } else if (response.statusCode == 400) {
                               _showErrorDialog(
@@ -404,29 +405,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           }
                         }
                       },
-                      // onPressed: () {
-                      //   setState(() {
-                      //     if (formKey.currentState!.validate()) {
-                      //       SignUpModel Data = SignUpModel(
-                      //           // context: context,
-                      //           firstName: firstName.text,
-                      //           lastName: lastName.text,
-                      //           email: email.text,
-                      //           pass: pass.text,
-                      //           verifPass: verifPass.text,
-                      //           cardNumberController: cardNumberController.text,
-                      //           cvvController: cvvController.text,
-                      //           expiryDateController: expiryDateController.text,
-                      //           phone: phone.text,
-                      //           dropdownValue: dropdownValue!);
-                      //           CreateUser().signupPostRequest(Data);
-                      //          navigateTo(
-                      //          context,
-                      //   MainMenuScreenView(),
-                      // );
-                      //     }
-                      //   });
-                      // },
+                     
                       child: Text(
                         "Done",
                         style: GoogleFonts.comfortaa(
