@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -8,10 +10,14 @@ import 'package:mute_motion_passenger/core/styles.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/customtextfield.dart';
 import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/data/models/user_model.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/add_card_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/add_card_view_body.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/custom_drop_down.dart';
+import 'package:mute_motion_passenger/features/registration/data/repos/create_user.dart';
+import 'package:http/http.dart' as http;
 
 class CreateProfileScreenBody extends StatefulWidget {
   CreateProfileScreenBody({super.key});
@@ -21,15 +27,17 @@ class CreateProfileScreenBody extends StatefulWidget {
       _CreateProfileScreenBodyState();
 }
 
+final TextEditingController firstName = TextEditingController();
+
+final TextEditingController lastName = TextEditingController();
+final TextEditingController email = TextEditingController();
+final TextEditingController phone = TextEditingController();
+final TextEditingController pass = TextEditingController();
+final TextEditingController verifPass = TextEditingController();
+
 class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
-  final TextEditingController firstName = TextEditingController();
-
-  final TextEditingController lastName = TextEditingController();
-
-  final TextEditingController phone = TextEditingController();
-  final TextEditingController pass = TextEditingController();
-  final TextEditingController verifPass = TextEditingController();
   var formKey = GlobalKey<FormState>();
+
   bool showPassword = true;
   bool showVerifPassword = true;
   @override
@@ -79,7 +87,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                   height: 30,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.9,
+                  height: MediaQuery.of(context).size.height * 1,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -145,6 +153,21 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
                             ),
+                            child: CustomTextField(
+                              obscureText: false,
+                              controller: email,
+                              hintText: 'E-mail',
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
                             child: TextFormField(
                               keyboardType: TextInputType.phone,
                               controller: phone,
@@ -177,13 +200,25 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              child: CustomTextField(
-                                suffix: IconButton(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            child: TextFormField(
+                              obscureText: showPassword,
+                              keyboardType: TextInputType.visiblePassword,
+                              controller: pass,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Password must not be empty";
+                                } else if (value.length < 6) {
+                                  return "Password is too short";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
                                   icon: Icon(showPassword
                                       ? Icons.visibility_off
                                       : Icons.visibility),
@@ -193,11 +228,24 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                     });
                                   },
                                 ),
-                                obscureText: showPassword,
-                                keyboardType: TextInputType.visiblePassword,
-                                controller: pass,
-                                hintText: 'Password',
-                              )),
+                                hintText: 'password',
+                                hintStyle: GoogleFonts.comfortaa(
+                                  color: Colors.black.withOpacity(0.65),
+                                  fontSize: 12,
+                                ),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -230,7 +278,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                     });
                                   },
                                 ),
-                                hintText: 'Verify ypur password',
+                                hintText: 'Verify your password',
                                 hintStyle: GoogleFonts.comfortaa(
                                   color: Colors.black.withOpacity(0.65),
                                   fontSize: 12,
@@ -272,7 +320,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                 ),
                                 IconButton(
                                     onPressed: () {
-                                      Navigator.of(context).pushReplacement(
+                                      Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   AddCardView()));
@@ -298,14 +346,87 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                       color: const Color(0xff003248),
                       borderRadius: BorderRadius.circular(15)),
                   child: MaterialButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
-                          navigateTo(
-                            context,
-                            MainMenuScreenView(),
-                          );
+                          String url =
+                              'https://gradution2024-production.up.railway.app/api/v1/passengers';
+                          Map<String, dynamic> requestData = {
+                            "firstname": firstName.text,
+                            "lastname": lastName.text,
+                            "email": email.text,
+                            "password": pass.text,
+                            "passwordConfirm": verifPass.text,
+                            "CardNumber": cardNumberController.text,
+                            "ExpiryDate": expiryDateController.text,
+                            "CVV": cvvController.text,
+                            "gender": dropdownValue!,
+                            "phone": phone.text
+                          };
+                          try {
+                            // Encode the data to JSON
+                            String jsonBody = jsonEncode(requestData);
+                            // Make the HTTP POST request
+                            final response = await http.post(
+                              Uri.parse(url),
+                              headers: {
+                                'Content-Type': 'application/json',
+                              },
+                              body: jsonBody,
+                            );
+                            if (response.statusCode == 200 ||
+                                response.statusCode == 201) {
+                              print('Request successful');
+                              print('Response: ${response.body}');
+                              navigateTo(
+                                context,
+                                MainMenuScreenView(),
+                              );
+                            } else if (response.statusCode == 400) {
+                              _showErrorDialog(
+                                  context,
+                                  "Email Already Exist",
+                                  firstName,
+                                  lastName,
+                                  email,
+                                  pass,
+                                  verifPass,
+                                  cardNumberController,
+                                  expiryDateController,
+                                  cvvController,
+                                  phone);
+                            } else {
+                              print(
+                                  'Request failed with status: ${response.statusCode}');
+                              print('Response: ${response.body}');
+                            }
+                          } catch (error) {
+                            print('Error: $error');
+                          }
                         }
                       },
+                      // onPressed: () {
+                      //   setState(() {
+                      //     if (formKey.currentState!.validate()) {
+                      //       SignUpModel Data = SignUpModel(
+                      //           // context: context,
+                      //           firstName: firstName.text,
+                      //           lastName: lastName.text,
+                      //           email: email.text,
+                      //           pass: pass.text,
+                      //           verifPass: verifPass.text,
+                      //           cardNumberController: cardNumberController.text,
+                      //           cvvController: cvvController.text,
+                      //           expiryDateController: expiryDateController.text,
+                      //           phone: phone.text,
+                      //           dropdownValue: dropdownValue!);
+                      //           CreateUser().signupPostRequest(Data);
+                      //          navigateTo(
+                      //          context,
+                      //   MainMenuScreenView(),
+                      // );
+                      //     }
+                      //   });
+                      // },
                       child: Text(
                         "Done",
                         style: GoogleFonts.comfortaa(
@@ -319,4 +440,65 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
       ),
     );
   }
+}
+
+void _showErrorDialog(
+  BuildContext context,
+  String message,
+  TextEditingController firstName,
+  TextEditingController lastName,
+  TextEditingController email,
+  TextEditingController pass,
+  TextEditingController verifPass,
+  TextEditingController cardNumberController,
+  TextEditingController expiryDateController,
+  TextEditingController cvvController,
+  TextEditingController phone,
+) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: kPrimaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        content: Container(
+          decoration: BoxDecoration(
+            color: kPrimaryColor,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Text(
+            message,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20, fontFamily: 'Comfortaa', color: Colors.white),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              firstName.clear();
+              lastName.clear();
+              email.clear();
+              verifPass.clear();
+              cardNumberController.clear();
+              expiryDateController.clear();
+              cvvController.clear();
+              pass.clear();
+              phone.clear();
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text(
+              'OK',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20, fontFamily: 'Comfortaa', color: Colors.white),
+            ),
+          ),
+        ],
+      );
+    },
+  );
 }

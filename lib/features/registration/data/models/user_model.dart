@@ -1,79 +1,41 @@
-import 'package:equatable/equatable.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/add_card_view_body.dart';
 
-class UserModel extends Equatable {
-  final String? id;
-  final String? firstname;
-  final String? lastname;
+class SignUpModel {
+  final String? firstName;
+  final String? lastName;
   final String? email;
-  final String? cardNumber;
-  final String? expiryDate;
-  final String? cvv;
-  final String? profileImg;
-  final String? password;
-  final String? gender;
-  final String? phone;
-  
+  final String? verifPass;
+  final String? cardNumberController;
+  final String? expiryDateController;
+  final String? cvvController;
+  final String? pass;
 
-  const UserModel({
-    this.id,
-    this.firstname,
-    this.lastname,
+  final String? phone;
+  final String? dropdownValue;
+
+  SignUpModel({
+    this.firstName,
+    this.lastName,
     this.email,
-    this.cardNumber,
-    this.expiryDate,
-    this.cvv,
-    this.profileImg,
-    this.password,
-    this.gender,
+    this.verifPass,
+    this.cardNumberController,
+    this.expiryDateController,
+    this.cvvController,
+    this.pass,
     this.phone,
-    
+    this.dropdownValue,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json['_id'] as String?,
-        firstname: json['firstname'] as String?,
-        lastname: json['lastname'] as String?,
-        email: json['email'] as String?,
-        cardNumber: json['CardNumber'] as String?,
-        expiryDate: json['ExpiryDate'] as String?,
-        cvv: json['CVV'] as String?,
-        profileImg: json['profileImg'] as String?,
-        password: json['password'] as String?,
-        gender: json['gender'] as String?,
-        phone: json['phone'] as String?,
-        
-      );
-
   Map<String, dynamic> toJson() => {
-        '_id': id,
-        'firstname': firstname,
-        'lastname': lastname,
-        'email': email,
-        'CardNumber': cardNumber,
-        'ExpiryDate': expiryDate,
-        'CVV': cvv,
-        'profileImg': profileImg,
-        'password': password,
-        'gender': gender,
-        'phone': phone,
-        
+        "firstname": firstName,
+        "lastname": lastName,
+        "email": email,
+        "password": pass,
+        "passwordConfirm": verifPass,
+        "CardNumber": cardNumberController,
+        "ExpiryDate": expiryDateController,
+        "CVV": cvvController,
+        "gender": dropdownValue,
+        "phone": phone
       };
-
-  @override
-  List<Object?> get props {
-    return [
-      id,
-      firstname,
-      lastname,
-      email,
-      cardNumber,
-      expiryDate,
-      cvv,
-      profileImg,
-      password,
-      gender,
-      phone,
-      
-    ];
-  }
 }

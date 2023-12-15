@@ -11,9 +11,9 @@ class CustomDropDown extends StatefulWidget {
   State<CustomDropDown> createState() => _CustomDropDownState();
 }
 
-class _CustomDropDownState extends State<CustomDropDown> {
-  String? dropdownValue;
+String? dropdownValue;
 
+class _CustomDropDownState extends State<CustomDropDown> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,11 +52,11 @@ class _CustomDropDownState extends State<CustomDropDown> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.male),
-                      Text("Male"),
+                      Text("male"),
                     ],
                   ),
                 ),
-                value: "Male",
+                value: "male",
               ),
               DropdownMenuItem(
                 child: Padding(
@@ -65,11 +65,11 @@ class _CustomDropDownState extends State<CustomDropDown> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.female),
-                      Text("Female"),
+                      Text("female"),
                     ],
                   ),
                 ),
-                value: "Female",
+                value: "female",
               ),
             ]),
       ),
