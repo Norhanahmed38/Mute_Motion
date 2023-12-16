@@ -370,7 +370,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                             } else if (response.statusCode == 400) {
                               _showErrorDialog(
                                   context,
-                                  "Email Already Exist",
+                                  "This Email is Already Exist",
                                   firstName,
                                   lastName,
                                   // email,
@@ -421,22 +421,24 @@ void _showErrorDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        content: Container(
-          decoration: BoxDecoration(
-            color: kPrimaryColor,
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            message,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20, fontFamily: 'Comfortaa', color: Colors.white),
-          ),
+        content:
+            //  Container(
+            //   decoration: BoxDecoration(
+            //     color: kPrimaryColor,
+            //     borderRadius: BorderRadius.circular(20.0),
+            //   ),
+            //   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            //   child:
+            Text(
+          message,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
+          // ),
         ),
         actions: [
           TextButton(
@@ -450,13 +452,27 @@ void _showErrorDialog(
               cvvController.clear();
               pass.clear();
               phone.clear();
+
               Navigator.of(context).pop(); // Close the dialog
             },
-            child: Text(
-              'OK',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 20, fontFamily: 'Comfortaa', color: Colors.white),
+            child: Container(
+              width: 120,
+              height: 45,
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(
+                  'Try Again',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Comfortaa',
+                      color: Colors.white),
+                ),
+              ),
             ),
           ),
         ],
