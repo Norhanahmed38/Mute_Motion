@@ -380,7 +380,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                   expiryDateController,
                                   cvvController,
                                   phone);
-                            } else {
+
                               print(
                                   'Request failed with status: ${response.statusCode}');
                               print('Response: ${response.body}');
@@ -452,8 +452,9 @@ void _showErrorDialog(
               cvvController.clear();
               pass.clear();
               phone.clear();
-
-              Navigator.of(context).pop(); // Close the dialog
+              Navigator.of(context).pop();
+              navigateTo(context, LoginScreenView());
+              // Close the dialog
             },
             child: Container(
               width: 120,
