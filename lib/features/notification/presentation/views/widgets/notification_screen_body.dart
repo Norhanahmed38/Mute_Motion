@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
+import 'package:mute_motion_passenger/features/notification/presentation/views/widgets/newmsg.dart';
 
 class NotificationScreenBody extends StatelessWidget {
   const NotificationScreenBody({super.key});
@@ -39,75 +40,14 @@ class NotificationScreenBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Text(
-                  'Hassan, you have a new order',
-                  style: TextStyle(
-                      fontSize: 20, fontFamily: 'Lato', color: kPrimaryColor),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  'Check out your newest orders to take one of them',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Comfortaa',
-                      color: kPrimaryColor),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  '6:00 pm - 16 March',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Comfortaa',
-                      color: kPrimaryColor),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Divider(
-                  color: Colors.grey,
-                  thickness: 1,
-                  height: 30,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Welcome to our team, Hassan!',
-                  style: TextStyle(
-                      fontSize: 20, fontFamily: 'Lato', color: kPrimaryColor),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  'We are happy to join with us, get your orders now.',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: 'Comfortaa',
-                      color: kPrimaryColor),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  '8:00 pm - 15 March',
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Comfortaa',
-                      color: kPrimaryColor),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Divider(
-                  color: Colors.grey,
-                  thickness: 1,
-                  height: 30,
-                ),
+                Newmsg(
+                    text1: 'Hassan, you have a new order',
+                    text2: 'Check out your newest orders to take one of them',
+                    text3: '6:00 pm - 16 March'),
+                Newmsg(
+                    text1: 'Welcome to our team, Hassan!',
+                    text2: 'We are happy to join with us, get your orders now',
+                    text3: '8:00 pm - 15 March'),
               ],
             ),
           ),
