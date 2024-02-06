@@ -15,6 +15,7 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/O
 import 'package:mute_motion_passenger/features/registration/presentation/views/add_card_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/add_card_view_body.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/custom_drop_down.dart';
 import 'package:mute_motion_passenger/features/registration/data/repos/create_user.dart';
@@ -51,7 +52,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
             iconSize: 30,
             onPressed: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => OTPScreenView()));
+                  MaterialPageRoute(builder: (context) => RegisterScreenView()));
             },
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -199,7 +200,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                 if (value!.isEmpty) {
                                   return "Password must not be empty";
                                 } else if (value.length < 6) {
-                                  return "Password is too short";
+                                  return "Password can't be less than 6 letters";
                                 }
                                 return null;
                               },
@@ -370,7 +371,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                             } else if (response.statusCode == 400) {
                               _showErrorDialog(
                                   context,
-                                  "This Email is Already Exist",
+                                  "This Email Already Exists",
                                   firstName,
                                   lastName,
                                   // email,

@@ -7,6 +7,8 @@ import 'package:mute_motion_passenger/features/requests/presentation/views/reque
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
+import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
+import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
        
       ), */
       debugShowCheckedModeBanner: false,
-      home: SplashView(),
+      home: LoginScreenView(),
     );
   }
 }
