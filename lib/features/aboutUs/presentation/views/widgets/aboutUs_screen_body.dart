@@ -62,12 +62,14 @@ class AboutUsScreenBody extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: kPrimaryColor),
                 ),
-                child: const Text(
-                    'The "MuteMotion" project aims to create an innovative smart taxi service catering specifically to deaf and mute drivers. It involves the development of advanced driver assistance systems (ADAS) using artificial intelligence (AI) and mobile application technologies. By enhancing safety features, communication tools, and convenience, MuteMotion seeks to empower the deaf/mute community with job opportunities and effective interaction platforms.',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Comfortaa',
-                        color: kPrimaryColor)),
+                child: SingleChildScrollView(
+                  child: const Text(
+                      'The "MuteMotion" project aims to create an innovative smart taxi service catering specifically to deaf and mute drivers. It involves the development of advanced driver assistance systems (ADAS) using artificial intelligence (AI) and mobile application technologies. By enhancing safety features, communication tools, and convenience, MuteMotion seeks to empower the deaf/mute community with job opportunities and effective interaction platforms.',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Comfortaa',
+                          color: kPrimaryColor)),
+                ),
               ),
             ],
           ),

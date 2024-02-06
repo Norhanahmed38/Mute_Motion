@@ -36,7 +36,7 @@ class newmsg extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             height: 44,
-            width: 340,
+            width: 320,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(children: [
@@ -78,7 +78,7 @@ class newmsg extends StatelessWidget {
             margin: EdgeInsets.only(right: 22, left: 15),
             padding: EdgeInsets.all(9),
             height: 220,
-            width: 338,
+            width: 320,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),

@@ -7,6 +7,7 @@ import 'package:mute_motion_passenger/features/requests/presentation/views/reque
 import 'package:intl/intl.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/stack.dart';
 
 class Requests extends StatefulWidget {
   const Requests({super.key});
@@ -82,95 +83,34 @@ class _RequestsState extends State<Requests> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                minimumSize: const Size(40, 70),
-                                backgroundColor: kPrimaryColor,
-                              ),
-                              onPressed: () {
-                                navigateTo(context, RequestsScreenView());
-                              },
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 7,
-                                  ),
-                                  Text(
-                                    'Transport',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              right: 0,
-                              left: 0,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          child: stack_model(
+                              color: kPrimaryColor,
                               top: -20,
-                              child: Image.asset(
-                                'assets/images/rafiki.png',
-                                height: 55,
-                              ),
-                            )
-                          ],
+                              hight: 55,
+                              image: 'assets/images/rafiki.png',
+                              type: 'Transport',
+                              widdget: RequestsScreenView()),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      SizedBox(
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                minimumSize: const Size(40, 70),
-                                backgroundColor: const Color(0xff316F89),
-                              ),
-                              onPressed: () {
-                                navigateTo(context, RequestsScreenVieww());
-                              },
-                              child: Column(
-                                children: const [
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    'City to city',
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              right: 0,
-                              left: 0,
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        SizedBox(
+                          child: stack_model(
+                              color: Color(0xff316F89),
                               top: -25,
-                              child: Image.asset(
-                                'assets/images/cuate.png',
-                                height: 50,
-                              ),
-                            )
-                          ],
+                              hight: 50,
+                              image: 'assets/images/cuate.png',
+                              type: 'City to city',
+                              widdget: RequestsScreenVieww()),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -262,11 +202,11 @@ class _RequestsState extends State<Requests> {
                 ),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  validator: (data) {
-                    if (data!.isEmpty) {
-                      return 'Please Enter your Expexted Cost !!';
-                    }
-                  },
+                  // validator: (data) {
+                  //   if (data!.isEmpty) {
+                  //     return 'Please Enter your Expexted Cost !!';
+                  //   }
+                  // },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -298,36 +238,39 @@ class _RequestsState extends State<Requests> {
                 SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      minimumSize: const Size(350, 60),
+                      primary: kPrimaryColor,
                     ),
-                    minimumSize: const Size(350, 60),
-                    primary: kPrimaryColor,
+                    onPressed: () {
+                      setState(() {
+                        btnPressed = true;
+                      });
+                      if (formKey.currentState!.validate()) {
+                        locationController.text;
+                        destinationController.text;
+                        timeController.text;
+                        dateController.text;
+                        // costController.text;
+                        paymentController.text;
+                      }
+                    },
+                    child: btnPressed == false
+                        ? Text(
+                            'Send Request',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          )
+                        : Text(
+                            'Request Sent',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      btnPressed = true;
-                    });
-                    if (formKey.currentState!.validate()) {
-                      locationController.text;
-                      destinationController.text;
-                      timeController.text;
-                      dateController.text;
-                      costController.text;
-                      paymentController.text;
-                    }
-                  },
-                  child: btnPressed == false
-                      ? Text(
-                          'Send Request',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        )
-                      : Text(
-                          'Request Sent',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
                 ),
               ],
             ),
