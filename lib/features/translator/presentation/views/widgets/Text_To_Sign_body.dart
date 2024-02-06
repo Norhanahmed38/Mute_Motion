@@ -11,7 +11,7 @@ class TextToSignBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController TextController = TextEditingController();
+    final TextEditingController messageController = TextEditingController();
     return Scaffold(
       drawer: NavDrawerView(),
       backgroundColor: Color(0xff003248),
@@ -41,29 +41,26 @@ class TextToSignBody extends StatelessWidget {
               )),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.only(right: 22, left: 10),
+                   padding: EdgeInsets.all( 10),
+                 /* margin: EdgeInsets.only(right: 22, left: 10),
                   padding: EdgeInsets.all(8),
                   height: 200,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: kPrimaryColor),
-                  ),
-                  child: TextFormField(
-                    controller: TextController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Text can't be empty";
-                      }
-                      return null;
-                    },
-                    keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
-                      hintText: "Text",
-                    ),
+                  ), */
+                  child: defaultFormFeild(
+                    
+                    controller: messageController,
+                    type: TextInputType.multiline,
+                    min: 8,
+                    max: 12,
+                    label: 'Message',
                   ),
                 ),
                 SizedBox(

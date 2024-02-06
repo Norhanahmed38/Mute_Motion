@@ -91,22 +91,16 @@ void _showErrorDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: kPrimaryColor,
+         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        content: Container(
-          decoration: BoxDecoration(
-            color: kPrimaryColor,
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            message,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 20, fontFamily: 'Comfortaa', color: Colors.white),
-          ),
+        content:  Text(
+          message,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
+          // ),
         ),
         actions: [
           TextButton(
@@ -117,11 +111,24 @@ void _showErrorDialog(
               code4.clear();
               Navigator.of(context).pop(); // Close the dialog
             },
-            child: Text(
-              'OK',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 20, fontFamily: 'Comfortaa', color: Colors.white),
+            child: Container(
+              width: 120,
+              height: 45,
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: const Padding(
+                padding:  EdgeInsets.only(top: 5),
+                child: Text(
+                  'OK',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Comfortaa',
+                      color: Colors.white),
+                ),
+              ),
             ),
           ),
         ],
