@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/registration/data/repos/login_user.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/data/repos/api_provider.dart';
 
 import '../../../../mainMenu/presentation/views/mainMenu_screen_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreenViewBody extends StatefulWidget {
   const LoginScreenViewBody({super.key});
@@ -129,10 +130,18 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                     borderRadius: BorderRadius.circular(20)),
                 child: MaterialButton(
                     onPressed: () async {
-
-                      
                       if (formKey.currentState!.validate()) {
-                        LoginUserApi().userLogin(context: context, emailcont: emailCont, passcont: passCont);
+                        // LoginUserApi().userLogin(
+                        //     context: context,
+                        //     emailcont: emailCont,
+                        //     passcont: passCont);
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setString('email', emailCont.text);
+                        await ApiProvide().UserLogin(
+                            context: context,
+                            emailCont: emailCont,
+                            passCont: passCont);
                       }
                     },
                     child: const Text(

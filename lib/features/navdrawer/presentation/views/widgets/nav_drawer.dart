@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/aboutUs/presentation/views/aboutUs_screen_view.dart';
 import 'package:mute_motion_passenger/features/history/presentation/views/history_screen_view.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/pages.dart';
 import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/headwidget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../contactUs/presentation/views/contact_us_screenView.dart';
 import '../../../../notification/presentation/views/notification_view.dart';
@@ -25,7 +28,7 @@ class NavDrawer extends StatelessWidget {
           child: Column(children: [
             hadwidget(darkGreen: kPrimaryColor),
             SizedBox(
-              height: 60,
+              height: 45,
             ),
             Container(
               child: Column(
@@ -121,6 +124,33 @@ class NavDrawer extends StatelessWidget {
                       onpressed: () {
                         navigateTo(context, ContactUsScreenView());
                       }),
+                  Divider(
+                    indent: 20,
+                    endIndent: 30,
+                    color: kPrimaryColor,
+                    thickness: 1,
+                    height: 2,
+                  ),
+                  pages(
+                      darkGreen: kPrimaryColor,
+                      pagename: 'Logout',
+                      icone: Icons.logout,
+                      onpressed: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.remove('email');
+                        Navigator.of(context).pushAndRemoveUntil(
+                          // the new route
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                LoginScreenView(),
+                          ),
+
+                          (Route route) => false,
+                        );
+                      }),
+
+                  // navigateTo(context, ContactUsScreenView());
                 ],
               ),
             ),
