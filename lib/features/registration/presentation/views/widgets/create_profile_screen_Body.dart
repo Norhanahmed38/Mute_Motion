@@ -18,7 +18,6 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/l
 import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/add_card_view_body.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/custom_drop_down.dart';
-import 'package:mute_motion_passenger/features/registration/data/repos/create_user.dart';
 import 'package:http/http.dart' as http;
 
 class CreateProfileScreenBody extends StatefulWidget {
@@ -29,15 +28,13 @@ class CreateProfileScreenBody extends StatefulWidget {
       _CreateProfileScreenBodyState();
 }
 
-final TextEditingController firstName = TextEditingController();
-
-final TextEditingController lastName = TextEditingController();
-final TextEditingController email = TextEditingController();
-final TextEditingController phone = TextEditingController();
-final TextEditingController pass = TextEditingController();
-final TextEditingController verifPass = TextEditingController();
-
 class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController phone = TextEditingController();
+  final TextEditingController pass = TextEditingController();
+  final TextEditingController verifPass = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   bool showPassword = true;
@@ -51,8 +48,8 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
         leading: IconButton(
             iconSize: 30,
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => RegisterScreenView()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => RegisterScreenView()));
             },
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -333,69 +330,70 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                       color: const Color(0xff003248),
                       borderRadius: BorderRadius.circular(15)),
                   child: MaterialButton(
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          String url =
-                              'https://gradution2024-production.up.railway.app/api/v1/passengers';
-                          Map<String, dynamic> requestData = {
-                            "firstname": firstName.text,
-                            "lastname": lastName.text,
-                            "email": getUserEmail(),
-                            "password": pass.text,
-                            "passwordConfirm": verifPass.text,
-                            "CardNumber": cardNumberController.text,
-                            "ExpiryDate": expiryDateController.text,
-                            "CVV": cvvController.text,
-                            "gender": dropdownValue!,
-                            "phone": phone.text
-                          };
-                          try {
-                            // Encode the data to JSON
-                            String jsonBody = jsonEncode(requestData);
-                            // Make the HTTP POST request
-                            final response = await http.post(
-                              Uri.parse(url),
-                              headers: {
-                                'Content-Type': 'application/json',
-                              },
-                              body: jsonBody,
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        String url =
+                            'https://gradution2024-production.up.railway.app/api/v1/passengers';
+                        Map<String, dynamic> requestData = {
+                          "firstname": firstName.text,
+                          "lastname": lastName.text,
+                          "email": getUserEmail(),
+                          "password": pass.text,
+                          "passwordConfirm": verifPass.text,
+                          "CardNumber": cardNumberController.text,
+                          "ExpiryDate": expiryDateController.text,
+                          "CVV": cvvController.text,
+                          "gender": dropdownValue!,
+                          "phone": phone.text
+                        };
+                        try {
+                          // Encode the data to JSON
+                          String jsonBody = jsonEncode(requestData);
+                          // Make the HTTP POST request
+                          final response = await http.post(
+                            Uri.parse(url),
+                            headers: {
+                              'Content-Type': 'application/json',
+                            },
+                            body: jsonBody,
+                          );
+                          if (response.statusCode == 200 ||
+                              response.statusCode == 201) {
+                            print('Request successful');
+                            print('Response: ${response.body}');
+                            navigateTo(
+                              context,
+                              LoginScreenView(),
                             );
-                            if (response.statusCode == 200 ||
-                                response.statusCode == 201) {
-                              print('Request successful');
-                              print('Response: ${response.body}');
-                              navigateTo(
+                          } else if (response.statusCode == 400) {
+                            _showErrorDialog(
                                 context,
-                                LoginScreenView(),
-                              );
-                            } else if (response.statusCode == 400) {
-                              _showErrorDialog(
-                                  context,
-                                  "This Email Already Exists",
-                                  firstName,
-                                  lastName,
-                                  // email,
-                                  pass,
-                                  verifPass,
-                                  cardNumberController,
-                                  expiryDateController,
-                                  cvvController,
-                                  phone);
+                                "This Email Already Exists",
+                                firstName,
+                                lastName,
+                                // email,
+                                pass,
+                                verifPass,
+                                cardNumberController,
+                                expiryDateController,
+                                cvvController,
+                                phone);
 
-                              print(
-                                  'Request failed with status: ${response.statusCode}');
-                              print('Response: ${response.body}');
-                            }
-                          } catch (error) {
-                            print('Error: $error');
+                            print(
+                                'Request failed with status: ${response.statusCode}');
+                            print('Response: ${response.body}');
                           }
+                        } catch (error) {
+                          print('Error: $error');
                         }
-                      },
-                      child: Text(
-                        "Done",
-                        style: GoogleFonts.comfortaa(
-                            fontSize: 20, color: Colors.white),
-                      )),
+                      }
+                    },
+                    child: Text(
+                      "Done",
+                      style: GoogleFonts.comfortaa(
+                          fontSize: 20, color: Colors.white),
+                    ),
+                  ),
                 ),
               ],
             ),

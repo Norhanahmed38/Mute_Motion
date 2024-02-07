@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
+import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/create_profile_screen_BOdy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiProvide {
@@ -96,106 +98,105 @@ class ApiProvide {
     );
   }
 
-//   UserRegisteration(
-//       { required BuildContext context,
-//         required String fullname,
-//         required String age,
-//         required String email,
-//         required String password,
-//         required String passwordConfirm,
-//         required String phone,
+  // UserRegisteration({
+  //   required BuildContext context,
+  //   required String firstName,
+  //   required String lastName,
+  //   required String phone,
+  //   required String email,
+  //   required String pass,
+  //   required String veripass,
+  //   required String cardnum,
+  //   required String exdate,
+  //   required String cvv,
+  // }) async {
+  //   try {
+  //     FormData formData = FormData.fromMap({
+  //       "firstname": firstName,
+  //       "phone": phone,
+  //       "lastname": lastName,
+  //       "password": pass,
+  //       "passwordConfirm": verifPass,
+  //       "CardNumber": cardnum,
+  //       "email": getUserEmail(),
+  //       "ExpiryDate": exdate,
+  //       "CVV": cvv,
+  //     });
+  //     Response response =
+  //         await Dio().post("$baseUrl/passengers", data: formData);
+  //     navigateTo(context, LoginScreenView());
 
-//         required String cardnum,
-//         required String exdate,
-//         required String cvv,
-//       }) async {
-//     try {
-//       FormData formData = FormData.fromMap(
-//           {
-//             "fullname": fullname,
-//             "email": email,
-//             "password": password,
-//             "passwordConfirm": passwordConfirm,
-//             "phone":phone,
-//             "age": age,
-//
-//             "cardescription":cardescription,
-//             "CardNumber": cardnum,
-//             "ExpiryDate": exdate,
-//             "CVV": cvv,
-//           }
-//       );
-//       Response response =
+  //     print('Request successful');
+  //     print('Response: ${response.data}');
+  //   } catch (e) {
+  //     if (e is DioException) {
+  //       print(e.response?.data);
 
-//       await Dio().post("$baseUrl/drivers", data: formData);
+  //       _showErrorDialogReg(
+  //           context, 'Attention!', '${e.response?.data["errors"][0]["msg"]}');
+  //     }
+  //   }
+  // }
 
-//       await OTPprovider().sendcode(email: email);
-//       Navigator.of(context).push(MaterialPageRoute (
-//         builder: (BuildContext context) =>  OTP(rg: regmodel(email)),
-//       ),);
-//       print('Request successful');
-//       print('Response: ${response.data}');
-//     } catch (e) {
-//       if (e is DioException) {
-//         print(e.response?.data);
-//         //_showErrorDialogReg(context, 'Attention!','this mail already taken');
-//         _showErrorDialogReg(context, 'Attention!','${e.response?.data["errors"][0]["msg"]}');
-//       }
-//     }
-//   }
-
-//   void _showErrorDialogReg(
-//       BuildContext context,
-//       String title,
-//       String message,
-//       ) {
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//           buttonPadding: EdgeInsets.only(right: 20,bottom: 10),
-//           elevation: 20,
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(15.0),
-//           ),
-//           backgroundColor: Colors.white,
-//           title: Text(
-//             title,
-//             textAlign: TextAlign.center,
-//             style: TextStyle(
-//                 fontSize: 25, fontFamily: 'Comfortaa',fontWeight: FontWeight.bold,color: kPrimaryColor),
-//           ),
-//           content: Text(
-//             message,
-//             textAlign: TextAlign.center,
-//             style: TextStyle(
-//                 fontSize: 20, fontFamily: 'Comfortaa',color: kPrimaryColor),
-//           ),
-//           actions: [
-//             TextButton(
-//               style: ButtonStyle(
-//                 elevation:MaterialStatePropertyAll(30.0),
-//                 backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor),
-//                 shape: MaterialStateProperty.all<OutlinedBorder>(
-//                   RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(
-//                         12.0), // Adjust the border radius as needed
-//                   ),
-//                 ),
-//               ),
-//               onPressed: () {
-//                 Navigator.of(context).pop();// Close the dialog
-//               },
-//               child: Text(
-//                 'Try again',
-//                 textAlign: TextAlign.center,
-//                 style: TextStyle(
-//                     fontSize: 15, fontFamily: 'Comfortaa',fontWeight: FontWeight.bold, color: Colors.white),
-//               ),
-//             ),
-//           ],
-//         );
-//       },
-//     );
-//   }
+  // void _showErrorDialogReg(
+  //   BuildContext context,
+  //   String title,
+  //   String message,
+  // ) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         buttonPadding: EdgeInsets.only(right: 20, bottom: 10),
+  //         elevation: 20,
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(15.0),
+  //         ),
+  //         backgroundColor: Colors.white,
+  //         title: Text(
+  //           title,
+  //           textAlign: TextAlign.center,
+  //           style: TextStyle(
+  //               fontSize: 25,
+  //               fontFamily: 'Comfortaa',
+  //               fontWeight: FontWeight.bold,
+  //               color: kPrimaryColor),
+  //         ),
+  //         content: Text(
+  //           message,
+  //           textAlign: TextAlign.center,
+  //           style: TextStyle(
+  //               fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
+  //         ),
+  //         actions: [
+  //           TextButton(
+  //             style: ButtonStyle(
+  //               elevation: MaterialStatePropertyAll(30.0),
+  //               backgroundColor:
+  //                   MaterialStateProperty.all<Color>(kPrimaryColor),
+  //               shape: MaterialStateProperty.all<OutlinedBorder>(
+  //                 RoundedRectangleBorder(
+  //                   borderRadius: BorderRadius.circular(
+  //                       12.0), // Adjust the border radius as needed
+  //                 ),
+  //               ),
+  //             ),
+  //             onPressed: () {
+  //               Navigator.of(context).pop(); // Close the dialog
+  //             },
+  //             child: Text(
+  //               'Try again',
+  //               textAlign: TextAlign.center,
+  //               style: TextStyle(
+  //                   fontSize: 15,
+  //                   fontFamily: 'Comfortaa',
+  //                   fontWeight: FontWeight.bold,
+  //                   color: Colors.white),
+  //             ),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 }
