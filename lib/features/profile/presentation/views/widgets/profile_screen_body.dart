@@ -40,6 +40,7 @@ class ProfileScreenViewBody extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
                       height: 65,
@@ -47,31 +48,11 @@ class ProfileScreenViewBody extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 20,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 20,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 20,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 20,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 20,
-                        ),
+                        star(),
+                        star(),
+                        star(),
+                        star(),
+                        star(),
                       ],
                     ),
                     SizedBox(
@@ -91,68 +72,74 @@ class ProfileScreenViewBody extends StatelessWidget {
                     Stack(
                       children: [
                         Container(
+                          alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: kPrimaryColor,
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          width: 340,
+                          width: 320,
                           height: 75,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 16, left: 30),
-                          child: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    '100',
-                                    style: TextStyle(
-                                        fontFamily: 'Comfortaa',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w800,
-                                        color: Colors.white),
-                                  ),
-                                  Text(
-                                    ' Count of Req.',
-                                    style: TextStyle(
-                                        fontFamily: 'Comfortaa',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 40,
-                              ),
-                              VerticalDivider(
-                                color: Colors.white,
-                                thickness: 2,
-                                endIndent: 0,
-                                indent: 20,
-                                width: 10,
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    ' EGP 2500',
-                                    style: TextStyle(
-                                        fontFamily: 'Comfortaa',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w800,
-                                        color: Colors.white),
-                                  ),
-                                  Text(
-                                    ' Cost of Rides',
-                                    style: TextStyle(
-                                        fontFamily: 'Comfortaa',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          padding: const EdgeInsets.only(top: 16, left: 25),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      '100',
+                                      style: TextStyle(
+                                          fontFamily: 'Comfortaa',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w800,
+                                          color: Colors.white),
+                                    ),
+                                    Text(
+                                      ' Count of Req.',
+                                      style: TextStyle(
+                                          fontFamily: 'Comfortaa',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                VerticalDivider(
+                                  color: Colors.white,
+                                  thickness: 2,
+                                  endIndent: 0,
+                                  indent: 20,
+                                  width: 10,
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      ' EGP 2500',
+                                      style: TextStyle(
+                                          fontFamily: 'Comfortaa',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w800,
+                                          color: Colors.white),
+                                    ),
+                                    Text(
+                                      ' Cost of Rides',
+                                      style: TextStyle(
+                                          fontFamily: 'Comfortaa',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -200,18 +187,21 @@ class ProfileScreenViewBody extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          minimumSize: const Size(400, 55),
+                          backgroundColor: kPrimaryColor,
                         ),
-                        minimumSize: const Size(400, 55),
-                        backgroundColor: kPrimaryColor,
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Save',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        onPressed: () {},
+                        child: Text(
+                          'Save',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
                       ),
                     ),
                   ]),
@@ -245,6 +235,21 @@ class ProfileScreenViewBody extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class star extends StatelessWidget {
+  const star({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.star,
+      color: Colors.amber,
+      size: 20,
     );
   }
 }
