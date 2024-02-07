@@ -21,109 +21,111 @@ class NavDrawer extends StatelessWidget {
       child: SizedBox(
         height: screenHeight,
         width: screenWidth,
-        child: Column(children: [
-          hadwidget(darkGreen: kPrimaryColor),
-          SizedBox(
-            height: 60,
-          ),
-          Container(
-            child: Column(
-              children: [
-                pages(
-                  darkGreen: kPrimaryColor,
-                  pagename: 'requests',
-                  icone: Icons.car_crash,
-                  onpressed: () {
-                    navigateTo(context, RequestsScreenView());
-                  },
-                ),
-                Divider(
-                  indent: 20,
-                  endIndent: 30,
-                  color: kPrimaryColor,
-                  thickness: 1,
-                  height: 2,
-                ),
-                pages(
-                    darkGreen: kPrimaryColor,
-                    pagename: 'History',
-                    icone: Icons.history_toggle_off,
-                    onpressed: () {
-                      navigateTo(context, HistoryScreenView());
-                    }),
-                Divider(
-                  indent: 20,
-                  endIndent: 30,
-                  color: kPrimaryColor,
-                  thickness: 1,
-                  height: 2,
-                ),
-                pages(
-                    darkGreen: kPrimaryColor,
-                    pagename: 'Translator',
-                    icone: Icons.camera_alt_rounded,
-                    onpressed: () {
-                      navigateTo(context, TranslatorView());
-                    }),
-                Divider(
-                  indent: 20,
-                  endIndent: 30,
-                  color: kPrimaryColor,
-                  thickness: 1,
-                  height: 2,
-                ),
-                pages(
-                    darkGreen: kPrimaryColor,
-                    pagename: 'Map',
-                    icone: Icons.map_outlined,
-                    onpressed: () {}),
-                Divider(
-                  indent: 20,
-                  endIndent: 30,
-                  color: kPrimaryColor,
-                  thickness: 1,
-                  height: 2,
-                ),
-                pages(
-                  darkGreen: kPrimaryColor,
-                  pagename: 'Notification',
-                  icone: Icons.notifications_none,
-                  onpressed: () {
-                    navigateTo(context, NotificationScreenView());
-                  },
-                ),
-                Divider(
-                  indent: 20,
-                  endIndent: 30,
-                  color: kPrimaryColor,
-                  thickness: 1,
-                  height: 2,
-                ),
-                pages(
-                    darkGreen: kPrimaryColor,
-                    pagename: 'About us',
-                    icone: Icons.album_outlined,
-                    onpressed: () {
-                      navigateTo(context, AboutUsScreenView());
-                    }),
-                Divider(
-                  indent: 20,
-                  endIndent: 30,
-                  color: kPrimaryColor,
-                  thickness: 1,
-                  height: 2,
-                ),
-                pages(
-                    darkGreen: kPrimaryColor,
-                    pagename: 'Contact us',
-                    icone: Icons.contact_support,
-                    onpressed: () {
-                      navigateTo(context, ContactUsScreenView());
-                    }),
-              ],
+        child: SingleChildScrollView(
+          child: Column(children: [
+            hadwidget(darkGreen: kPrimaryColor),
+            SizedBox(
+              height: 60,
             ),
-          ),
-        ]),
+            Container(
+              child: Column(
+                children: [
+                  pages(
+                    darkGreen: kPrimaryColor,
+                    pagename: 'requests',
+                    icone: Icons.car_crash,
+                    onpressed: () {
+                      navigateTo(context, RequestsScreenView());
+                    },
+                  ),
+                  Divider(
+                    indent: 20,
+                    endIndent: 30,
+                    color: kPrimaryColor,
+                    thickness: 1,
+                    height: 2,
+                  ),
+                  pages(
+                      darkGreen: kPrimaryColor,
+                      pagename: 'History',
+                      icone: Icons.history_toggle_off,
+                      onpressed: () {
+                        navigateTo(context, HistoryScreenView());
+                      }),
+                  Divider(
+                    indent: 20,
+                    endIndent: 30,
+                    color: kPrimaryColor,
+                    thickness: 1,
+                    height: 2,
+                  ),
+                  pages(
+                      darkGreen: kPrimaryColor,
+                      pagename: 'Translator',
+                      icone: Icons.camera_alt_rounded,
+                      onpressed: () {
+                        navigateTo(context, TranslatorView());
+                      }),
+                  Divider(
+                    indent: 20,
+                    endIndent: 30,
+                    color: kPrimaryColor,
+                    thickness: 1,
+                    height: 2,
+                  ),
+                  pages(
+                      darkGreen: kPrimaryColor,
+                      pagename: 'Map',
+                      icone: Icons.map_outlined,
+                      onpressed: () {}),
+                  Divider(
+                    indent: 20,
+                    endIndent: 30,
+                    color: kPrimaryColor,
+                    thickness: 1,
+                    height: 2,
+                  ),
+                  pages(
+                    darkGreen: kPrimaryColor,
+                    pagename: 'Notification',
+                    icone: Icons.notifications_none,
+                    onpressed: () {
+                      navigateTo(context, NotificationScreenView());
+                    },
+                  ),
+                  Divider(
+                    indent: 20,
+                    endIndent: 30,
+                    color: kPrimaryColor,
+                    thickness: 1,
+                    height: 2,
+                  ),
+                  pages(
+                      darkGreen: kPrimaryColor,
+                      pagename: 'About us',
+                      icone: Icons.album_outlined,
+                      onpressed: () {
+                        navigateTo(context, AboutUsScreenView());
+                      }),
+                  Divider(
+                    indent: 20,
+                    endIndent: 30,
+                    color: kPrimaryColor,
+                    thickness: 1,
+                    height: 2,
+                  ),
+                  pages(
+                      darkGreen: kPrimaryColor,
+                      pagename: 'Contact us',
+                      icone: Icons.contact_support,
+                      onpressed: () {
+                        navigateTo(context, ContactUsScreenView());
+                      }),
+                ],
+              ),
+            ),
+          ]),
+        ),
       ),
     );
   }

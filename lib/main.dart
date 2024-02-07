@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
+
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
-import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
+
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
-import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
-import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
+
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 }
 
 class MyApp extends StatelessWidget {
