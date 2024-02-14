@@ -77,7 +77,7 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
                     height: 56,
                   ),
                   Text(
-                    "Please enter the 4-digit code sent via email on\n ${getUserEmail()}",
+                    "Please enter the 4-digit code sent via email to\n ${getUserEmail()}",
                     style: GoogleFonts.comfortaa(
                         color: kPrimaryColor, fontSize: 15),
                   ),
