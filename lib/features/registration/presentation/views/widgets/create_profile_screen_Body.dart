@@ -13,7 +13,6 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/O
 import 'package:mute_motion_passenger/features/registration/presentation/views/add_card_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/add_card_view_body.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/custom_drop_down.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -49,16 +48,16 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          leading: IconButton(
-              iconSize: 30,
-              onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => RegisterScreenView()));
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: kPrimaryColor,
-              )),
+          // leading: IconButton(
+          //     iconSize: 30,
+          //     onPressed: () {
+          //       Navigator.of(context).pushReplacement(MaterialPageRoute(
+          //           builder: (context) => RegisterScreenView()));
+          //     },
+          //     icon: const Icon(
+          //       Icons.arrow_back_ios,
+          //       color: kPrimaryColor,
+          //     )),
           title: Text(
             'Create Your Profile',
             textAlign: TextAlign.center,
@@ -92,7 +91,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                     height: 30,
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.95,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: kPrimaryColor,
@@ -147,6 +146,48 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                 obscureText: false,
                                 controller: lastName,
                                 hintText: 'Last name',
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                controller: email,
+                                validator: (value) {
+                                  final bool emailValid = RegExp(
+                                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                      .hasMatch(value!);
+                                  if (value!.isEmpty) {
+                                    return "Email can't be empty";
+                                  } else if (emailValid == false) {
+                                    return "Email format not valid";
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Email',
+                                  hintStyle: GoogleFonts.comfortaa(
+                                    color: Colors.black.withOpacity(0.65),
+                                    fontSize: 12,
+                                  ),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  border: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -343,11 +384,11 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                             _isLoading = true;
                           });
                           String url =
-                              'https://gradution2024-production.up.railway.app/api/v1/passengers';
+                              'https://mutemotion.onrender.com/api/v1/passenger/signup';
                           Map<String, dynamic> requestData = {
                             "firstname": firstName.text,
                             "lastname": lastName.text,
-                            "email": getUserEmail(),
+                            "email": email.text,
                             "password": pass.text,
                             "passwordConfirm": verifPass.text,
                             "CardNumber": cardNumberController.text,
@@ -371,9 +412,10 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                 response.statusCode == 201) {
                               print('Request successful');
                               print('Response: ${response.body}');
+                              setUserEmail(email.text);
                               navigateTo(
                                 context,
-                                LoginScreenView(),
+                                OTPScreenView(),
                               );
                             } else if (response.statusCode == 400) {
                               _showErrorDialog(
@@ -381,7 +423,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                   "This Email Already Exists",
                                   firstName,
                                   lastName,
-                                  // email,
+                                  email,
                                   pass,
                                   verifPass,
                                   cardNumberController,
@@ -423,6 +465,7 @@ void _showErrorDialog(
   String message,
   TextEditingController firstName,
   TextEditingController lastName,
+  TextEditingController email,
   TextEditingController pass,
   TextEditingController verifPass,
   TextEditingController cardNumberController,
@@ -458,7 +501,7 @@ void _showErrorDialog(
             onPressed: () {
               firstName.clear();
               lastName.clear();
-              // email.clear();
+              email.clear();
               verifPass.clear();
               cardNumberController.clear();
               expiryDateController.clear();
@@ -466,7 +509,7 @@ void _showErrorDialog(
               pass.clear();
               phone.clear();
               Navigator.of(context).pop();
-              navigateTo(context, LoginScreenView());
+              navigateTo(context, OTPScreenView());
               // Close the dialog
             },
             child: Container(

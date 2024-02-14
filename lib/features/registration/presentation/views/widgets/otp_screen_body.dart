@@ -7,7 +7,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/register_screen_view.dart';
 
 import '../../../../../core/utils/widgets/custemOTPbar.dart';
 
@@ -35,7 +34,8 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
 
   final TextEditingController code4 = TextEditingController();
 
-  String verifyCodeUrl = 'https://verifications.onrender.com/verifyCode';
+  String verifyCodeUrl =
+      'https://mutemotion.onrender.com/api/v1/passenger/verify';
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
               iconSize: 30,
               onPressed: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const RegisterScreenView()));
+                    builder: (context) => const CreateProfileScreenView()));
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -87,7 +87,8 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const RegisterScreenView()));
+                          builder: (context) =>
+                              const CreateProfileScreenView()));
                     },
                     child: Text(
                       "Edit your Email",
