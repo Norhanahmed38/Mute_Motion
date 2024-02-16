@@ -291,7 +291,7 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
                             //_visible= false;
                           },
                           child: const Text(
-                            "Resend Password",
+                            "Resend Code",
                             style: TextStyle(
                                 color: kPrimaryColor,
                                 fontSize: 16,

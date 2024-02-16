@@ -28,8 +28,12 @@ class LoginUserApi {
         print(response.data["token"]);
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("token", response.data["token"]);
+        await prefs.setString("id", response.data["id"]);
         String? token = prefs.getString("token");
+        String? id = prefs.getString("id");
         print("Token is : $token");
+         print("Id is : $id");
+         print("after");
       }
     } catch (e) {
       if (e is DioException) {
