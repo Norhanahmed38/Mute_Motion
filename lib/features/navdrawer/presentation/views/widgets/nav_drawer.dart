@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/features/aboutUs/presentation/views/aboutUs_screen_view.dart';
 import 'package:mute_motion_passenger/features/history/presentation/views/history_screen_view.dart';
+import 'package:mute_motion_passenger/features/map/veiw/map_screen.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/pages.dart';
 import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
@@ -80,7 +82,9 @@ class NavDrawer extends StatelessWidget {
                       darkGreen: kPrimaryColor,
                       pagename: 'Map',
                       icone: Icons.map_outlined,
-                      onpressed: () {}),
+                      onpressed: () {
+                        navigateTo(context, CustomMap());
+                      }),
                   Divider(
                     indent: 20,
                     endIndent: 30,
