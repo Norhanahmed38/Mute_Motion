@@ -8,6 +8,6 @@ class ProfileScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomMap();
+    return ProfileScreenViewBody();
   }
 }
