@@ -104,9 +104,8 @@ class ContactUsScreenBody extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                      ),
+                      ), backgroundColor: kPrimaryColor,
                       minimumSize: const Size(400, 55),
-                      primary: kPrimaryColor,
                     ),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
