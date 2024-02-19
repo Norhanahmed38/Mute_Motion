@@ -244,9 +244,8 @@ class _RequestsState extends State<Requests> {
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                      ),
+                      ), backgroundColor: kPrimaryColor,
                       minimumSize: const Size(350, 60),
-                      primary: kPrimaryColor,
                     ),
                     onPressed: () {
                       setState(() {
