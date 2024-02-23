@@ -6,6 +6,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:intl/intl.dart';
+import 'package:mute_motion_passenger/features/requests/data/cityToCityApi.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
@@ -212,11 +213,11 @@ class _RequestsBodyState extends State<RequestsBody> {
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    // validator: (data) {
-                    //   if (data!.isEmpty) {
-                    //     return 'Please Enter your Expexted Cost !!';
-                    //   }
-                    // },
+                     validator: (data) {
+                      if (data!.isEmpty) {
+                       return 'Please Enter your Expexted Cost !!';
+                      }
+                    },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -311,23 +312,28 @@ class _RequestsBodyState extends State<RequestsBody> {
                         setState(() {
                           _isLoading = true;
                         });
+                        CityToCityApi().sendCTCRequest(bagsCont: bagsController,context: context,costCont: costController,dateCont: dateController,destCont: destinationController,locationCont: locationController,passCont: passengersController,paymentCont: paymentController,timeCont: timeController);
+                        /* final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        String? id = prefs.getString("_id");
+                        print('The id is $id');
+                        
                         String url =
-                            'https://mutemotion.onrender.com/api/passengers/:passengerId/city-to-city-rides';
+                            "https://mutemotion.onrender.com/api/city-to-city-rides";
                         Map<String, dynamic> requestData = {
                           "location": locationController.text,
                           "destination": destinationController.text,
-                          "dateAndTime": dateController.text,
+                          "date": dateController.text,
+                          "time" :timeController.text,
                           "expectedCost": costController.text,
                           "noOfPassenger": passengersController.text,
                           "noOfBags": bagsController.text,
                           "paymentMehod": paymentController.text,
-                          "driver": null
+                          "driver": null,
+                          "_id": id,
                         };
+                        
                         try {
-                          final SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          String? id = prefs.getString("_id");
-                          print('The id is $id');
                           // Encode the data to JSON
                           String jsonBody = jsonEncode(requestData);
                           // Make the HTTP POST request
@@ -345,12 +351,13 @@ class _RequestsBodyState extends State<RequestsBody> {
                           } else if (response.statusCode == 400) {
                             _showErrorDialog(
                               context,
-                              "This Email Already Exists",
+                              "Some data are faulty",
                               destinationController,
                               locationController,
                               bagsController,
                               passengersController,
                               dateController,
+                              timeController,
                               costController,
                               paymentController,
                             );
@@ -361,7 +368,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                           }
                         } catch (error) {
                           print('Error: $error');
-                        }
+                        } */
                         setState(() {
                           _isLoading = false;
                         });
@@ -399,6 +406,8 @@ void _showErrorDialog(
   TextEditingController date,
   TextEditingController passenger,
   TextEditingController payment,
+    TextEditingController time,
+
 ) {
   showDialog(
     context: context,
@@ -425,6 +434,7 @@ void _showErrorDialog(
               destination.clear();
               location.clear();
               cost.clear();
+              time.clear();
               Navigator.of(context).pop();
               // navigateTo(context, RequestsBody());
               // Close the dialog
