@@ -384,7 +384,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           setState(() {
                             _isLoading = true;
                           });
-                        
+
                           String url =
                               'https://mutemotion.onrender.com/api/v1/passenger/signup';
                           Map<String, dynamic> requestData = {
@@ -415,15 +415,22 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               print('Request successful');
                               print('Response: ${response.body}');
                               setUserEmail(email.text);
-                              final SharedPreferences prefs = await SharedPreferences.getInstance();
-       /*  await prefs.setString("token", response.data["token"]);
-        String? token = prefs.getString("token");
-        print("Token is : $token");
-        print("after");
-        await prefs.setString("_id", response.data["user"]["_id"]);
-        String? id = prefs.getString("_id");
-        print("Id is : $id");
-        print('after222'); */
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              final responseData = jsonDecode(response.body);
+                              await prefs.setString(
+                                  "token", responseData["token"]);
+                              await prefs.setString(
+                                  "_id", responseData["user"]["_id"]);
+                              // final SharedPreferences prefs = await SharedPreferences.getInstance();
+                              // await prefs.setString("token", response["token"]);
+                              String? token = prefs.getString("token");
+                              print("Token is : $token");
+                              print("after");
+                              //  await prefs.setString("_id", response.data["user"]["_id"]);
+                              String? id = prefs.getString("_id");
+                              print("Id is : $id");
+                              print('after222');
                               navigateTo(
                                 context,
                                 OTPScreenView(),
@@ -492,8 +499,7 @@ void _showErrorDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        content:
-            Text(
+        content: Text(
           message,
           textAlign: TextAlign.center,
           style: TextStyle(
