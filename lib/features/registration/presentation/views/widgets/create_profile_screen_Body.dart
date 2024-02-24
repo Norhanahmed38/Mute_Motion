@@ -415,24 +415,19 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               print('Request successful');
                               print('Response: ${response.body}');
                               setUserEmail(email.text);
+                              navigateTo(
+                                context,
+                                OTPScreenView(),
+                              );
                               final SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
                               final responseData = jsonDecode(response.body);
-                              await prefs.setString(
-                                  "token", responseData["token"]);
-                              String? token = prefs.getString("token");
-                              print("Token is : $token");
-                              print("after");
+
                               await prefs.setString(
                                   "_id", responseData["user"]["_id"]);
 
                               String? id = prefs.getString("_id");
                               print("Id is : $id");
-                              print('after222');
-                              navigateTo(
-                                context,
-                                OTPScreenView(),
-                              );
                             } else if (response.statusCode == 400) {
                               _showErrorDialog(
                                   context,
@@ -517,7 +512,7 @@ void _showErrorDialog(
               pass.clear();
               phone.clear();
               Navigator.of(context).pop();
-              navigateTo(context, OTPScreenView());
+              navigateTo(context, CreateProfileScreenView());
               // Close the dialog
             },
             child: Container(
