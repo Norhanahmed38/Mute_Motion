@@ -513,7 +513,6 @@ void _showErrorDialog(
               phone.clear();
               Navigator.of(context).pop();
               navigateTo(context, CreateProfileScreenView());
-              // Close the dialog
             },
             child: Container(
               width: 120,
