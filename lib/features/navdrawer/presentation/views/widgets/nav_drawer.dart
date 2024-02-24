@@ -144,12 +144,10 @@ class NavDrawer extends StatelessWidget {
                             await SharedPreferences.getInstance();
                         prefs.remove('email');
                         Navigator.of(context).pushAndRemoveUntil(
-                          // the new route
                           MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 LoginScreenView(),
                           ),
-
                           (Route route) => false,
                         );
                       }),

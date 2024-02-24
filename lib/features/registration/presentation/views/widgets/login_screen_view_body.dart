@@ -128,25 +128,28 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                 const SizedBox(
                   height: 10,
                 ),
-                Container( alignment: Alignment.topLeft,
-                  child: TextButton
-                  ( 
-                    onPressed: (){
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: TextButton(
+                    onPressed: () {
                       setUserEmail(emailCont.text);
                       setState(() {
-                        _isLoading =true;
+                        _isLoading = true;
                       });
-                      ForgotPassApi().forgotPass(context: context, emailcont: emailCont);
+                      ForgotPassApi()
+                          .forgotPass(context: context, emailcont: emailCont);
                       setState(() {
                         _isLoading = false;
                       });
-                    }, 
-                  child: Text("Forgot Your Password",
-                              style: TextStyle(
-                                  color: Colors.red[900],
-                                  fontSize: 16,
-                                  fontFamily: 'Comfortaa',
-                                  fontWeight: FontWeight.bold),),
+                    },
+                    child: Text(
+                      "Forgot Your Password",
+                      style: TextStyle(
+                          color: Colors.red[900],
+                          fontSize: 16,
+                          fontFamily: 'Comfortaa',
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -222,6 +225,5 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
         ),
       ),
     );
-    
   }
 }

@@ -7,6 +7,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/utils/widgets/custemOTPbar.dart';
 
@@ -27,11 +28,8 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
   var formKey = GlobalKey<FormState>();
 
   final TextEditingController code1 = TextEditingController();
-
   final TextEditingController code2 = TextEditingController();
-
   final TextEditingController code3 = TextEditingController();
-
   final TextEditingController code4 = TextEditingController();
 
   String verifyCodeUrl =

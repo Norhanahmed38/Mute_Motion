@@ -4,16 +4,16 @@ import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/forget_pass.dart';
 
 class ForgotPassApi {
-  static const forgotPassUrl = "https://mutemotion.onrender.com/api/v1/passenger/resetpassword";
-  forgotPass(
-      {required BuildContext context,
-      required TextEditingController emailcont,
-      }) async {
+  static const forgotPassUrl =
+      "https://mutemotion.onrender.com/api/v1/passenger/resetpassword";
+  forgotPass({
+    required BuildContext context,
+    required TextEditingController emailcont,
+  }) async {
     try {
       print('before');
       Map<String, dynamic> requestBody = {
         'email': emailcont.text,
-        
       };
       Response response = await Dio().post("$forgotPassUrl", data: requestBody);
       print('after');
@@ -23,13 +23,11 @@ class ForgotPassApi {
           context,
           ForgotPasswordBody(),
         );
-        
       }
     } catch (e) {
       if (e is DioException) {
         print(e.response?.data);
-        _showErrorDialog(
-            context, 'Email not Found', emailcont);
+        _showErrorDialog(context, 'Email not Found', emailcont);
       }
     }
   }
@@ -53,13 +51,12 @@ void _showErrorDialog(
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
-          
         ),
         actions: [
           TextButton(
             onPressed: () {
               emailcont.clear();
-          
+
               Navigator.of(context).pop(); // Close the dialog
             },
             child: Container(
@@ -70,7 +67,7 @@ void _showErrorDialog(
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: const Padding(
-                padding:  EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(top: 5),
                 child: Text(
                   'OK',
                   textAlign: TextAlign.center,

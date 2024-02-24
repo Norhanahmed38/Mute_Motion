@@ -264,43 +264,40 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
                             Text(time.toString()),
                         interval: Duration(milliseconds: 100),
                         onFinished: () {
-                          setState(() {
-                            
-                          });
+                          setState(() {});
                           _visible = true;
                           print('Timer is done!');
-                          
                         },
                       )
                     ],
                   ),
                 ),
-                  Visibility(
-                    visible: _visible,
-                child:  TextButton(
-                          onPressed: () async {
-                            setState(() {
-                              _isLoading =true;
-                            });
-                           await ResendPassApi().resendPass(context: context, emailcont: emailCont);
-                           setState(() {
-                             _isLoading = false;
-                           });
-                            counterCont.restart();
-                            
-                            //_visible= false;
-                          },
-                          child: const Text(
-                            "Resend Code",
-                            style: TextStyle(
-                                color: kPrimaryColor,
-                                fontSize: 16,
-                                fontFamily: 'Comfortaa',
-                                fontWeight: FontWeight.bold),
-                          )),
-              ),
+                Visibility(
+                  visible: _visible,
+                  child: TextButton(
+                      onPressed: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        await ResendPassApi()
+                            .resendPass(context: context, emailcont: emailCont);
+                        setState(() {
+                          _isLoading = false;
+                        });
+                        counterCont.restart();
+
+                        //_visible= false;
+                      },
+                      child: const Text(
+                        "Resend Code",
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontSize: 16,
+                            fontFamily: 'Comfortaa',
+                            fontWeight: FontWeight.bold),
+                      )),
+                ),
               ],
-            
             ),
           ),
         ),

@@ -8,7 +8,8 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/w
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiProvide {
-  static const String baseUrl = "https://mutemotion.onrender.com/api/v1/passenger/login";
+  static const String baseUrl =
+      "https://mutemotion.onrender.com/api/v1/passenger/login";
   UserLogin(
       {required BuildContext context,
       required TextEditingController emailCont,
@@ -19,8 +20,7 @@ class ApiProvide {
         "email": emailCont.text,
         "password": passCont.text,
       };
-      Response response =
-          await Dio().post(baseUrl, data: requestBody);
+      Response response = await Dio().post(baseUrl, data: requestBody);
       navigateTo(context, MainMenuScreenView());
       print('Request successful');
       print('Response: ${response.data}');

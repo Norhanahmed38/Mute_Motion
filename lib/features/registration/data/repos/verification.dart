@@ -4,6 +4,7 @@ import 'package:mute_motion_passenger/features/registration/data/models/verifica
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../presentation/views/create_Profile_screen.dart';
 
 class Verification {
@@ -53,6 +54,14 @@ class Verification {
       Response response = await Dio().post("$verifyCodeUrl", data: requestBody);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString("token", response.data["token"]);
+        String? token = prefs.getString("token");
+        print("Token is : $token");
+        await prefs.setString("_id", response.data["user"]["_id"]);
+
+        String? id = prefs.getString("_id");
+        print("Id is : $id");
         navigateTo(
           context,
           const MainMenuScreenView(),
