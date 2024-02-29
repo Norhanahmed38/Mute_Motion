@@ -11,8 +11,8 @@ class CityToCityApi {
     required BuildContext context,
     required TextEditingController locationCont,
     required TextEditingController destCont,
-    required TextEditingController dateCont,
-    required TextEditingController timeCont,
+    
+   required String? dateANdTime,
     required TextEditingController costCont,
     required TextEditingController paymentCont,
     required TextEditingController bagsCont,
@@ -25,12 +25,12 @@ class CityToCityApi {
       Map<String, dynamic> requestBody = {
         "location": locationCont.text,
         "destination": destCont.text,
-        "date": dateCont.text,
-        "time": timeCont.text,
+        "dateAndtime": dateANdTime,
+       
         "expectedCost": costCont.text,
         "noOfPassenger": passCont.text,
         "noOfBags": bagsCont.text,
-        "paymentMehod": 'cash',
+        "paymentMethod": 'cash',
         "driver": null,
         "passengerId": id,
       };
@@ -49,8 +49,6 @@ class CityToCityApi {
           "Some data are faulty",
           destCont,
           locationCont,
-          dateCont,
-          timeCont,
           costCont,
           paymentCont,
           bagsCont,
@@ -67,9 +65,9 @@ void _showErrorDialog(
   TextEditingController destination,
   TextEditingController location,
   TextEditingController cost,
-  TextEditingController date,
+
   TextEditingController payment,
-  TextEditingController time,
+ 
   TextEditingController bags,
   TextEditingController pass,
 ) {
@@ -91,12 +89,12 @@ void _showErrorDialog(
         actions: [
           TextButton(
             onPressed: () {
-              date.clear();
+          
               payment.clear();
               destination.clear();
               location.clear();
               cost.clear();
-              time.clear();
+            
               bags.clear();
               pass.clear();
               Navigator.of(context).pop();

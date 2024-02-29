@@ -26,12 +26,13 @@ class Requests extends StatefulWidget {
 }
 
 class _RequestsState extends State<Requests> {
+  String? dateAndTime;
   bool btnPressed = false;
   static var formKey = GlobalKey<FormState>();
   var locationController = TextEditingController();
   var destinationController = TextEditingController();
-  var timeController = TextEditingController();
-  var dateController = TextEditingController();
+  //var timeController = TextEditingController();
+  //var dateController = TextEditingController();
   var costController = TextEditingController();
   var paymentController = TextEditingController();
 
@@ -139,6 +140,7 @@ class _RequestsState extends State<Requests> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: locationController,
                     validator: (data) {
                       if (data!.isEmpty) {
                         return 'Please Enter your Location !!';
@@ -160,6 +162,7 @@ class _RequestsState extends State<Requests> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: destinationController,
                     validator: (data) {
                       if (data!.isEmpty) {
                         return 'Please Enter your Destination !!';
@@ -203,8 +206,10 @@ class _RequestsState extends State<Requests> {
                             context: context,
                             initialTime: TimeOfDay.fromDateTime(
                                 currentValue ?? DateTime.now()));
+                                dateAndTime = DateTimeField.combine(date, time).toString();
                         return DateTimeField.combine(date, time);
                       } else {
+                        dateAndTime = currentValue.toString();
                         return currentValue;
                       }
                     },
@@ -213,6 +218,7 @@ class _RequestsState extends State<Requests> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: costController,
                     keyboardType: TextInputType.number,
                      validator: (data) {
                       if (data!.isEmpty) {
@@ -264,13 +270,8 @@ class _RequestsState extends State<Requests> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                          locationController.text;
-                          destinationController.text;
-                          timeController.text;
-                          dateController.text;
-                           costController.text;
-                          paymentController.text;
-                        }
+                          
+                        
                         print(paymentController.text);
                          /* final SharedPreferences prefs =
                               await SharedPreferences.getInstance();
@@ -279,7 +280,7 @@ class _RequestsState extends State<Requests> {
                           setState(() {
                             _isLoading = true;
                           });
-                          TransportApi().sendTransportRequest(context: context,costCont: costController,dateCont: dateController,destCont: destinationController, locationCont: locationController,paymentCont: paymentController,timeCont: timeController); 
+                          TransportApi().sendTransportRequest(context: context,costCont: costController,dateAndTime: dateAndTime,destCont: destinationController, locationCont: locationController,paymentCont: paymentController,); 
                            //const url =
                              // "https://mutemotion.onrender.com/api/transports";
                         /*   Map<String, dynamic> requestBody = {
@@ -335,7 +336,7 @@ class _RequestsState extends State<Requests> {
                           });
                   
       
-      
+                        }
                       },
                       child: btnPressed == false
                           ? Text(
