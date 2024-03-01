@@ -54,20 +54,29 @@ class TransportApi{
                               );
                             }
                           }
-        
-
-
       }
-
+    } catch (error) {
+      if (error is DioException) {
+        print(error.response?.data);
+        _showErrorDialog(
+          context,
+          "Some data are faulty",
+          destCont,
+          locationCont,
+          costCont,
+          paymentCont,
+        );
+      }
+    }
+  }
 }
+
 void _showErrorDialog(
   BuildContext context,
   String message,
   TextEditingController destination,
   TextEditingController location,
   TextEditingController cost,
- 
-  
   TextEditingController payment,
    
 
@@ -90,13 +99,10 @@ void _showErrorDialog(
         actions: [
           TextButton(
             onPressed: () {
-            
-            
               payment.clear();
               destination.clear();
               location.clear();
               cost.clear();
-          
               Navigator.of(context).pop();
               // navigateTo(context, RequestsBody());
               // Close the dialog

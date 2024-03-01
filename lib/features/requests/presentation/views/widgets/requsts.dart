@@ -17,7 +17,6 @@ import 'package:mute_motion_passenger/features/requests/presentation/views/widge
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-
 class Requests extends StatefulWidget {
   const Requests({super.key});
 
@@ -41,7 +40,7 @@ class _RequestsState extends State<Requests> {
     int currentIndex = 0;
 
     final format = DateFormat("yyyy-MM-dd HH:mma");
-       bool _isLoading = false;
+    bool _isLoading = false;
 
     String dropdownvalue = 'Payment Method';
 
@@ -60,8 +59,8 @@ class _RequestsState extends State<Requests> {
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
             'Requests',
-            style:
-                TextStyle(fontSize: 24, fontFamily: 'Lato', color: Colors.white),
+            style: TextStyle(
+                fontSize: 24, fontFamily: 'Lato', color: Colors.white),
           ),
           elevation: 0,
           centerTitle: true,
@@ -220,11 +219,11 @@ class _RequestsState extends State<Requests> {
                   TextFormField(
                     controller: costController,
                     keyboardType: TextInputType.number,
-                     validator: (data) {
+                    validator: (data) {
                       if (data!.isEmpty) {
                         return 'Please Enter your Expexted Cost !!';
                       }
-                     },
+                    },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -262,7 +261,8 @@ class _RequestsState extends State<Requests> {
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
-                        ), backgroundColor: kPrimaryColor,
+                        ),
+                        backgroundColor: kPrimaryColor,
                         minimumSize: const Size(350, 60),
                       ),
                       onPressed: () async {
@@ -270,7 +270,6 @@ class _RequestsState extends State<Requests> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                          
                         
                         print(paymentController.text);
                          /* final SharedPreferences prefs =
@@ -306,7 +305,7 @@ class _RequestsState extends State<Requests> {
                               },
                               body: jsonBody,
                             ); */
-                           /*  Response response = await Dio().post("$url", data: requestBody);
+                          /*  Response response = await Dio().post("$url", data: requestBody);
                             print('after posting request');
                             if (response.statusCode == 200 ||
                                 response.statusCode == 201) {
@@ -334,18 +333,18 @@ class _RequestsState extends State<Requests> {
                           setState(() {
                             _isLoading = false;
                           });
-                  
-      
                         }
                       },
                       child: btnPressed == false
                           ? Text(
                               'Send Request',
-                              style: TextStyle(fontSize: 20, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
                             )
                           : Text(
                               'Request Sent',
-                              style: TextStyle(fontSize: 20, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
                             ),
                     ),
                   ),

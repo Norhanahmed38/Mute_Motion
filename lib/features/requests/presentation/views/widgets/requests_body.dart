@@ -207,6 +207,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                                 currentValue ?? DateTime.now()));
                                 print(DateTimeField.combine(date, time));
                                 dateAndtime = DateTimeField.combine(date, time).toString();
+                        
                         return DateTimeField.combine(date, time);
                         
                       } else {
@@ -223,9 +224,9 @@ class _RequestsBodyState extends State<RequestsBody> {
                   TextFormField(
                     controller: costController,
                     keyboardType: TextInputType.number,
-                     validator: (data) {
+                    validator: (data) {
                       if (data!.isEmpty) {
-                       return 'Please Enter your Expexted Cost !!';
+                        return 'Please Enter your Expexted Cost !!';
                       }
                     },
                     decoration: InputDecoration(
@@ -320,6 +321,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                           paymentController.text;
                           passengersController.text;
                           bagsController.text; */
+
                         
                         setState(() {
                           _isLoading = true;
@@ -386,6 +388,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                         } catch (error) {
                           print('Error: $error');
                         } */
+
                         setState(() {
                           _isLoading = false;
                         });
@@ -425,8 +428,7 @@ void _showErrorDialog(
   TextEditingController date,
   TextEditingController passenger,
   TextEditingController payment,
-    TextEditingController time,
-
+  TextEditingController time,
 ) {
   showDialog(
     context: context,
