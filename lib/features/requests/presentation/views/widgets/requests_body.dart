@@ -25,12 +25,13 @@ class RequestsBody extends StatefulWidget {
 
 class _RequestsBodyState extends State<RequestsBody> {
   bool btnPressed = false;
+  String? dateAndtime;
 
   static var formKey = GlobalKey<FormState>();
   var locationController = TextEditingController();
   var destinationController = TextEditingController();
-  var timeController = TextEditingController();
-  var dateController = TextEditingController();
+  //var timeController = TextEditingController();
+  var dateAndTimeController = TextEditingController();
   var costController = TextEditingController();
   var paymentController = TextEditingController();
   var passengersController = TextEditingController();
@@ -138,6 +139,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: locationController,
                     validator: (data) {
                       if (data!.isEmpty) {
                         return 'Please Enter your Location !!';
@@ -159,6 +161,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: destinationController,
                     validator: (data) {
                       if (data!.isEmpty) {
                         return 'Please Enter your Destination !!';
@@ -202,8 +205,13 @@ class _RequestsBodyState extends State<RequestsBody> {
                             context: context,
                             initialTime: TimeOfDay.fromDateTime(
                                 currentValue ?? DateTime.now()));
+                        print(DateTimeField.combine(date, time));
+                        dateAndtime =
+                            DateTimeField.combine(date, time).toString();
                         return DateTimeField.combine(date, time);
                       } else {
+                        print(currentValue);
+                        dateAndtime = currentValue.toString();
                         return currentValue;
                       }
                     },
@@ -212,6 +220,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: costController,
                     keyboardType: TextInputType.number,
                     validator: (data) {
                       if (data!.isEmpty) {
@@ -230,6 +239,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: passengersController,
                     keyboardType: TextInputType.number,
                     validator: (data) {
                       if (data!.isEmpty) {
@@ -248,6 +258,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: bagsController,
                     keyboardType: TextInputType.number,
                     validator: (data) {
                       if (data!.isEmpty) {
@@ -300,29 +311,34 @@ class _RequestsBodyState extends State<RequestsBody> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                          locationController.text;
+                          /*  locationController.text;
                           destinationController.text;
                           timeController.text;
                           dateController.text;
                           costController.text;
                           paymentController.text;
                           passengersController.text;
-                          bagsController.text;
-                        }
-                        setState(() {
-                          _isLoading = true;
-                        });
-                        CityToCityApi().sendCTCRequest(
+                          bagsController.text; */
+
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          print(locationController.text);
+                          print(destinationController.text);
+                          // print(dateController.text);
+                          print(passengersController.text);
+
+                          CityToCityApi().sendCTCRequest(
                             bagsCont: bagsController,
                             context: context,
                             costCont: costController,
-                            dateCont: dateController,
+                            dateANdTime: dateAndtime,
                             destCont: destinationController,
                             locationCont: locationController,
                             passCont: passengersController,
                             paymentCont: paymentController,
-                            timeCont: timeController);
-                        /* final SharedPreferences prefs =
+                          );
+                          /* final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         String? id = prefs.getString("_id");
                         print('The id is $id');
@@ -378,9 +394,10 @@ class _RequestsBodyState extends State<RequestsBody> {
                         } catch (error) {
                           print('Error: $error');
                         } */
-                        setState(() {
-                          _isLoading = false;
-                        });
+                          setState(() {
+                            _isLoading = false;
+                          });
+                        }
                       },
                       child: btnPressed == false
                           ? Text(

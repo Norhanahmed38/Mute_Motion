@@ -8,10 +8,9 @@ class TransportApi {
   static const transportUrl = 'https://mutemotion.onrender.com/api/transports';
   sendTransportRequest({
     required BuildContext context,
+    required String? dateAndTime,
     required TextEditingController locationCont,
     required TextEditingController destCont,
-    required TextEditingController dateCont,
-    required TextEditingController timeCont,
     required TextEditingController costCont,
     required TextEditingController paymentCont,
   }) async {
@@ -22,10 +21,9 @@ class TransportApi {
       Map<String, dynamic> requestBody = {
         "location": locationCont.text,
         "destination": destCont.text,
-        "date": dateCont.text,
-        "time": timeCont.text,
+        "dateAndtime": dateAndTime,
         "expectedCost": costCont.text,
-        "paymentMehod": 'cash',
+        "paymentMethod": 'cash',
         "driver": null,
         "passengerId": id,
       };
@@ -44,8 +42,6 @@ class TransportApi {
           "Some data are faulty",
           destCont,
           locationCont,
-          dateCont,
-          timeCont,
           costCont,
           paymentCont,
         );
@@ -60,9 +56,7 @@ void _showErrorDialog(
   TextEditingController destination,
   TextEditingController location,
   TextEditingController cost,
-  TextEditingController date,
   TextEditingController payment,
-  TextEditingController time,
 ) {
   showDialog(
     context: context,
@@ -82,12 +76,11 @@ void _showErrorDialog(
         actions: [
           TextButton(
             onPressed: () {
-              date.clear();
               payment.clear();
               destination.clear();
               location.clear();
               cost.clear();
-              time.clear();
+
               Navigator.of(context).pop();
               // navigateTo(context, RequestsBody());
               // Close the dialog

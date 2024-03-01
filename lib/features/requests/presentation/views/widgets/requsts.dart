@@ -25,12 +25,13 @@ class Requests extends StatefulWidget {
 }
 
 class _RequestsState extends State<Requests> {
+  String? dateAndTime;
   bool btnPressed = false;
   static var formKey = GlobalKey<FormState>();
   var locationController = TextEditingController();
   var destinationController = TextEditingController();
-  var timeController = TextEditingController();
-  var dateController = TextEditingController();
+  //var timeController = TextEditingController();
+  //var dateController = TextEditingController();
   var costController = TextEditingController();
   var paymentController = TextEditingController();
 
@@ -138,6 +139,7 @@ class _RequestsState extends State<Requests> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: locationController,
                     validator: (data) {
                       if (data!.isEmpty) {
                         return 'Please Enter your Location !!';
@@ -159,6 +161,7 @@ class _RequestsState extends State<Requests> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: destinationController,
                     validator: (data) {
                       if (data!.isEmpty) {
                         return 'Please Enter your Destination !!';
@@ -202,8 +205,11 @@ class _RequestsState extends State<Requests> {
                             context: context,
                             initialTime: TimeOfDay.fromDateTime(
                                 currentValue ?? DateTime.now()));
+                        dateAndTime =
+                            DateTimeField.combine(date, time).toString();
                         return DateTimeField.combine(date, time);
                       } else {
+                        dateAndTime = currentValue.toString();
                         return currentValue;
                       }
                     },
@@ -212,6 +218,7 @@ class _RequestsState extends State<Requests> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: costController,
                     keyboardType: TextInputType.number,
                     validator: (data) {
                       if (data!.isEmpty) {
@@ -264,32 +271,25 @@ class _RequestsState extends State<Requests> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                          locationController.text;
-                          destinationController.text;
-                          timeController.text;
-                          dateController.text;
-                          costController.text;
-                          paymentController.text;
-                        }
-                        print(paymentController.text);
-                        /* final SharedPreferences prefs =
+                          print(paymentController.text);
+                          /* final SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           String? id = prefs.getString("_id");
                           print('The id is $id'); */
-                        setState(() {
-                          _isLoading = true;
-                        });
-                        TransportApi().sendTransportRequest(
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          TransportApi().sendTransportRequest(
                             context: context,
                             costCont: costController,
-                            dateCont: dateController,
+                            dateAndTime: dateAndTime,
                             destCont: destinationController,
                             locationCont: locationController,
                             paymentCont: paymentController,
-                            timeCont: timeController);
-                        //const url =
-                        // "https://mutemotion.onrender.com/api/transports";
-                        /*   Map<String, dynamic> requestBody = {
+                          );
+                          //const url =
+                          // "https://mutemotion.onrender.com/api/transports";
+                          /*   Map<String, dynamic> requestBody = {
                             "location": locationController.text,
                             "destination": destinationController.text,
                             "date": dateController.text,
@@ -312,7 +312,7 @@ class _RequestsState extends State<Requests> {
                               },
                               body: jsonBody,
                             ); */
-                        /*  Response response = await Dio().post("$url", data: requestBody);
+                          /*  Response response = await Dio().post("$url", data: requestBody);
                             print('after posting request');
                             if (response.statusCode == 200 ||
                                 response.statusCode == 201) {
@@ -337,9 +337,10 @@ class _RequestsState extends State<Requests> {
                           } catch (error) {
                             print('Error: $error');
                           } */
-                        setState(() {
-                          _isLoading = false;
-                        });
+                          setState(() {
+                            _isLoading = false;
+                          });
+                        }
                       },
                       child: btnPressed == false
                           ? Text(
