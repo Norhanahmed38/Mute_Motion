@@ -205,14 +205,16 @@ class _RequestsBodyState extends State<RequestsBody> {
                             context: context,
                             initialTime: TimeOfDay.fromDateTime(
                                 currentValue ?? DateTime.now()));
-                        print(DateTimeField.combine(date, time));
-                        dateAndtime =
-                            DateTimeField.combine(date, time).toString();
+                                print(DateTimeField.combine(date, time));
+                                dateAndtime = DateTimeField.combine(date, time).toString();
+                        
                         return DateTimeField.combine(date, time);
+                        
                       } else {
                         print(currentValue);
                         dateAndtime = currentValue.toString();
                         return currentValue;
+                        
                       }
                     },
                   ),
@@ -311,7 +313,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                          /*  locationController.text;
+                         /*  locationController.text;
                           destinationController.text;
                           timeController.text;
                           dateController.text;
@@ -320,25 +322,17 @@ class _RequestsBodyState extends State<RequestsBody> {
                           passengersController.text;
                           bagsController.text; */
 
-                          setState(() {
-                            _isLoading = true;
-                          });
-                          print(locationController.text);
-                          print(destinationController.text);
-                          // print(dateController.text);
-                          print(passengersController.text);
-
-                          CityToCityApi().sendCTCRequest(
-                            bagsCont: bagsController,
-                            context: context,
-                            costCont: costController,
-                            dateANdTime: dateAndtime,
-                            destCont: destinationController,
-                            locationCont: locationController,
-                            passCont: passengersController,
-                            paymentCont: paymentController,
-                          );
-                          /* final SharedPreferences prefs =
+                        
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        print(locationController.text);
+                        print(destinationController.text);
+                       // print(dateController.text);
+                        print(passengersController.text);
+                        
+                        CityToCityApi().sendCTCRequest(bagsCont: bagsController,context: context,costCont: costController,dateANdTime: dateAndtime,destCont: destinationController,locationCont: locationController,passCont: passengersController,paymentCont: paymentController,);
+                        /* final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         String? id = prefs.getString("_id");
                         print('The id is $id');
@@ -394,11 +388,13 @@ class _RequestsBodyState extends State<RequestsBody> {
                         } catch (error) {
                           print('Error: $error');
                         } */
-                          setState(() {
-                            _isLoading = false;
-                          });
+
+                        setState(() {
+                          _isLoading = false;
+                        });
                         }
                       },
+  
                       child: btnPressed == false
                           ? Text(
                               'Send Request',

@@ -205,8 +205,7 @@ class _RequestsState extends State<Requests> {
                             context: context,
                             initialTime: TimeOfDay.fromDateTime(
                                 currentValue ?? DateTime.now()));
-                        dateAndTime =
-                            DateTimeField.combine(date, time).toString();
+                                dateAndTime = DateTimeField.combine(date, time).toString();
                         return DateTimeField.combine(date, time);
                       } else {
                         dateAndTime = currentValue.toString();
@@ -271,25 +270,19 @@ class _RequestsState extends State<Requests> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                          print(paymentController.text);
-                          /* final SharedPreferences prefs =
+                        
+                        print(paymentController.text);
+                         /* final SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           String? id = prefs.getString("_id");
                           print('The id is $id'); */
                           setState(() {
                             _isLoading = true;
                           });
-                          TransportApi().sendTransportRequest(
-                            context: context,
-                            costCont: costController,
-                            dateAndTime: dateAndTime,
-                            destCont: destinationController,
-                            locationCont: locationController,
-                            paymentCont: paymentController,
-                          );
-                          //const url =
-                          // "https://mutemotion.onrender.com/api/transports";
-                          /*   Map<String, dynamic> requestBody = {
+                          TransportApi().sendTransportRequest(context: context,costCont: costController,dateAndTime: dateAndTime,destCont: destinationController, locationCont: locationController,paymentCont: paymentController,); 
+                           //const url =
+                             // "https://mutemotion.onrender.com/api/transports";
+                        /*   Map<String, dynamic> requestBody = {
                             "location": locationController.text,
                             "destination": destinationController.text,
                             "date": dateController.text,
