@@ -4,61 +4,56 @@ import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-class TransportApi{
-  static const transportUrl= 'https://mutemotion.onrender.com/api/transports';
-  sendTransportRequest({required BuildContext context,
-      required TextEditingController locationCont,
-      required TextEditingController destCont,
-      required TextEditingController dateCont,
-      required TextEditingController timeCont,
-      required TextEditingController costCont,
-      required TextEditingController paymentCont,
-      }) async {
-        try{
-          final SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          String? id = prefs.getString("_id");
-                          print('The id is $id');
-            Map<String, dynamic> requestBody = {
-                            "location": locationCont.text,
-                            "destination": destCont.text,
-                            "date": dateCont.text,
-                            "time" :timeCont.text,
-                            "expectedCost": costCont.text,
-                            "paymentMehod": 'cash',
-                            "driver": null,
-                            "passengerId": id,
-                          };
-                          print('aaaaaaaaaa3333333');
-                           Response response = await Dio().post("$transportUrl", data: requestBody);
-                            print('after posting request');
-                            if (response.statusCode == 200 ||
-                                response.statusCode == 201) {
-                              print('Request successful');
-                                      print(response.data);
-                            } 
-                          } catch (error) {
-                            if (error is DioException){
-                            print(error.response?.data);
-                            _showErrorDialog(
-                                context,
-                                "Some data are faulty",
-                                destCont,
-                                locationCont,
-                                dateCont,
-                                timeCont,
-                                costCont,
-                                paymentCont,
-                              );
-                            }
-                          }
-        
-
-
+class TransportApi {
+  static const transportUrl = 'https://mutemotion.onrender.com/api/transports';
+  sendTransportRequest({
+    required BuildContext context,
+    required TextEditingController locationCont,
+    required TextEditingController destCont,
+    required TextEditingController dateCont,
+    required TextEditingController timeCont,
+    required TextEditingController costCont,
+    required TextEditingController paymentCont,
+  }) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? id = prefs.getString("_id");
+      print('The id is $id');
+      Map<String, dynamic> requestBody = {
+        "location": locationCont.text,
+        "destination": destCont.text,
+        "date": dateCont.text,
+        "time": timeCont.text,
+        "expectedCost": costCont.text,
+        "paymentMehod": 'cash',
+        "driver": null,
+        "passengerId": id,
+      };
+      print('aaaaaaaaaa3333333');
+      Response response = await Dio().post("$transportUrl", data: requestBody);
+      print('after posting request');
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print('Request successful');
+        print(response.data);
       }
-
+    } catch (error) {
+      if (error is DioException) {
+        print(error.response?.data);
+        _showErrorDialog(
+          context,
+          "Some data are faulty",
+          destCont,
+          locationCont,
+          dateCont,
+          timeCont,
+          costCont,
+          paymentCont,
+        );
+      }
+    }
+  }
 }
+
 void _showErrorDialog(
   BuildContext context,
   String message,
@@ -66,10 +61,8 @@ void _showErrorDialog(
   TextEditingController location,
   TextEditingController cost,
   TextEditingController date,
-  
   TextEditingController payment,
-    TextEditingController time,
-
+  TextEditingController time,
 ) {
   showDialog(
     context: context,
@@ -89,7 +82,6 @@ void _showErrorDialog(
         actions: [
           TextButton(
             onPressed: () {
-            
               date.clear();
               payment.clear();
               destination.clear();
