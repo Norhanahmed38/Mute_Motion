@@ -21,29 +21,34 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: kPrimaryColor,
-            ),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => CreateProfileScreenView()));
-            }),
-        title: const Text(
-          'Setup Credit Card',
-          style: TextStyle(
-            fontSize: 21,
-            fontFamily: 'Lato',
-            color: kPrimaryColor,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ),
-      body: Padding(
+    return
+        // Scaffold(
+        // appBar: AppBar(
+        //   leading: IconButton(
+        //       icon: const Icon(
+        //         Icons.arrow_back_ios,
+        //         color: kPrimaryColor,
+        //       ),
+        //       onPressed: () {
+        //         Navigator.of(context).push(MaterialPageRoute(
+        //             builder: (context) => CreateProfileScreenView()));
+        //       }),
+        //   title: const Text(
+        //     'Setup Credit Card',
+        //     style: TextStyle(
+        //       fontSize: 21,
+        //       fontFamily: 'Lato',
+        //       color: kPrimaryColor,
+        //     ),
+        //   ),
+        //   centerTitle: true,
+        //   backgroundColor: Colors.white,
+        // ),
+        // body:
+        SizedBox(
+      height: 466,
+      width: 430,
+      child: Padding(
         padding: const EdgeInsets.all(30),
         child: Form(
           key: formKey,
@@ -212,6 +217,7 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
             ],
           ),
         ),
+        // ),
       ),
     );
   }

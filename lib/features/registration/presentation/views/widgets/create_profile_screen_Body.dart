@@ -77,7 +77,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Text(
                     'Welcome,',
@@ -89,7 +89,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                         .copyWith(fontSize: 12, color: kPrimaryColor),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.95,
@@ -120,20 +120,21 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 5),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                ),
-                                child: CustomTextField(
-                                  obscureText: false,
-                                  controller: firstName,
-                                  hintText: 'First name',
-                                )),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: CustomTextField(
+                                obscureText: false,
+                                controller: firstName,
+                                hintText: 'First name',
+                              ),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -353,10 +354,11 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                   ),
                                   IconButton(
                                       onPressed: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AddCardView()));
+                                        buildShowModalBottomSheet(context);
+                                        // Navigator.of(context).push(
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             AddCardView()));
                                       },
                                       icon: Icon(Icons.arrow_right)),
                                 ],
@@ -468,6 +470,21 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
         ),
       ),
     );
+  }
+
+  Future<dynamic> buildShowModalBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        context: context,
+        builder: (BuildContext context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: AddCardView(),
+          );
+        });
   }
 }
 

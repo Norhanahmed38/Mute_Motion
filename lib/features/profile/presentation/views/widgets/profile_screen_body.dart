@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/profile/model/model.dart';
