@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
        
       ), */
       debugShowCheckedModeBanner: false,
-      home: MapScreen(),
+      home: LoginScreenView(),
     );
   }
 }
