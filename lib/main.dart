@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/features/driverProfile/presentation/views/DriverProfileView.dart';
 import 'package:mute_motion_passenger/features/driverProfile/presentation/views/widgets/driver_profile_view_body.dart';
 import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
+import 'package:mute_motion_passenger/features/map/veiw/map_screen.dart';
+import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
@@ -35,7 +37,9 @@ class MyApp extends StatelessWidget {
        
       ), */
       debugShowCheckedModeBanner: false,
+
       home: TextToSign(),
+
     );
   }
 }
