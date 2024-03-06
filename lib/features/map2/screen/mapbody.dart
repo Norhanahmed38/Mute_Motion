@@ -24,10 +24,11 @@ class _mymapState extends State<mymap> {
       LatLng(30.538064272855628, 31.662419559020925);
   @override
   void initState() {
-    getLocationUpdated().then((_) => {
-          getpolylinepoints()
-              .then((coordanites) => {generatepolyline(coordanites)})
-        });
+    getLocationUpdated();
+    //getLocationUpdated().then((_) => {
+    //    getpolylinepoints()
+    // .then((coordanites) => {generatepolyline(coordanites)})
+    //});
 
     super.initState();
   }
@@ -43,7 +44,7 @@ class _mymapState extends State<mymap> {
               onMapCreated: ((GoogleMapController controller) {
                 _mapcontroller.complete(controller);
                 googleMapController = controller;
-                initMapStyle();
+                //initMapStyle();
               }),
               initialCameraPosition:
                   CameraPosition(target: _destinationlocatio, zoom: 10),
@@ -69,11 +70,11 @@ class _mymapState extends State<mymap> {
     );
   }
 
-  Future<void> initMapStyle() async {
+  /*Future<void> initMapStyle() async {
     var roadcolor = await DefaultAssetBundle.of(context)
         .loadString('lib/feature/map/assets/map_style/road_color_gray.json');
     googleMapController?.setMapStyle(roadcolor);
-  }
+  }*/
 
   //move camerapostin on map while user moving
   Future<void> cameratopostion(LatLng pos) async {
@@ -108,7 +109,7 @@ class _mymapState extends State<mymap> {
         setState(() {
           _currentlocation =
               LatLng(currentLocation.latitude!, currentLocation.longitude!);
-          //print(currentLocation);
+          print(currentLocation);
           cameratopostion(_currentlocation!);
           // _cameraTopotion( LatLng);
           //var marker =Marker(markerId: MarkerId('current location'),icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),position: currentlocation!);
@@ -118,11 +119,11 @@ class _mymapState extends State<mymap> {
     });
   }
 
-  Future<List<LatLng>> getpolylinepoints() async {
+  /* Future<List<LatLng>> getpolylinepoints() async {
     List<LatLng> polylinecoordinates = [];
     PolylinePoints polylinePoints = new PolylinePoints();
     PolylineResult Result = await polylinePoints.getRouteBetweenCoordinates(
-        'AIzaSyB0MweXa8Uh4IgNC35ayWrW8j1dN4SGn4c',
+        'AIzaSyDj_BNAFpTh9nIMK5lxMJYC8AzOXXh0RaY',
         PointLatLng(_userlocation.latitude, _userlocation.longitude),
         PointLatLng(
             _destinationlocatio.latitude, _destinationlocatio.longitude),
@@ -150,5 +151,5 @@ class _mymapState extends State<mymap> {
     setState(() {
       polylines[id] = polyline;
     });
-  }
+  }*/
 }
