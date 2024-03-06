@@ -83,7 +83,7 @@ class NavDrawer extends StatelessWidget {
                       pagename: 'Map',
                       icone: Icons.map_outlined,
                       onpressed: () {
-                        navigateTo(context, CustomMap());
+                        navigateTo(context, MapScreen());
                       }),
                   Divider(
                     indent: 20,
