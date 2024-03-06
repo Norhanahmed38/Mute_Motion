@@ -26,17 +26,21 @@ class _TextToSignBodyState extends State<TextToSignBody> {
     super.initState();
     _initSpeech();
   }
-   void _initSpeech() async {
+
+  void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
     setState(() {});
   }
-   /// Each time to start a speech recognition session
+
+  /// Each time to start a speech recognition session
   void _startListening() async {
-    await _speechToText.listen(onResult: _onSpeechResult,
-    localeId: 'ar_EG',
+    await _speechToText.listen(
+      onResult: _onSpeechResult,
+      localeId: 'ar_EG',
     );
     setState(() {});
   }
+
   /// Manually stop the active speech recognition session
   /// Note that there are also timeouts that each platform enforces
   /// and the SpeechToText plugin supports setting timeouts on the
@@ -51,10 +55,11 @@ class _TextToSignBodyState extends State<TextToSignBody> {
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() {
       _lastWords = result.recognizedWords;
-      record =_lastWords;
+      record = _lastWords;
       //print(record);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController messageController = TextEditingController();
@@ -85,7 +90,6 @@ class _TextToSignBodyState extends State<TextToSignBody> {
           width: double.infinity,
           padding: const EdgeInsets.only(
             top: 20,
-            left: 15,
           ),
           decoration: const BoxDecoration(
               color: Colors.white,
@@ -97,78 +101,86 @@ class _TextToSignBodyState extends State<TextToSignBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
-             
-                Text(  _speechEnabled
-                          ? 'Tap the microphone to start listening...'
-                          : 'Speech not available',),
-                          const SizedBox(height: 10,),
-                          Text(_lastWords,
-                          style: GoogleFonts.comfortaa(fontSize: 20, color: kPrimaryColor),
-                          ),
-                          const SizedBox(height: 10,),
+                Text(
+                  _speechEnabled
+                      ? 'Tap the microphone to start listening...'
+                      : 'Speech not available',
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: kPrimaryColor, // Set border color here
+                        width: 1, // Set border width here
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      // color: kPrimaryColor,
+                    ),
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      _lastWords,
+                      style: GoogleFonts.comfortaa(
+                        fontSize: 20,
+                        color: kPrimaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Container(
-                   padding: EdgeInsets.all( 10),
-                 /* margin: EdgeInsets.only(right: 22, left: 10),
-                  padding: EdgeInsets.all(8),
-                  height: 200,
-                  width: double.infinity,
-                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: kPrimaryColor),
-                  ), */
+                  padding: EdgeInsets.all(10),
                   child: defaultFormFeild(
-                    
                     controller: messageController,
                     type: TextInputType.multiline,
                     min: 8,
                     max: 12,
                     label: 'Message',
-
                   ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                TextButton(
-                    onPressed: () {
-                     
-                    },
-
-                    child: Text(
-                      "Send",
-                      style: GoogleFonts.comfortaa(
-                          fontSize: 20, color: kPrimaryColor),
-                    )),
-                 const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 23, left: 13),
-                  child: Center(child: Image.asset('assets/images/upDown.png')),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  margin: EdgeInsets.only(right: 22, left: 10),
-                  padding: EdgeInsets.all(8),
-                  height: 250,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: kPrimaryColor),
-                  ),
-                  child: Icon(
-                   Icons.image,
-                    size: 68,
-                    color: Colors.grey, 
-                   
-                    
-                  ),
-                ),
+                // TextButton(
+                //     onPressed: () {},
+                //     child: Text(
+                //       "Send",
+                //       style: GoogleFonts.comfortaa(
+                //           fontSize: 20, color: kPrimaryColor),
+                //     )),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(right: 23, left: 13),
+                //   child: Center(child: Image.asset('assets/images/upDown.png')),
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Container(
+                //   margin: EdgeInsets.only(right: 22, left: 10),
+                //   padding: EdgeInsets.all(8),
+                //   height: 250,
+                //   width: double.infinity,
+                //   decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     borderRadius: BorderRadius.circular(10),
+                //     border: Border.all(color: kPrimaryColor),
+                //   ),
+                //   child: Icon(
+                //     Icons.image,
+                //     size: 68,
+                //     color: Colors.grey,
+                //   ),
+                // ),
                 SizedBox(
                   height: 50,
                 ),
@@ -188,7 +200,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                         );
                       },
                       child: Text(
-                        "Done",
+                        "Send",
                         style: GoogleFonts.comfortaa(
                             fontSize: 20, color: Colors.white),
                       )),
