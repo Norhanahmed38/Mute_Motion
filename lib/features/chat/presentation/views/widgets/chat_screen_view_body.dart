@@ -6,12 +6,35 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/styles.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/customtextfield.dart';
+import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/message_item.dart';
 
 import 'chat_Item.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class ChatScreenViewBody extends StatelessWidget {
+class ChatScreenViewBody extends StatefulWidget {
   ChatScreenViewBody({super.key});
+
+  @override
+  State<ChatScreenViewBody> createState() => _ChatScreenViewBodyState();
+}
+
+class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
   TextEditingController msgController = TextEditingController();
+
+  late IO.Socket socket;
+  @override
+  void initState() {
+    // TODO: implement initState
+    socket = IO.io(
+        'http://localhost:4000',
+        IO.OptionBuilder()
+            .setTransports(['websocket'])
+            .disableAutoConnect()
+            .build());
+    socket.connect();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +58,15 @@ class ChatScreenViewBody extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+      ),
+      body: Container(
+        child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return MessageItem(
+                sentByMe: true,
+              );
+            }),
       ),
       bottomSheet: Container(
         color: kPrimaryColor,
@@ -73,43 +105,54 @@ class ChatScreenViewBody extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 40,
-                      width: 240,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
+              child: Container(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                  ),
+                  child: TextFormField(
+                    cursorColor: kPrimaryColor,
+                    controller: msgController,
+                    decoration: InputDecoration(
+                      hintText: 'Message',
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            var messageJson = {
+                              "message": msgController.text,
+                              "sentByMe": socket.id
+                            };
+                            socket.emit('message', messageJson);
+                            msgController.text = "";
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.solidPaperPlane,
+                            color: kPrimaryColor,
+                          )),
+                      hintStyle: GoogleFonts.comfortaa(
+                        color: Colors.black.withOpacity(0.65),
+                        fontSize: 12,
                       ),
-                      child: TextFormField(
-                        controller: msgController,
-                        decoration: InputDecoration(
-                          hintText: 'Message',
-                          hintStyle: GoogleFonts.comfortaa(
-                            color: Colors.black.withOpacity(0.65),
-                            fontSize: 12,
-                          ),
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
                         ),
                       ),
                     ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: const FaIcon(
-                          FontAwesomeIcons.solidPaperPlane,
-                          color: Colors.white,
-                        ))
-                  ]),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void sendMessage(String text) {
+    print('dxzxzxzx');
+    var messageJson = {"message": text, "sentByMe": socket.id};
+    socket.emit('message', messageJson);
+    print('dxzxzxzx');
   }
 }
