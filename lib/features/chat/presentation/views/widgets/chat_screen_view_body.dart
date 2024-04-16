@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/styles.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/customtextfield.dart';
+import 'package:mute_motion_passenger/features/chat/controller/chat_controller.dart';
+import 'package:mute_motion_passenger/features/chat/model/messages.dart';
 import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/message_item.dart';
 
 import 'chat_Item.dart';
@@ -20,7 +23,7 @@ class ChatScreenViewBody extends StatefulWidget {
 
 class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
   TextEditingController msgController = TextEditingController();
-
+  ChatController chatController = ChatController();
   late IO.Socket socket;
   @override
   void initState() {
@@ -32,6 +35,7 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
             .disableAutoConnect()
             .build());
     socket.connect();
+    setUpSocketListener();
     super.initState();
   }
 
@@ -59,12 +63,14 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
           ),
         ),
       ),
-      body: Container(
-        child: ListView.builder(
-            itemCount: 10,
+      body: Obx(
+        () => ListView.builder(
+            itemCount: chatController.chatMessages.length,
             itemBuilder: (context, index) {
+              var currentItem = chatController.chatMessages[index];
               return MessageItem(
-                sentByMe: true,
+                sentByMe: currentItem.sentByMe == socket.id,
+                message: currentItem.message,
               );
             }),
       ),
@@ -153,6 +159,14 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
     print('dxzxzxzx');
     var messageJson = {"message": text, "sentByMe": socket.id};
     socket.emit('message', messageJson);
-    print('dxzxzxzx');
+    chatController.chatMessages.add(Message.fromJson(messageJson));
+    print('sentttt');
+  }
+
+  void setUpSocketListener() {
+    socket.on('message-receive', (data) {
+      print(data);
+      chatController.chatMessages.add(Message.fromJson(data));
+    });
   }
 }
