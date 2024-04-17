@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/styles.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/customtextfield.dart';
@@ -25,11 +26,12 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
   TextEditingController msgController = TextEditingController();
   ChatController chatController = ChatController();
   late IO.Socket socket;
+  String Time= '';
   @override
   void initState() {
     // TODO: implement initState
     socket = IO.io(
-        'http://localhost:4000',
+        'https://mutemotion.onrender.com/',
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()
@@ -68,9 +70,14 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
             itemCount: chatController.chatMessages.length,
             itemBuilder: (context, index) {
               var currentItem = chatController.chatMessages[index];
+              DateTime now = DateTime.now();
+              String formattedTime = DateFormat('h:mm a').format(now);
+              Time = formattedTime;
+              print(formattedTime);
               return MessageItem(
                 sentByMe: currentItem.sentByMe == socket.id,
                 message: currentItem.message,
+                time: Time,
               );
             }),
       ),
@@ -88,20 +95,88 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  children: const [
-                    chatItem(text: 'Hello'),
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 160,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          sendMessage('Hello');
+                        },
+                        child: Text(
+                          'Hello',
+                          overflow: TextOverflow.ellipsis,
+                          style: Styles.textStyle12,
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       width: 5,
                     ),
-                    chatItem(text: 'Where are you'),
+                    Container(
+                      height: 40,
+                      width: 160,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          sendMessage('Where are you?');
+                        },
+                        child: Text(
+                          'Where are you?',
+                          overflow: TextOverflow.ellipsis,
+                          style: Styles.textStyle12,
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       width: 5,
                     ),
-                    chatItem(text: "Don't be late, I'm waiting for you"),
+                    Container(
+                      height: 40,
+                      width: 160,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          sendMessage('Don\'t be late. I\'m waiting for you!');
+                        },
+                        child: Text(
+                          'Don\'t be late. I\'m waiting for you!',
+                          overflow: TextOverflow.ellipsis,
+                          style: Styles.textStyle12,
+                        ),
+                      ),
+                    ), //
                     SizedBox(
                       width: 5,
                     ),
-                    chatItem(text: 'I\'m coming'),
+                    Container(
+                      height: 40,
+                      width: 160,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          sendMessage('I\'m coming');
+                        },
+                        child: Text(
+                          'I\'m coming',
+                          overflow: TextOverflow.ellipsis,
+                          style: Styles.textStyle12,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -124,11 +199,7 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
                       hintText: 'Message',
                       suffixIcon: IconButton(
                           onPressed: () {
-                            var messageJson = {
-                              "message": msgController.text,
-                              "sentByMe": socket.id
-                            };
-                            socket.emit('message', messageJson);
+                            sendMessage(msgController.text);
                             msgController.text = "";
                           },
                           icon: const FaIcon(

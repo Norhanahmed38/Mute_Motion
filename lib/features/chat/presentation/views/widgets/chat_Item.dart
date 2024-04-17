@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../../core/styles.dart';
 
 class chatItem extends StatelessWidget {
-  const chatItem({super.key, required this.text});
+  const chatItem({super.key, required this.text, required this.onPressed});
   final String text;
+  final Function? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(

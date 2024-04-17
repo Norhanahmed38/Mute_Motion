@@ -3,9 +3,10 @@ import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/styles.dart';
 
 class MessageItem extends StatelessWidget {
-  const MessageItem({super.key, required this.sentByMe, required this.message});
+  const MessageItem({super.key, required this.sentByMe, required this.message, required this.time,});
   final bool sentByMe;
   final String message;
+  final String time;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -17,12 +18,14 @@ class MessageItem extends StatelessWidget {
           color: sentByMe ? chatColorMe : kPrimaryColor,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          mainAxisSize: MainAxisSize.min,
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.end,
+          //spacing: 8,
+          //textBaseline: TextBaseline.alphabetic,
+          //mainAxisSize: MainAxisSize.min,
           children: [
             Text(
+              softWrap: true,
               message,
               style: Styles.textStyle15.copyWith(
                 color: sentByMe ? kPrimaryColor : Colors.white,
@@ -31,13 +34,18 @@ class MessageItem extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Text(
-              '1:10 AM',
-              style: Styles.textStyle12.copyWith(
-                color:
-                    (sentByMe ? kPrimaryColor : Colors.white).withOpacity(0.6),
-                fontSize: 10,
-              ),
+            Column(
+              children: [
+                Text(
+                  time,
+                  style: Styles.textStyle12.copyWith(
+                    color:
+                        (sentByMe ? kPrimaryColor : Colors.white).withOpacity(0.6),
+                    fontSize: 10,
+                  ),
+                ),
+                const SizedBox(height: 2),
+              ],
             ),
           ],
         ),
