@@ -182,41 +182,6 @@ class _RequestsState extends State<Requests> {
                   SizedBox(
                     height: 10,
                   ),
-                  DateTimeField(
-                    format: format,
-                    decoration: InputDecoration(
-                      hintText: 'Date and Time',
-                      suffixIcon: Icon(Icons.date_range_rounded),
-                      suffixIconColor: kPrimaryColor,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(color: kPrimaryColor),
-                      ),
-                    ),
-                    onShowPicker: (context, currentValue) async {
-                      final date = await showDatePicker(
-                        context: context,
-                        initialDate: currentValue ?? DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100),
-                      );
-                      if (date != null) {
-                        final time = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.fromDateTime(
-                                currentValue ?? DateTime.now()));
-                        dateAndTime =
-                            DateTimeField.combine(date, time).toString();
-                        return DateTimeField.combine(date, time);
-                      } else {
-                        dateAndTime = currentValue.toString();
-                        return currentValue;
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   TextFormField(
                     controller: costController,
                     keyboardType: TextInputType.number,
@@ -252,7 +217,9 @@ class _RequestsState extends State<Requests> {
                   //     });
                   //   },
                   // ),
-                  CustomDropDownn(),
+                  CustomDropDownn(
+                    items: ["VISA", "CASH"],
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -344,12 +311,12 @@ class _RequestsState extends State<Requests> {
                       },
                       child: btnPressed == false
                           ? Text(
-                              'Send Request',
+                              'Find Driver',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             )
                           : Text(
-                              'Request Sent',
+                              'Waiting For a Driver',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),

@@ -12,6 +12,7 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/c
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/forget_pass.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
 import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/services.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
        
       ), */
       debugShowCheckedModeBanner: false,
-      home: ChatScreenView(),
+      home: Requests(),
     );
   }
 }

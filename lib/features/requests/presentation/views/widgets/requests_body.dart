@@ -182,43 +182,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                   SizedBox(
                     height: 10,
                   ),
-                  DateTimeField(
-                    format: format,
-                    decoration: InputDecoration(
-                      hintText: 'Date and Time',
-                      suffixIcon: Icon(Icons.date_range_rounded),
-                      suffixIconColor: kPrimaryColor,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(color: kPrimaryColor),
-                      ),
-                    ),
-                    onShowPicker: (context, currentValue) async {
-                      final date = await showDatePicker(
-                        context: context,
-                        initialDate: currentValue ?? DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100),
-                      );
-                      if (date != null) {
-                        final time = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.fromDateTime(
-                                currentValue ?? DateTime.now()));
-                        print(DateTimeField.combine(date, time));
-                        dateAndtime =
-                            DateTimeField.combine(date, time).toString();
-                        return DateTimeField.combine(date, time);
-                      } else {
-                        print(currentValue);
-                        dateAndtime = currentValue.toString();
-                        return currentValue;
-                      }
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+
                   TextFormField(
                     controller: costController,
                     keyboardType: TextInputType.number,
@@ -292,7 +256,9 @@ class _RequestsBodyState extends State<RequestsBody> {
                   //     });
                   //   },
                   // ),
-                  CustomDropDownn(),
+                  CustomDropDownn(
+                    items: ["VISA", "CASH"],
+                  ),
                   SizedBox(
                     height: 20,
                   ),
