@@ -26,7 +26,7 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
   TextEditingController msgController = TextEditingController();
   ChatController chatController = ChatController();
   late IO.Socket socket;
-  String Time= '';
+  String Time = '';
   @override
   void initState() {
     // TODO: implement initState
