@@ -1,11 +1,9 @@
 import 'dart:convert';
-
-import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/requests/data/transprt_api.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
@@ -30,8 +28,6 @@ class _RequestsState extends State<Requests> {
   static var formKey = GlobalKey<FormState>();
   var locationController = TextEditingController();
   var destinationController = TextEditingController();
-  //var timeController = TextEditingController();
-  //var dateController = TextEditingController();
   var costController = TextEditingController();
   var paymentController = TextEditingController();
 
@@ -39,7 +35,6 @@ class _RequestsState extends State<Requests> {
   Widget build(BuildContext context) {
     int currentIndex = 0;
 
-    final format = DateFormat("yyyy-MM-dd HH:mma");
     bool _isLoading = false;
 
     String dropdownvalue = 'Payment Method';
@@ -146,8 +141,11 @@ class _RequestsState extends State<Requests> {
                       }
                     },
                     decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.location_on,
+                      prefixIcon: IconButton(
+                        onPressed: () {
+                          navigateTo(context, CustomMap());
+                        },
+                        icon: Icon(Icons.location_on),
                         color: kPrimaryColor,
                       ),
                       border: OutlineInputBorder(
@@ -168,8 +166,11 @@ class _RequestsState extends State<Requests> {
                       }
                     },
                     decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.airline_stops_rounded,
+                      prefixIcon: IconButton(
+                        onPressed: () {
+                          navigateTo(context, CustomMap());
+                        },
+                        icon: Icon(Icons.airline_stops_rounded),
                         color: kPrimaryColor,
                       ),
                       border: OutlineInputBorder(
@@ -201,22 +202,6 @@ class _RequestsState extends State<Requests> {
                   SizedBox(
                     height: 10,
                   ),
-                  // DropdownButtonFormField(
-                  //   dropdownColor: Colors.grey[200],
-                  //   value: dropdownvalue,
-                  //   icon: Icon(Icons.arrow_drop_down),
-                  //   items: items.map((String items) {
-                  //     return DropdownMenuItem(
-                  //       value: items,
-                  //       child: Text(items),
-                  //     );
-                  //   }).toList(),
-                  //   onChanged: (String? newValue) {
-                  //     setState(() {
-                  //       dropdownvalue = newValue!;
-                  //     });
-                  //   },
-                  // ),
                   CustomDropDownn(
                     items: ["VISA", "CASH"],
                   ),
@@ -249,7 +234,6 @@ class _RequestsState extends State<Requests> {
                           TransportApi().sendTransportRequest(
                             context: context,
                             costCont: costController,
-                            dateAndTime: dateAndTime,
                             destCont: destinationController,
                             locationCont: locationController,
                             paymentCont: paymentController,
