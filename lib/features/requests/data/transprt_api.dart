@@ -8,7 +8,6 @@ class TransportApi {
   static const transportUrl = 'https://mutemotion.onrender.com/api/transports';
   sendTransportRequest({
     required BuildContext context,
-    required String? dateAndTime,
     required TextEditingController locationCont,
     required TextEditingController destCont,
     required TextEditingController costCont,
@@ -21,7 +20,6 @@ class TransportApi {
       Map<String, dynamic> requestBody = {
         "location": locationCont.text,
         "destination": destCont.text,
-        "dateAndtime": dateAndTime,
         "expectedCost": costCont.text,
         "paymentMethod": 'cash',
         "driver": null,
