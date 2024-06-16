@@ -1,20 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 
-class CustomDropDownn extends StatefulWidget {
+class CustomServiceTypeDropDown extends StatefulWidget {
   final List<String> items;
-  final ValueChanged<String> onChanged; // Define the onChanged callback
+  final ValueChanged<String> onChanged;
 
-  CustomDropDownn({Key? key, required this.items, required this.onChanged}) : super(key: key);
+  CustomServiceTypeDropDown({Key? key, required this.items, required this.onChanged}) : super(key: key);
 
   @override
-  State<CustomDropDownn> createState() => _CustomDropDownState();
+  State<CustomServiceTypeDropDown> createState() => _CustomServiceTypeDropDownState();
 }
 
-class _CustomDropDownState extends State<CustomDropDownn> {
-  String? dropdownValuee;
+class _CustomServiceTypeDropDownState extends State<CustomServiceTypeDropDown> {
+  String? dropdownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -32,34 +31,28 @@ class _CustomDropDownState extends State<CustomDropDownn> {
           child: DropdownButton<String>(
             isExpanded: true,
             hint: const Text(
-              'Payment Method',
+              'Select Service Type',
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
-            value: dropdownValuee,
+            value: dropdownValue,
             elevation: 0,
             style: GoogleFonts.lato(color: kPrimaryColor),
             onChanged: (String? value) {
               setState(() {
-                dropdownValuee = value; // Update local state
+                dropdownValue = value; // Update local state
               });
               widget.onChanged(value!); // Notify parent widget
             },
             items: widget.items.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(value == "VISA" ? Icons.call_to_action_rounded : Icons.attach_money_sharp),
-                    Text(
-                      " $value",
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
               );
             }).toList(),
@@ -69,5 +62,3 @@ class _CustomDropDownState extends State<CustomDropDownn> {
     );
   }
 }
-
-
