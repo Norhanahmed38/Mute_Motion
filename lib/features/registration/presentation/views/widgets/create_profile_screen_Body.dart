@@ -1,14 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/styles.dart';
-import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/customtextfield.dart';
-import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
-import 'package:mute_motion_passenger/features/registration/data/models/user_model.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/add_card_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
@@ -108,15 +104,6 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const SizedBox(height: 70),
-                              // TextButton(
-                              //   onPressed: () {},
-                              //   child: Text(
-                              //     'Upload Image',
-                              //     style: Styles.textStyle12.copyWith(
-                              //       color: Colors.white,
-                              //     ),
-                              //   ),
-                              // ),
                               const SizedBox(height: 4),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),

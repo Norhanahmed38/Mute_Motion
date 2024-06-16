@@ -1,33 +1,54 @@
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TransportApi {
-  static const transportUrl = 'https://mutemotion.onrender.com/api/transports';
+  static const transportUrl = 'https://mutemotion.onrender.com/api/v1/findNearestDriver';
+  
   sendTransportRequest({
     required BuildContext context,
     required TextEditingController locationCont,
     required TextEditingController destCont,
     required TextEditingController costCont,
-    required TextEditingController paymentCont,
+    required String paymentCont,
+    required String servType,
   }) async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String? id = prefs.getString("_id");
+      String? token = prefs.getString("token"); // Retrieve the token
       print('The id is $id');
+      print('The token is $token');
+      
       Map<String, dynamic> requestBody = {
+        "startLat": locationCont.text.split(',')[0],
+        "startLon": locationCont.text.split(',')[1],
+        "destLat": destCont.text.split(',')[0],
+        "destLon": destCont.text.split(',')[1],
         "location": locationCont.text,
         "destination": destCont.text,
         "expectedCost": costCont.text,
-        "paymentMethod": 'cash',
-        "driver": null,
-        "passengerId": id,
+        "paymentMethod": paymentCont,
+        "serviceType": servType, // Assuming a static value for serviceType
+        "locationName": locationCont.text,
+        "destinationName": destCont.text,
       };
-      print('aaaaaaaaaa3333333');
-      Response response = await Dio().post("$transportUrl", data: requestBody);
-      print('after posting request');
+      print('Request body: $requestBody');
+
+      Response response = await Dio().get(
+        transportUrl,
+        queryParameters: requestBody, // Use queryParameters for GET request
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+          },
+        ),
+      );
+      print('After sending request');
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('Request successful');
         print(response.data);
@@ -53,8 +74,7 @@ void _showErrorDialog(
   String message,
   TextEditingController destination,
   TextEditingController location,
-  TextEditingController cost,
-  TextEditingController payment,
+  TextEditingController cost, String paymentCont,
 ) {
   showDialog(
     context: context,
@@ -69,19 +89,15 @@ void _showErrorDialog(
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
-          // ),
         ),
         actions: [
           TextButton(
             onPressed: () {
-              payment.clear();
               destination.clear();
               location.clear();
               cost.clear();
 
               Navigator.of(context).pop();
-              // navigateTo(context, RequestsBody());
-              // Close the dialog
             },
             child: Container(
               width: 120,

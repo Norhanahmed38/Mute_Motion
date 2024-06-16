@@ -32,10 +32,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
               child: Text('Gender'),
             ),
             value: dropdownValue,
-            /* icon: const Padding(
-                                padding: EdgeInsets.only(right: 5),
-                                child: Icon(Icons.arrow_downward),
-                              ), */
+       
             elevation: 0,
             style: GoogleFonts.comfortaa(color: kPrimaryColor),
             onChanged: (String? value) {
