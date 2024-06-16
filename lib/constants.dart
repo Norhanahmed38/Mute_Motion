@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Color(0xff003248);
+const baseUrl = 'https://mutemotion.onrender.com/';
 const chatColorMe = Color(0xffffd700);
 Widget myDivider() => Padding(
       padding: const EdgeInsetsDirectional.only(

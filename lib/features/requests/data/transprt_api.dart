@@ -29,6 +29,8 @@ class TransportApi {
         "startLon": locationCont.text.split(',')[1],
         "destLat": destCont.text.split(',')[0],
         "destLon": destCont.text.split(',')[1],
+        "location": locationCont.text,
+        "destination": destCont.text,
         "expectedCost": costCont.text,
         "paymentMethod": paymentCont,
         "serviceType": servType, // Assuming a static value for serviceType
