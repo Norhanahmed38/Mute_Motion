@@ -292,7 +292,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                       },
                       child: btnPressed == false
                           ? Text(
-                              'Find Dreiver',
+                              'Find Driver',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             )

@@ -69,7 +69,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          'Text To Sign',
+          'Speech to text',
           style: GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
         ),
         elevation: 0,
@@ -135,52 +135,6 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: defaultFormFeild(
-                    controller: messageController,
-                    type: TextInputType.multiline,
-                    min: 8,
-                    max: 12,
-                    label: 'Message',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                // TextButton(
-                //     onPressed: () {},
-                //     child: Text(
-                //       "Send",
-                //       style: GoogleFonts.comfortaa(
-                //           fontSize: 20, color: kPrimaryColor),
-                //     )),
-                // const SizedBox(
-                //   height: 10,
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.only(right: 23, left: 13),
-                //   child: Center(child: Image.asset('assets/images/upDown.png')),
-                // ),
-                // SizedBox(
-                //   height: 10,
-                // ),
-                // Container(
-                //   margin: EdgeInsets.only(right: 22, left: 10),
-                //   padding: EdgeInsets.all(8),
-                //   height: 250,
-                //   width: double.infinity,
-                //   decoration: BoxDecoration(
-                //     color: Colors.white,
-                //     borderRadius: BorderRadius.circular(10),
-                //     border: Border.all(color: kPrimaryColor),
-                //   ),
-                //   child: Icon(
-                //     Icons.image,
-                //     size: 68,
-                //     color: Colors.grey,
-                //   ),
-                // ),
                 SizedBox(
                   height: 50,
                 ),

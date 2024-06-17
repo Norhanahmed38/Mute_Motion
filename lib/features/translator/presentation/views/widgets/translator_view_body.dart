@@ -51,7 +51,7 @@ class TranslatorViewBody extends StatelessWidget {
               children: [
                 Image.asset('assets/images/translator.png'),
                 Text(
-                  'Text To Sign',
+                  'Sound to Text',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.comfortaa(
                       fontSize: 26,
@@ -62,7 +62,7 @@ class TranslatorViewBody extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'Start translation to connect with your driver by translating your text to sign language ',
+                  'Start translation to connect with your driver by translating your Sound to Text ',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.comfortaa(
                     fontSize: 14,
