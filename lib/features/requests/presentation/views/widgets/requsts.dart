@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -6,6 +7,7 @@ import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/requests/data/transprt_api.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/custonservice.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 
 import 'package:intl/intl.dart';
@@ -23,27 +25,20 @@ class Requests extends StatefulWidget {
 }
 
 class _RequestsState extends State<Requests> {
-  String? dateAndTime;
+  String selectedDropdownValue = "VISA";
+  String serviceType = "economic";
   bool btnPressed = false;
+
   static var formKey = GlobalKey<FormState>();
   var locationController = TextEditingController();
   var destinationController = TextEditingController();
   var costController = TextEditingController();
-  var paymentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     int currentIndex = 0;
 
     bool _isLoading = false;
-
-    String dropdownvalue = 'Payment Method';
-
-    var items = [
-      'Payment Method',
-      'VISA',
-      'CASH',
-    ];
 
     return ModalProgressHUD(
       inAsyncCall: _isLoading,
@@ -204,6 +199,22 @@ class _RequestsState extends State<Requests> {
                   ),
                   CustomDropDownn(
                     items: ["VISA", "CASH"],
+                    onChanged: (value) {
+                      setState(() {
+                        selectedDropdownValue = value; // Update selected value
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomServiceTypeDropDown(
+                    items: ['economic', 'comfort', 'luxury'],
+                    onChanged: (String value) {
+                      setState(() {
+                        serviceType = value;
+                      });
+                    },
                   ),
                   SizedBox(
                     height: 20,
@@ -223,7 +234,7 @@ class _RequestsState extends State<Requests> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                          print(paymentController.text);
+                          print(selectedDropdownValue!);
                           /* final SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           String? id = prefs.getString("_id");
@@ -236,58 +247,10 @@ class _RequestsState extends State<Requests> {
                             costCont: costController,
                             destCont: destinationController,
                             locationCont: locationController,
-                            paymentCont: paymentController,
+                            paymentCont: selectedDropdownValue,
+                            servType: serviceType,
                           );
-                          //const url =
-                          // "https://mutemotion.onrender.com/api/transports";
-                          /*   Map<String, dynamic> requestBody = {
-                            "location": locationController.text,
-                            "destination": destinationController.text,
-                            "date": dateController.text,
-                            "time" :timeController.text,
-                            "expectedCost": costController.text,
-                            "paymentMehod": paymentController.text,
-                            "driver": null,
-                            "_id": id,
-                          };
-                          print('aaaaaaaaaa3333333'); 
-                          try {
-                            // Encode the data to JSON
-                            String jsonBody = jsonEncode(requestData);
-                            print('IN TRY');
-                            // Make the HTTP POST request
-                            final response = await http.post(
-                              Uri.parse(url),
-                              headers: {
-                                'Content-Type': 'application/json',
-                              },
-                              body: jsonBody,
-                            ); */
-                          /*  Response response = await Dio().post("$url", data: requestBody);
-                            print('after posting request');
-                            if (response.statusCode == 200 ||
-                                response.statusCode == 201) {
-                              print('Request successful');
-                              print('Response: ${response.body}');
-                            } else if (response.statusCode == 400) {
-                              _showErrorDialog(
-                                context,
-                                "Some data are faulty",
-                                destinationController,
-                                locationController,
-                                dateController,
-                                timeController,
-                                costController,
-                                paymentController,
-                              );
-      
-                              print(
-                                  'Request failed with status: ${response.statusCode}');
-                              print('Response: ${response.body}');
-                            }
-                          } catch (error) {
-                            print('Error: $error');
-                          } */
+
                           setState(() {
                             _isLoading = false;
                           });
@@ -315,70 +278,3 @@ class _RequestsState extends State<Requests> {
     );
   }
 }
-/* void _showErrorDialog(
-  BuildContext context,
-  String message,
-  TextEditingController destination,
-  TextEditingController location,
-  TextEditingController cost,
-  TextEditingController date,
-  
-  TextEditingController payment,
-    TextEditingController time,
-
-) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        content: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
-          // ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-            
-              date.clear();
-              payment.clear();
-              destination.clear();
-              location.clear();
-              cost.clear();
-              time.clear();
-              Navigator.of(context).pop();
-              // navigateTo(context, RequestsBody());
-              // Close the dialog
-            },
-            child: Container(
-              width: 120,
-              height: 45,
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Text(
-                  'Try Again',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Comfortaa',
-                      color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    },
-  );
-}
- */

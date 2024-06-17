@@ -36,7 +36,7 @@ class LoginUserApi {
         print("after");
         await prefs.setString("_id", response.data["user"]["_id"]);
         await prefs.setString("firstname", response.data["user"]["firstname"]);
-        await prefs.setString("email", response.data["user"]["email"]);
+        await prefs.setString("email;", response.data["user"]["email"]);
         String? id = prefs.getString("_id");
         print("Id is : $id");
         print('after222');

@@ -1,4 +1,3 @@
-import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -6,15 +5,12 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:intl/intl.dart';
-import 'package:mute_motion_passenger/features/requests/data/cityToCityApi.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/custonservice.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
-import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
+
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/stack.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class RequestsBody extends StatefulWidget {
   const RequestsBody({super.key});
@@ -25,6 +21,9 @@ class RequestsBody extends StatefulWidget {
 
 class _RequestsBodyState extends State<RequestsBody> {
   bool btnPressed = false;
+  String selectedDropdownValue = "VISA";
+    String serviceType = "economic";
+
   String? dateAndtime;
 
   static var formKey = GlobalKey<FormState>();
@@ -182,7 +181,6 @@ class _RequestsBodyState extends State<RequestsBody> {
                   SizedBox(
                     height: 10,
                   ),
-
                   TextFormField(
                     controller: costController,
                     keyboardType: TextInputType.number,
@@ -240,24 +238,24 @@ class _RequestsBodyState extends State<RequestsBody> {
                   SizedBox(
                     height: 10,
                   ),
-                  // DropdownButtonFormField(
-                  //   dropdownColor: Colors.grey[200],
-                  //   value: dropdownvalue,
-                  //   icon: Icon(Icons.arrow_drop_down),
-                  //   items: items.map((String items) {
-                  //     return DropdownMenuItem(
-                  //       value: items,
-                  //       child: Text(items),
-                  //     );
-                  //   }).toList(),
-                  //   onChanged: (String? newValue) {
-                  //     setState(() {
-                  //       dropdownvalue = newValue!;
-                  //     });
-                  //   },
-                  // ),
                   CustomDropDownn(
                     items: ["VISA", "CASH"],
+                    onChanged: (value) {
+                      setState(() {
+                        selectedDropdownValue = value; // Update selected value
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  CustomServiceTypeDropDown(
+                    items: ['economic', 'comfort', 'luxury'],
+                    onChanged: (String value) {
+                      setState(() {
+                        serviceType = value;
+                      });
+                    },
                   ),
                   SizedBox(
                     height: 20,
@@ -277,89 +275,16 @@ class _RequestsBodyState extends State<RequestsBody> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                          /*  locationController.text;
-                          destinationController.text;
-                          timeController.text;
-                          dateController.text;
-                          costController.text;
-                          paymentController.text;
-                          passengersController.text;
-                          bagsController.text; */
+                        
 
                           setState(() {
                             _isLoading = true;
                           });
                           print(locationController.text);
                           print(destinationController.text);
-                          // print(dateController.text);
+
                           print(passengersController.text);
 
-                          CityToCityApi().sendCTCRequest(
-                            bagsCont: bagsController,
-                            context: context,
-                            costCont: costController,
-                            dateANdTime: dateAndtime,
-                            destCont: destinationController,
-                            locationCont: locationController,
-                            passCont: passengersController,
-                            paymentCont: paymentController,
-                          );
-                          /* final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        String? id = prefs.getString("_id");
-                        print('The id is $id');
-                        
-                        String url =
-                            "https://mutemotion.onrender.com/api/city-to-city-rides";
-                        Map<String, dynamic> requestData = {
-                          "location": locationController.text,
-                          "destination": destinationController.text,
-                          "date": dateController.text,
-                          "time" :timeController.text,
-                          "expectedCost": costController.text,
-                          "noOfPassenger": passengersController.text,
-                          "noOfBags": bagsController.text,
-                          "paymentMehod": paymentController.text,
-                          "driver": null,
-                          "_id": id,
-                        };
-                        
-                        try {
-                          // Encode the data to JSON
-                          String jsonBody = jsonEncode(requestData);
-                          // Make the HTTP POST request
-                          final response = await http.post(
-                            Uri.parse(url),
-                            headers: {
-                              'Content-Type': 'application/json',
-                            },
-                            body: jsonBody,
-                          );
-                          if (response.statusCode == 200 ||
-                              response.statusCode == 201) {
-                            print('Request successful');
-                            print('Response: ${response.body}');
-                          } else if (response.statusCode == 400) {
-                            _showErrorDialog(
-                              context,
-                              "Some data are faulty",
-                              destinationController,
-                              locationController,
-                              bagsController,
-                              passengersController,
-                              dateController,
-                              timeController,
-                              costController,
-                              paymentController,
-                            );
-
-                            print(
-                                'Request failed with status: ${response.statusCode}');
-                            print('Response: ${response.body}');
-                          }
-                        } catch (error) {
-                          print('Error: $error');
-                        } */
                           setState(() {
                             _isLoading = false;
                           });
@@ -367,12 +292,12 @@ class _RequestsBodyState extends State<RequestsBody> {
                       },
                       child: btnPressed == false
                           ? Text(
-                              'Send Request',
+                              'Find Driver',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             )
                           : Text(
-                              'Request Sent',
+                              'Waiting For A Driver',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),
