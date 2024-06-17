@@ -34,7 +34,7 @@ class MessageItem extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Column(
+            /* Column(
               children: [
                 Text(
                   time,
@@ -46,7 +46,7 @@ class MessageItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
               ],
-            ),
+            ), */
           ],
         ),
       ),

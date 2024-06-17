@@ -38,7 +38,7 @@ class _ContactUsScreenBodyState extends State<ContactUsScreenBody> {
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
-            'Contact us',
+            'Contact Us',
             style:
                 TextStyle(fontSize: 22, fontFamily: 'Lato', color: Colors.white),
           ),

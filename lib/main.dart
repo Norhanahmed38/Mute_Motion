@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/features/chat/presentation/views/chat_screen_view.dart';
+import 'package:mute_motion_passenger/features/contactUs/presentation/views/contact_us_screenView.dart';
 import 'package:mute_motion_passenger/features/driverProfile/presentation/views/DriverProfileView.dart';
 import 'package:mute_motion_passenger/features/driverProfile/presentation/views/widgets/driver_profile_view_body.dart';
 import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
        
       ), */
       debugShowCheckedModeBanner: false,
-      home: SplashView(),
+      home: ChatScreenView(),
     );
   }
 }
