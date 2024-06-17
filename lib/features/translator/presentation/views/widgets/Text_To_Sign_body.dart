@@ -69,7 +69,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          'Text To Sign',
+          'Speech to text',
           style: GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
         ),
         elevation: 0,
