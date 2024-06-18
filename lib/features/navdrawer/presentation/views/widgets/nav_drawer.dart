@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
+import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/features/aboutUs/presentation/views/aboutUs_screen_view.dart';
 import 'package:mute_motion_passenger/features/history/presentation/views/history_screen_view.dart';
-import 'package:mute_motion_passenger/features/map/veiw/map_screen.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/pages.dart';
-import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
-import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/headwidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -83,7 +81,7 @@ class NavDrawer extends StatelessWidget {
                       pagename: 'Map',
                       icone: Icons.map_outlined,
                       onpressed: () {
-                        navigateTo(context, CustomMap());
+                        navigateTo(context, MapScreen());
                       }),
                   Divider(
                     indent: 20,

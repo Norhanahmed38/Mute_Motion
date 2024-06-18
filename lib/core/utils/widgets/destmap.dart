@@ -1,22 +1,23 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:mute_motion_passenger/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
 
-class MapScreen extends StatefulWidget {
+class DestMap extends StatefulWidget {
   @override
-  _MapScreenState createState() => _MapScreenState();
+  _DestMapState createState() => _DestMapState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _DestMapState extends State<DestMap> {
   GoogleMapController? mapController;
   TextEditingController searchController = TextEditingController();
   Set<Marker> markers = Set<Marker>();
-  String locationName = '';
-  String latitude = '0.0';
-  String longitude = '0.0';
+  String destinationName = '';
+  String lat = '0.0';
+  String long = '0.0';
 
   @override
   void dispose() {
@@ -29,21 +30,21 @@ class _MapScreenState extends State<MapScreen> {
     if (locations.isNotEmpty) {
       Location location = locations.first;
       setState(() {
-        locationName = searchController.text;
-        latitude = location.latitude.toString();
-        longitude = location.longitude.toString();
+        destinationName = searchController.text;
+        lat = location.latitude.toString();
+        long = location.longitude.toString();
         markers.clear();
         markers.add(
           Marker(
             markerId: MarkerId('Selected Location'),
-            position: LatLng(double.parse(latitude), double.parse(longitude)),
+            position: LatLng(double.parse(lat), double.parse(long)),
           ),
         );
       });
       mapController!.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-            target: LatLng(double.parse(latitude), double.parse(longitude)),
+            target: LatLng(double.parse(lat), double.parse(long)),
             zoom: 15.0,
           ),
         ),
@@ -121,29 +122,32 @@ class _MapScreenState extends State<MapScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Location Name: $locationName',
+                          'Destination Name: $destinationName',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 5.0),
-                        Text('Latitude: $latitude'),
+                        Text('Latitude: $lat'),
                         SizedBox(height: 5.0),
-                        Text('Longitude: $longitude'),
+                        Text('Longitude: $long'),
                       ],
                     ),
                     SizedBox(width: 30.0),
                     ElevatedButton(
                       onPressed: () async {
                         navigateTo(context, Requests());
+
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
-                        await prefs.setString('locationName', locationName);
-                        await prefs.setString('latitude', latitude);
-                        await prefs.setString('longitude', longitude);
-                        locationController.text = locationName;
+                        await prefs.setString(
+                            'destinationName', destinationName);
+                        await prefs.setString('lat', lat);
+                        await prefs.setString('long', long);
+                        print(lat);
+                        destinationnController.text = destinationName;
                       },
-                      child: Text('OK'),
+                      child: Text('ok'),
                     ),
                   ],
                 ),

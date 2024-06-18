@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
@@ -22,7 +21,7 @@ class RequestsBody extends StatefulWidget {
 class _RequestsBodyState extends State<RequestsBody> {
   bool btnPressed = false;
   String selectedDropdownValue = "VISA";
-    String serviceType = "economic";
+  String serviceType = "economic";
 
   String? dateAndtime;
 
@@ -275,8 +274,6 @@ class _RequestsBodyState extends State<RequestsBody> {
                           btnPressed = true;
                         });
                         if (formKey.currentState!.validate()) {
-                        
-
                           setState(() {
                             _isLoading = true;
                           });
