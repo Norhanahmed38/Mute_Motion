@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
@@ -7,7 +6,8 @@ class CustomDropDownn extends StatefulWidget {
   final List<String> items;
   final ValueChanged<String> onChanged; // Define the onChanged callback
 
-  CustomDropDownn({Key? key, required this.items, required this.onChanged}) : super(key: key);
+  CustomDropDownn({Key? key, required this.items, required this.onChanged})
+      : super(key: key);
 
   @override
   State<CustomDropDownn> createState() => _CustomDropDownState();
@@ -34,7 +34,7 @@ class _CustomDropDownState extends State<CustomDropDownn> {
             hint: const Text(
               'Payment Method',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 17,
               ),
             ),
             value: dropdownValuee,
@@ -52,7 +52,9 @@ class _CustomDropDownState extends State<CustomDropDownn> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(value == "VISA" ? Icons.call_to_action_rounded : Icons.attach_money_sharp),
+                    Icon(value == "VISA"
+                        ? Icons.call_to_action_rounded
+                        : Icons.attach_money_sharp),
                     Text(
                       " $value",
                       style: TextStyle(
@@ -69,5 +71,3 @@ class _CustomDropDownState extends State<CustomDropDownn> {
     );
   }
 }
-
-

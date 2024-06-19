@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
@@ -16,8 +15,8 @@ class _DestMapState extends State<DestMap> {
   TextEditingController searchController = TextEditingController();
   Set<Marker> markers = Set<Marker>();
   String destinationName = '';
-  String lat = '0.0';
-  String long = '0.0';
+  double lat = 0.0;
+  double long = 0.0;
 
   @override
   void dispose() {
@@ -31,20 +30,20 @@ class _DestMapState extends State<DestMap> {
       Location location = locations.first;
       setState(() {
         destinationName = searchController.text;
-        lat = location.latitude.toString();
-        long = location.longitude.toString();
+        lat = location.latitude!;
+        long = location.longitude!;
         markers.clear();
         markers.add(
           Marker(
             markerId: MarkerId('Selected Location'),
-            position: LatLng(double.parse(lat), double.parse(long)),
+            position: LatLng(lat, long),
           ),
         );
       });
       mapController!.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-            target: LatLng(double.parse(lat), double.parse(long)),
+            target: LatLng(lat, long),
             zoom: 15.0,
           ),
         ),
@@ -133,7 +132,7 @@ class _DestMapState extends State<DestMap> {
                         Text('Longitude: $long'),
                       ],
                     ),
-                    SizedBox(width: 30.0),
+                    SizedBox(width: 10.0),
                     ElevatedButton(
                       onPressed: () async {
                         navigateTo(context, Requests());
@@ -142,8 +141,8 @@ class _DestMapState extends State<DestMap> {
                             await SharedPreferences.getInstance();
                         await prefs.setString(
                             'destinationName', destinationName);
-                        await prefs.setString('lat', lat);
-                        await prefs.setString('long', long);
+                        await prefs.setDouble('lat', lat);
+                        await prefs.setDouble('long', long);
                         print(lat);
                         destinationnController.text = destinationName;
                       },

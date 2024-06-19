@@ -1,9 +1,12 @@
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/destmap.dart';
+import 'package:mute_motion_passenger/features/driverProfile/presentation/views/DriverProfileView.dart';
+import 'package:mute_motion_passenger/features/driverProfile/presentation/views/widgets/driver_profile_view_body.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/requests/data/transprt_api.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/custonservice.dart';
@@ -26,10 +29,10 @@ var destinationnController = TextEditingController();
 class _RequestsState extends State<Requests> {
   String selectedDropdownValue = "VISA";
   String serviceType = "economic";
-  String latitude = "0.0";
-  String longitude = "0.0";
-  String lat = "0.0";
-  String long = "0.0";
+  double latitude = 0.0;
+  double longitude = 0.0;
+  double lat = 0.0;
+  double long = 0.0;
   bool btnPressed = false;
 
   static var formKey = GlobalKey<FormState>();
@@ -231,24 +234,19 @@ class _RequestsState extends State<Requests> {
                         minimumSize: const Size(350, 60),
                       ),
                       onPressed: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
                         final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
-                        latitude = prefs.getString('latitude') ?? '';
-                        longitude = prefs.getString('longitude') ?? '';
-                        lat = prefs.getString('lat') ?? "0.0";
-                        long = prefs.getString('long') ?? "0.0";
-
-                        setState(() {
-                          btnPressed = true;
-                        });
+                        latitude = prefs.getDouble('latitude') ?? 0.0;
+                        longitude = prefs.getDouble('longitude') ?? 0.0;
+                        lat = prefs.getDouble('lat') ?? 0.0;
+                        long = prefs.getDouble('long') ?? 0.0;
                         if (formKey.currentState!.validate()) {
                           final SharedPreferences prefs =
                               await SharedPreferences.getInstance();
-                          String? id = prefs.getString("_id");
-                          print('The id is $id');
-                          setState(() {
-                            _isLoading = true;
-                          });
+
                           TransportApi().sendTransportRequest(
                             context: context,
                             costCont: costController,
@@ -261,10 +259,6 @@ class _RequestsState extends State<Requests> {
                             paymentCont: selectedDropdownValue,
                             servType: serviceType,
                           );
-
-                          setState(() {
-                            _isLoading = false;
-                          });
                         }
                       },
                       child: btnPressed == false

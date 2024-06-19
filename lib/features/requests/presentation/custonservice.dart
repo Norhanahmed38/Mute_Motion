@@ -31,9 +31,9 @@ class _CustomServiceTypeDropDownState extends State<CustomServiceTypeDropDown> {
           child: DropdownButton<String>(
             isExpanded: true,
             hint: const Text(
-              'Select Service Type',
+              'Service Type',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 17,
               ),
             ),
             value: dropdownValue,
