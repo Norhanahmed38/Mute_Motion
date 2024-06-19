@@ -11,6 +11,8 @@ import 'package:mute_motion_passenger/core/utils/widgets/customtextfield.dart';
 import 'package:mute_motion_passenger/features/chat/controller/chat_controller.dart';
 import 'package:mute_motion_passenger/features/chat/model/messages.dart';
 import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/message_item.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 import 'chat_Item.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -23,6 +25,10 @@ class ChatScreenViewBody extends StatefulWidget {
 }
 
 class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
+   SpeechToText _speechToText = SpeechToText();
+  bool _speechEnabled = false;
+  String _lastWords = '';
+  String? record;
   TextEditingController msgController = TextEditingController();
   ChatController chatController = ChatController();
   late IO.Socket socket;
@@ -39,6 +45,42 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
     socket.connect();
     setUpSocketListener();
     super.initState();
+     _initSpeech();
+  }
+  void _initSpeech() async {
+    _speechEnabled = await _speechToText.initialize();
+    setState(() {});
+  }
+
+  /// Each time to start a speech recognition session
+  void _startListening() async {
+    await _speechToText.listen(
+      onResult: _onSpeechResult,
+     
+    );
+    setState(() {});
+  }
+
+  /// Manually stop the active speech recognition session
+  /// Note that there are also timeouts that each platform enforces
+  /// and the SpeechToText plugin supports setting timeouts on the
+  /// listen method.
+  void _stopListening() async {
+    await _speechToText.stop();
+    setState(() { 
+      sendMessage(record!);
+    });
+  }
+
+  /// This is the callback that the SpeechToText plugin calls when
+  /// the platform returns recognized words.
+  void _onSpeechResult(SpeechRecognitionResult result) {
+    setState(() {
+      _lastWords = result.recognizedWords;
+      record = _lastWords;
+      //print(record);
+      
+    });
   }
 
   @override
@@ -64,6 +106,14 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
             fontWeight: FontWeight.bold,
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed:
+            // If not yet listening for speech start, otherwise stop
+            _speechToText.isNotListening ? _startListening : _stopListening,
+        tooltip: 'Listen',
+        backgroundColor: Colors.white,
+        child: Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
       ),
       body: Obx(
         () => ListView.builder(

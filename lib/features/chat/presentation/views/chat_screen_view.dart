@@ -8,6 +8,6 @@ class ChatScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SplashView();
+    return ChatScreenViewBody();
   }
 }
