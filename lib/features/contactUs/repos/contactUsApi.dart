@@ -72,7 +72,7 @@ void _showErrorDialog(
             },
             child: Container(
               width: 120,
-              height: 55,
+              height: 45,
               decoration: BoxDecoration(
                 color: kPrimaryColor,
                 borderRadius: BorderRadius.circular(20.0),
