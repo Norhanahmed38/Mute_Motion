@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../mainMenu/presentation/views/mainMenu_screen_view.dart';
 
 class LoginUserApi {

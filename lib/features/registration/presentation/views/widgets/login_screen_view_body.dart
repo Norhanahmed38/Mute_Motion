@@ -175,10 +175,6 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                               context: context,
                               emailcont: emailCont,
                               passcont: passCont);
-                          // setState(() {
-                          //   _isLoading = false;
-                          // }
-                          // );
                         }
                       },
                       child: const Text(

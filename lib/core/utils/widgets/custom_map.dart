@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:mute_motion_passenger/constants.dart';
+import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
+
+import '../../../features/navdrawer/presentation/views/nav_drawer_view.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -15,8 +18,8 @@ class _MapScreenState extends State<MapScreen> {
   TextEditingController searchController = TextEditingController();
   Set<Marker> markers = Set<Marker>();
   String locationName = '';
-  String latitude = '0.0';
-  String longitude = '0.0';
+  double latitude = 0.0;
+  double longitude = 0.0;
 
   @override
   void dispose() {
@@ -30,20 +33,20 @@ class _MapScreenState extends State<MapScreen> {
       Location location = locations.first;
       setState(() {
         locationName = searchController.text;
-        latitude = location.latitude.toString();
-        longitude = location.longitude.toString();
+        latitude = location.latitude!;
+        longitude = location.longitude!;
         markers.clear();
         markers.add(
           Marker(
             markerId: MarkerId('Selected Location'),
-            position: LatLng(double.parse(latitude), double.parse(longitude)),
+            position: LatLng(latitude, longitude),
           ),
         );
       });
       mapController!.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-            target: LatLng(double.parse(latitude), double.parse(longitude)),
+            target: LatLng(latitude, longitude),
             zoom: 15.0,
           ),
         ),
@@ -70,8 +73,31 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // تحديد موقع جامعة الزقازيق
+    final initialLatitude = 30.5877;
+    final initialLongitude = 31.4814;
+
+    // إضافة marker لموقع جامعة الزقازيق
+    markers.add(
+      Marker(
+        markerId: MarkerId('Zagazig University'),
+        position: LatLng(initialLatitude, initialLongitude),
+      ),
+    );
+    // تحديث الحالة الأولية للخريطة
+    setState(() {
+      latitude = initialLatitude;
+      longitude = initialLongitude;
+      locationName = 'Zagazig University';
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const NavDrawerView(),
       appBar: AppBar(
         title: Text('Google Map'),
       ),
@@ -80,15 +106,23 @@ class _MapScreenState extends State<MapScreen> {
           GoogleMap(
             onMapCreated: (GoogleMapController controller) {
               mapController = controller;
+              mapController?.animateCamera(
+                CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                    target: LatLng(latitude, longitude),
+                    zoom: 15.0,
+                  ),
+                ),
+              );
             },
             initialCameraPosition: CameraPosition(
-              target: LatLng(0, 0),
-              zoom: 10.0,
+              target: LatLng(30.5877, 31.4814), // إحداثيات جامعة الزقازيق
+              zoom: 15.0,
             ),
             markers: markers,
           ),
           Positioned(
-            top: 10.0,
+            top: 5.0,
             left: 10.0,
             right: 10.0,
             child: Row(
@@ -115,38 +149,36 @@ class _MapScreenState extends State<MapScreen> {
             child: Card(
               child: Padding(
                 padding: EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Location Name: $locationName',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                child: Row(children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Location Name: $locationName',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(height: 5.0),
-                        Text('Latitude: $latitude'),
-                        SizedBox(height: 5.0),
-                        Text('Longitude: $longitude'),
-                      ],
-                    ),
-                    SizedBox(width: 30.0),
-                    ElevatedButton(
-                      onPressed: () async {
-                        navigateTo(context, Requests());
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        await prefs.setString('locationName', locationName);
-                        await prefs.setString('latitude', latitude);
-                        await prefs.setString('longitude', longitude);
-                        locationController.text = locationName;
-                      },
-                      child: Text('OK'),
-                    ),
-                  ],
-                ),
+                      ),
+                      SizedBox(height: 5.0),
+                      Text('Latitude: $latitude'),
+                      SizedBox(height: 5.0),
+                      Text('Longitude: $longitude'),
+                    ],
+                  ),
+                  SizedBox(width: 10.0),
+                  ElevatedButton(
+                    onPressed: () async {
+                      navigateTo(context, Requests());
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setString('locationName', locationName);
+                      await prefs.setDouble('latitude', latitude);
+                      await prefs.setDouble('longitude', longitude);
+                      locationController.text = locationName;
+                    },
+                    child: Text('ok'),
+                  ),
+                ]),
               ),
             ),
           ),
