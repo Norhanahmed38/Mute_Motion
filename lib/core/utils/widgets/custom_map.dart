@@ -122,7 +122,7 @@ class _MapScreenState extends State<MapScreen> {
             markers: markers,
           ),
           Positioned(
-            top: 5.0,
+            top: 0.0,
             left: 10.0,
             right: 10.0,
             child: Row(
@@ -159,10 +159,6 @@ class _MapScreenState extends State<MapScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 5.0),
-                      Text('Latitude: $latitude'),
-                      SizedBox(height: 5.0),
-                      Text('Longitude: $longitude'),
                     ],
                   ),
                   SizedBox(width: 10.0),

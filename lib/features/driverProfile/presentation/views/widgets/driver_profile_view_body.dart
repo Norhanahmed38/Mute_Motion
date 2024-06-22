@@ -21,6 +21,10 @@ class DriverProfileViewBody extends StatefulWidget {
 class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
   @override
   Widget build(BuildContext context) {
+    String displayedRating =
+        double.parse(widget.driverModel?.driver?.rating ?? '0')
+            .toStringAsFixed(1);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -113,7 +117,7 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                         size: 15,
                       ),
                       Text(
-                        "4.9 (123 Reviewers)",
+                        " $displayedRating (${widget.driverModel?.driver?.numberOfReviews}Reviewers)",
                         style: GoogleFonts.comfortaa(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -127,7 +131,6 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                   ),
                   Container(
                     margin: EdgeInsets.only(right: 5, left: 5),
-                    //padding: EdgeInsets.all(8),
                     width: double.infinity,
                     height: 110,
                     decoration: BoxDecoration(

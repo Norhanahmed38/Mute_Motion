@@ -7,8 +7,7 @@ import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widg
 import '../../../core/utils/widgets/containerdisplay.dart';
 import 'mapbody.dart';
 
-
-class map extends StatefulWidget{
+class map extends StatefulWidget {
   const map({super.key});
 
   @override
@@ -16,21 +15,16 @@ class map extends StatefulWidget{
 }
 
 class mapState extends State<map> {
-  //final Completer<GoogleMapController> controller =
-  //Completer<GoogleMapController>();
+  void initState() {
+    //googleMapController;
 
+    super.initState();
+  }
 
+  void dispose() {
+    super.dispose();
+  }
 
-void initState(){
-
-  //googleMapController;
-
-  super.initState();
-}
-void dispose(){
-
-  super.dispose();
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,28 +32,33 @@ void dispose(){
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(onTap:(){GoRouter.of(context).push('/chat');},
-                child: CircleAvatar(backgroundColor:  Color(0xff003248),radius: 25,child: Icon(Icons.message))),
-            SizedBox(height: 10,),
-            GestureDetector(onTap: (){GoRouter.of(context).push('/search');},child: CircleAvatar(backgroundColor:  Color(0xff003248),radius: 25,child: Icon(Icons.location_searching)))
+            GestureDetector(
+                onTap: () {
+                  GoRouter.of(context).push('/chat');
+                },
+                child: CircleAvatar(
+                    backgroundColor: Color(0xff003248),
+                    radius: 25,
+                    child: Icon(Icons.message))),
+            SizedBox(
+              height: 10,
+            ),
+            GestureDetector(
+                onTap: () {
+                  GoRouter.of(context).push('/search');
+                },
+                child: CircleAvatar(
+                    backgroundColor: Color(0xff003248),
+                    radius: 25,
+                    child: Icon(Icons.location_searching)))
           ],
         ),
         drawer: NavDrawer(),
-     // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
-      body: Stack(
-    children: <Widget>[ mymap(),
-      Positioned(bottom: 0,child: maindisplay())
-    ],
-      )
-
-
-    );
+        body: Stack(
+          children: <Widget>[
+            mymap(),
+            Positioned(bottom: 0, child: maindisplay())
+          ],
+        ));
   }
-
-
 }
-
-
-
-

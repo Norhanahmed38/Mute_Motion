@@ -56,9 +56,10 @@ class TransportApi {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('Request successful');
         print(response);
-          final SharedPreferences prefs = await SharedPreferences.getInstance();
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("sessionId", response.data["sessionId"]);
-        // Handle potential null values in the response
+         await prefs.setString("driver_id", response.data["driver"]["_id"]);
+
         if (response.data != null) {
           final driverModel = DriverModel.fromJson(response.data);
           navigateTo(context, DriverProfileViewBody(driverModel: driverModel));
@@ -144,7 +145,7 @@ class TransportApi {
                     style: TextStyle(
                         fontSize: 20,
                         fontFamily: 'Comfortaa',
-                        color: kPrimaryColor),
+                        color: Colors.white),
                   ),
                 ),
               ),
