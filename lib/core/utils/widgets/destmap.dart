@@ -121,15 +121,11 @@ class _DestMapState extends State<DestMap> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Destination Name: $destinationName',
+                          'Dest Name: $destinationName',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 5.0),
-                        Text('Latitude: $lat'),
-                        SizedBox(height: 5.0),
-                        Text('Longitude: $long'),
                       ],
                     ),
                     SizedBox(width: 10.0),
