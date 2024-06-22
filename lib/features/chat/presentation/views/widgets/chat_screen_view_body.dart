@@ -112,24 +112,27 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
             // If not yet listening for speech start, otherwise stop
             _speechToText.isNotListening ? _startListening : _stopListening,
         tooltip: 'Listen',
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         child: Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
       ),
-      body: Obx(
-        () => ListView.builder(
-            itemCount: chatController.chatMessages.length,
-            itemBuilder: (context, index) {
-              var currentItem = chatController.chatMessages[index];
-              DateTime now = DateTime.now();
-              String formattedTime = DateFormat('h:mm a').format(now);
-              Time = formattedTime;
-              print(formattedTime);
-              return MessageItem(
-                sentByMe: currentItem.sentByMe == socket.id,
-                message: currentItem.message,
-                time: Time,
-              );
-            }),
+      body: Padding(
+        padding: const EdgeInsets.only(bottom:160),
+        child: Obx(
+          () => ListView.builder(
+              itemCount: chatController.chatMessages.length,
+              itemBuilder: (context, index) {
+                var currentItem = chatController.chatMessages[index];
+                DateTime now = DateTime.now();
+                String formattedTime = DateFormat('h:mm a').format(now);
+                Time = formattedTime;
+                print(formattedTime);
+                return MessageItem(
+                  sentByMe: currentItem.sentByMe == socket.id,
+                  message: currentItem.message,
+                  time: Time,
+                );
+              }),
+        ),
       ),
       bottomSheet: Container(
         color: kPrimaryColor,
