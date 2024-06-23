@@ -18,7 +18,9 @@ class RatingViewBody extends StatefulWidget {
 class _RatingViewBodyState extends State<RatingViewBody> {
   String rating = '0';
   String rateComment = 'Please rate the driver';
+
   bool ratingSubmitted = false; // Track if the rating was submitted
+
 
   void handleRatingSuccess() {
     setState(() {
@@ -147,7 +149,9 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                           RatingApi().userRate(
                           context: context, // Replace with actual movie name
                           rating: rating,
+
                           onSuccess: handleRatingSuccess,
+
                         );
                                     },
                         child: Text(

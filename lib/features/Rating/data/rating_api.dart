@@ -10,6 +10,7 @@ class RatingApi {
     required BuildContext context,
     required String rating,
     required VoidCallback onSuccess,
+
   }) async {
     try {
       // Retrieve the driverId from SharedPreferences
@@ -30,8 +31,10 @@ class RatingApi {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('Request successful');
         print('Response: ${response.data}');
+
         // Invoke the callback to notify the UI about the successful submission
         onSuccess();
+
         // Show success dialog
         showDialog(
           context: context,
@@ -76,4 +79,6 @@ class RatingApi {
       print('Request failed with error: $e');
     }
   }
+
 }
+
