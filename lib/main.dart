@@ -21,7 +21,6 @@ import 'package:mute_motion_passenger/features/translator/presentation/views/Tex
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,

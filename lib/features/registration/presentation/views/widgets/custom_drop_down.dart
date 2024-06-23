@@ -32,11 +32,9 @@ class _CustomDropDownState extends State<CustomDropDown> {
               child: Text('Gender'),
             ),
             value: dropdownValue,
-       
             elevation: 0,
             style: GoogleFonts.comfortaa(color: kPrimaryColor),
             onChanged: (String? value) {
-              // This is called when the user selects an item.
               setState(() {
                 dropdownValue = value!;
               });
