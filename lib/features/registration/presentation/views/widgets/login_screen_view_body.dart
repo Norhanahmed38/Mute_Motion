@@ -131,12 +131,12 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                 Container(
                   alignment: Alignment.topLeft,
                   child: TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       setUserEmail(emailCont.text);
                       setState(() {
                         _isLoading = true;
                       });
-                      ForgotPassApi()
+                      await ForgotPassApi()
                           .forgotPass(context: context, emailcont: emailCont);
                       setState(() {
                         _isLoading = false;
