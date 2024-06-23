@@ -3,12 +3,14 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/l
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("Handling a background message: ${message.messageId}");
 }
+
 void main() async {
- WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   SystemChrome.setPreferredOrientations([
@@ -23,6 +25,7 @@ void main() async {
 
   runApp(const MyApp());
 }
+
 Future<void> _requestNotificationPermission() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   NotificationSettings settings = await messaging.requestPermission(
@@ -43,6 +46,7 @@ Future<void> _requestNotificationPermission() async {
     print('User declined or has not accepted permission');
   }
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
