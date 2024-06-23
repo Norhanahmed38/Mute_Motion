@@ -8,8 +8,7 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/w
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateUserAPI {
-  static const String baseUrl =
-      'https://mutemotion.onrender.com/api/'; // ضع هنا رابط الأساس الصحيح
+  static const String baseUrl = 'https://mutemotion.onrender.com/api/';
   static const String createUserUrl = "${baseUrl}v1/passenger/signup";
 
   Future<void> createUser({
