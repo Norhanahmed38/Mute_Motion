@@ -1,36 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
-import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
-import 'package:mute_motion_passenger/features/chat/presentation/views/chat_screen_view.dart';
-import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/chat_screen_view_body.dart';
-import 'package:mute_motion_passenger/features/driverProfile/presentation/views/DriverProfileView.dart';
-import 'package:mute_motion_passenger/features/driverProfile/presentation/views/widgets/driver_profile_view_body.dart';
-import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
-import 'package:mute_motion_passenger/features/map/veiw/map_screen.dart';
-import 'package:mute_motion_passenger/features/map2/screen/map.dart';
-import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/forget_pass.dart';
-import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
-import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
-import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/services.dart';
-import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
+void main() async {
+ WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(const MyApp());
   SystemChrome.setPreferredOrientations([
-    DeviceOrientation.landscapeRight,
     DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-}
 
+  // Request notification permissions
+  await _requestNotificationPermission();
+
+  runApp(const MyApp());
+}
+Future<void> _requestNotificationPermission() async {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('User declined or has not accepted permission');
+  }
+}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
