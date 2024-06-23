@@ -19,6 +19,14 @@ class _RatingViewBodyState extends State<RatingViewBody> {
   String rating = '0';
   String rateComment = 'Please rate the driver';
 
+  bool ratingSubmitted = false; // Track if the rating was submitted
+
+
+  void handleRatingSuccess() {
+    setState(() {
+      ratingSubmitted = true;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,6 +149,9 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                           RatingApi().userRate(
                           context: context, // Replace with actual movie name
                           rating: rating,
+
+                          onSuccess: handleRatingSuccess,
+
                         );
                                     },
                         child: Text(
@@ -151,9 +162,22 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                             fontSize: 20,
                           ),
                         ),
+                          ),
+                ),
+              ),
+                    if (ratingSubmitted)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'You rated your Driver',
+                    style: GoogleFonts.lato(fontSize: 14, color: kPrimaryColor),
+                  ),
+                ),
+                    ],
                       ),
+                      
                     ),
                   ),
-                ]))));
+                );
   }
 }
