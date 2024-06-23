@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/features/Rating/presentation/views/rating_view.dart';
 import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
 import 'package:mute_motion_passenger/features/requests/data/models/driver_model.dart';
 import 'package:mute_motion_passenger/features/requests/data/request_api.dart';
@@ -243,7 +244,7 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MainMenuScreenView(),
+                              builder: (context) => RatingViewScreen(),
                             ),
                           );
                         },
