@@ -136,7 +136,8 @@ class _ContactUsScreenBodyState extends State<ContactUsScreenBody> {
                               msgCont: messageController);
                                setState(() {
                            _isLoading =false;
-                        }); 
+                        }
+                        ); 
                               
                         }
                         

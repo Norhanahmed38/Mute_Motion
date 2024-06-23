@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/styles.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/customtextfield.dart';
+
+import 'package:mute_motion_passenger/features/registration/data/repos/create_user.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/add_card_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
@@ -23,6 +25,7 @@ class CreateProfileScreenBody extends StatefulWidget {
       _CreateProfileScreenBodyState();
 }
 
+final _api = CreateUserAPI();
 final TextEditingController firstName = TextEditingController();
 final TextEditingController lastName = TextEditingController();
 final TextEditingController email = TextEditingController();
@@ -372,72 +375,19 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               setState(() {
                                 _isLoading = true;
                               });
-
-                              String url =
-                                  'https://mutemotion.onrender.com/api/v1/passenger/signup';
-                              Map<String, dynamic> requestData = {
-                                "firstname": firstName.text,
-                                "lastname": lastName.text,
-                                "email": email.text,
-                                "password": pass.text,
-                                "passwordConfirm": verifPass.text,
-                                "CardNumber": cardNumberController.text,
-                                "ExpiryDate": expiryDateController.text,
-                                "CVV": cvvController.text,
-                                "gender": dropdownValue!,
-                                "phone": phone.text
-                              };
-                              try {
-                                // Encode the data to JSON
-                                String jsonBody = jsonEncode(requestData);
-                                // Make the HTTP POST request
-                                final response = await http.post(
-                                  Uri.parse(url),
-                                  headers: {
-                                    'Content-Type': 'application/json',
-                                  },
-                                  body: jsonBody,
-                                );
-                                if (response.statusCode == 200 ||
-                                    response.statusCode == 201) {
-                                  print('Request successful');
-                                  print('Response: ${response.body}');
-                                  setUserEmail(email.text);
-                                  navigateTo(
-                                    context,
-                                    OTPScreenView(),
-                                  );
-                                  final SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-                                  final responseData =
-                                      jsonDecode(response.body);
-
-                                  await prefs.setString(
-                                      "_id", responseData["user"]["_id"]);
-
-                                  String? id = prefs.getString("_id");
-                                  print("Id is : $id");
-                                } else if (response.statusCode == 400) {
-                                  _showErrorDialog(
-                                      context,
-                                      "This Email Already Exists",
-                                      firstName,
-                                      lastName,
-                                      email,
-                                      pass,
-                                      verifPass,
-                                      cardNumberController,
-                                      expiryDateController,
-                                      cvvController,
-                                      phone);
-
-                                  print(
-                                      'Request failed with status: ${response.statusCode}');
-                                  print('Response: ${response.body}');
-                                }
-                              } catch (error) {
-                                print('Error: $error');
-                              }
+                              await _api.createUser(
+                                context: context,
+                                firstnameCont: firstName,
+                                lastnameCont: lastName,
+                                emailCont: email,
+                                passwordCont: pass,
+                                passwordConfirmCont: verifPass,
+                                cardNumberCont: cardNumberController,
+                                expiryDateCont: expiryDateController,
+                                cvvCont: cvvController,
+                                genderCont: dropdownValue!,
+                                phoneCont: phone,
+                              );
                             }
                             setState(() {
                               _isLoading = false;
@@ -484,73 +434,4 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
           );
         });
   }
-}
-
-void _showErrorDialog(
-  BuildContext context,
-  String message,
-  TextEditingController firstName,
-  TextEditingController lastName,
-  TextEditingController email,
-  TextEditingController pass,
-  TextEditingController verifPass,
-  TextEditingController cardNumberController,
-  TextEditingController expiryDateController,
-  TextEditingController cvvController,
-  TextEditingController phone,
-) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        content: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
-          // ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              firstName.clear();
-              lastName.clear();
-              email.clear();
-              verifPass.clear();
-              cardNumberController.clear();
-              expiryDateController.clear();
-              cvvController.clear();
-              pass.clear();
-              phone.clear();
-              Navigator.of(context).pop();
-              navigateTo(context, CreateProfileScreenView());
-            },
-            child: Container(
-              width: 120,
-              height: 45,
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Text(
-                  'Try Again',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Comfortaa',
-                      color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
-    },
-  );
 }
