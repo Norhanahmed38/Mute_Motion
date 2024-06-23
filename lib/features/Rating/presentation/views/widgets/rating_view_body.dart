@@ -17,8 +17,14 @@ class RatingViewBody extends StatefulWidget {
 
 class _RatingViewBodyState extends State<RatingViewBody> {
   String rating = '0';
-  String rateComment = 'Good';
+  String rateComment = 'Please rate the driver';
+  bool ratingSubmitted = false; // Track if the rating was submitted
 
+  void handleRatingSuccess() {
+    setState(() {
+      ratingSubmitted = true;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,14 +62,14 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                   Text(
                     'Provide your feedback about your ride with this driver',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.lato(fontSize: 16, color: kPrimaryColor),
+                    style: GoogleFonts.lato(fontSize: 18, color: kPrimaryColor,fontWeight: FontWeight.bold ),
                   ),
                   SizedBox(
-                    height: 61,
+                    height: 100,
                   ),
                   RatingBar.builder(
                     glow: true,
-                    initialRating: 3,
+                    initialRating: 0,
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
@@ -76,7 +82,9 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                     onRatingUpdate: (value) {
                       setState(() {
                         rating = value.toString();
-                        if (value == 1) {
+                        if (value == 0) {
+                          rateComment = 'Please rate the driver';
+                        }else if (value == 1) {
                           rateComment = 'Awful';
                         } else if (value < 3) {
                           rateComment = 'Weak';
@@ -99,39 +107,37 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                   SizedBox(
                     height: 7,
                   ),
-                  Text(
-                    'You rated your Driver',
-                    style: GoogleFonts.lato(fontSize: 14, color: kPrimaryColor),
-                  ),
+                  // Text(
+                  //   'You rated your Driver',
+                  //   style: GoogleFonts.lato(fontSize: 14, color: kPrimaryColor),
+                  // ),
                   SizedBox(
-                    height: 20,
+                    height: 70,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: TextFormField(
-                      style: TextStyle(
-                        fontSize: 18.0, // Set the font size
-                        // You can also set other style properties here
-                      ),
-                      decoration: InputDecoration(
-                        hintText: 'Your comment',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 100.0,
-                            horizontal: 100), // Adjust the padding
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(20.0),
+                  //   child: TextFormField(
+                  //     style: TextStyle(
+                  //       fontSize: 18.0, // Set the font size
+                  //       // You can also set other style properties here
+                  //     ),
+                  //     decoration: InputDecoration(
+                  //       hintText: 'Your comment',
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(10.0),
+                  //       ),
+                  //       contentPadding: EdgeInsets.symmetric(
+                  //           vertical: 100.0,
+                  //           horizontal: 100), // Adjust the padding
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                       height: 58,
-                      width: double.infinity,
+                      
+                      width: 300,
                       decoration: BoxDecoration(
                         color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(15),
@@ -141,6 +147,7 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                           RatingApi().userRate(
                           context: context, // Replace with actual movie name
                           rating: rating,
+                          onSuccess: handleRatingSuccess,
                         );
                                     },
                         child: Text(
@@ -151,9 +158,22 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                             fontSize: 20,
                           ),
                         ),
+                          ),
+                ),
+              ),
+                    if (ratingSubmitted)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'You rated your Driver',
+                    style: GoogleFonts.lato(fontSize: 14, color: kPrimaryColor),
+                  ),
+                ),
+                    ],
                       ),
+                      
                     ),
                   ),
-                ]))));
+                );
   }
 }

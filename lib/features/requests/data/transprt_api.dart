@@ -56,15 +56,15 @@ class TransportApi {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('Request successful');
         print(response);
-        String driverId = response.data["driver"]["_Id"];
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("sessionId", response.data["sessionId"]);
-        await prefs.setString("driver_Id", response.data["driver"]["_Id"]);
+        await prefs.setString("driver_id", response.data["driver"]["_id"]);
+        String driverId = prefs.getString("driver_id")!;
+        print(driverId);
 
         if (response.data != null) {
           final driverModel = DriverModel.fromJson(response.data);
           navigateTo(context, DriverProfileViewBody(driverModel: driverModel));
-          setDriverId(driverId);
         } else {
           _showErrorDialog(
             context,
@@ -100,8 +100,7 @@ class TransportApi {
       );
     }
   }
-
-  void _showErrorDialog(
+void _showErrorDialog(
     BuildContext context,
     String message,
     TextEditingController destination,

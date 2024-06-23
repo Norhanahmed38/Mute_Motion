@@ -83,7 +83,3 @@ setUserEmail(String? mail) => userEmail = mail;
 String? getUserEmail() {
   return userEmail;
 }
-setDriverId(String? id) => driverId = id;
-String? getDriverId() {
-  return driverId;
-}
