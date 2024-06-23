@@ -241,12 +241,7 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                             style:
                                 TextStyle(fontSize: 20, color: Colors.white)),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => RatingViewScreen(),
-                            ),
-                          );
+                          navigateTo(context, RatingViewScreen());
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -263,8 +258,9 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                         child: Text("confirm request",
                             style:
                                 TextStyle(fontSize: 20, color: Colors.white)),
-                        onPressed: () async {
-                          await ApiService.sendRequest(context);
+                        onPressed: () {
+                          print('Button pressed');
+                          ApiService.sendRequest(context);
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(

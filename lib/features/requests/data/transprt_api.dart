@@ -60,7 +60,6 @@ class TransportApi {
         await prefs.setString("sessionId", response.data["sessionId"]);
         await prefs.setString("driver_id", response.data["driver"]["_id"]);
         String driverId = prefs.getString("driver_id")!;
-        print(driverId);
 
         if (response.data != null) {
           final driverModel = DriverModel.fromJson(response.data);
@@ -100,7 +99,8 @@ class TransportApi {
       );
     }
   }
-void _showErrorDialog(
+
+  void _showErrorDialog(
     BuildContext context,
     String message,
     TextEditingController destination,
