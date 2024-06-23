@@ -5,7 +5,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
-import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
+
+import '../../../data/rating_api.dart';
 
 class RatingViewBody extends StatefulWidget {
   const RatingViewBody({super.key});
@@ -15,7 +16,7 @@ class RatingViewBody extends StatefulWidget {
 }
 
 class _RatingViewBodyState extends State<RatingViewBody> {
-  double rating = 3;
+  String rating = '0';
   String rateComment = 'Good';
 
   @override
@@ -74,7 +75,7 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                     ),
                     onRatingUpdate: (value) {
                       setState(() {
-                        rating = value;
+                        rating = value.toString();
                         if (value == 1) {
                           rateComment = 'Awful';
                         } else if (value < 3) {
@@ -136,7 +137,12 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          RatingApi().userRate(
+                          context: context, // Replace with actual movie name
+                          rating: rating,
+                        );
+                                    },
                         child: Text(
                           'Continue',
                           style: GoogleFonts.comfortaa(
