@@ -59,9 +59,7 @@ class TransportApi {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("sessionId", response.data["sessionId"]);
         await prefs.setString("driver_id", response.data["driver"]["_id"]);
-
-        String? driverId = prefs.getString("driver_id");
-
+        String driverId = prefs.getString("driver_id")!;
         print(driverId);
 
         if (response.data != null) {

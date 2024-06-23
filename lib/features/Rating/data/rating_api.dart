@@ -56,8 +56,10 @@ class RatingApi {
         showRatingDialog(
           context: context,
           title: 'Error',
+
           content:
               'Failed to submit rating. Status code: ${response.statusCode}',
+
         );
       }
     } catch (e) {
@@ -116,4 +118,3 @@ class RatingApi {
     );
   }
 }
-
