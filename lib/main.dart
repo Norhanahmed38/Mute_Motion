@@ -56,5 +56,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: LoginScreenView(),
     );
+    // Changing updates    
   }
 }
