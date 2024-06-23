@@ -42,7 +42,7 @@ class CreateUserAPI {
       Response response = await Dio().post(createUserUrl, data: requestBody);
       if (response.statusCode == 200 || response.statusCode == 201) {
         print(response.data);
-        setUserEmail(email.text);
+        setUserEmail(emailCont.text);
         navigateTo(
           context,
           OTPScreenView(),
