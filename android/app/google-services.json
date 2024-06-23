@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1015246050058",
+    "project_id": "mutemotion-e44be",
+    "storage_bucket": "mutemotion-e44be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015246050058:android:06edc120e797f928aaa0f3",
+        "android_client_info": {
+          "package_name": "com.example.mute_motion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB081aXoj8h0TSw_Loq-8K1b1MICktmG2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015246050058:android:67be7c6f47632e5caaa0f3",
+        "android_client_info": {
+          "package_name": "com.example.mute_motion_passenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB081aXoj8h0TSw_Loq-8K1b1MICktmG2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
