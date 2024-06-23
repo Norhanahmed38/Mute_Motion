@@ -5,7 +5,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
-import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
+
+import '../../../data/rating_api.dart';
 
 class RatingViewBody extends StatefulWidget {
   const RatingViewBody({super.key});
@@ -15,8 +16,8 @@ class RatingViewBody extends StatefulWidget {
 }
 
 class _RatingViewBodyState extends State<RatingViewBody> {
-  double rating = 3;
-  String rateComment = 'Good';
+  String rating = '0';
+  String rateComment = 'Please rate the driver';
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +56,14 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                   Text(
                     'Provide your feedback about your ride with this driver',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.lato(fontSize: 16, color: kPrimaryColor),
+                    style: GoogleFonts.lato(fontSize: 18, color: kPrimaryColor,fontWeight: FontWeight.bold ),
                   ),
                   SizedBox(
-                    height: 61,
+                    height: 100,
                   ),
                   RatingBar.builder(
                     glow: true,
-                    initialRating: 3,
+                    initialRating: 0,
                     minRating: 1,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
@@ -74,8 +75,10 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                     ),
                     onRatingUpdate: (value) {
                       setState(() {
-                        rating = value;
-                        if (value == 1) {
+                        rating = value.toString();
+                        if (value == 0) {
+                          rateComment = 'Please rate the driver';
+                        }else if (value == 1) {
                           rateComment = 'Awful';
                         } else if (value < 3) {
                           rateComment = 'Weak';
@@ -98,45 +101,48 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                   SizedBox(
                     height: 7,
                   ),
-                  Text(
-                    'You rated your Driver',
-                    style: GoogleFonts.lato(fontSize: 14, color: kPrimaryColor),
-                  ),
+                  // Text(
+                  //   'You rated your Driver',
+                  //   style: GoogleFonts.lato(fontSize: 14, color: kPrimaryColor),
+                  // ),
                   SizedBox(
-                    height: 20,
+                    height: 70,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: TextFormField(
-                      style: TextStyle(
-                        fontSize: 18.0, // Set the font size
-                        // You can also set other style properties here
-                      ),
-                      decoration: InputDecoration(
-                        hintText: 'Your comment',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 100.0,
-                            horizontal: 100), // Adjust the padding
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(20.0),
+                  //   child: TextFormField(
+                  //     style: TextStyle(
+                  //       fontSize: 18.0, // Set the font size
+                  //       // You can also set other style properties here
+                  //     ),
+                  //     decoration: InputDecoration(
+                  //       hintText: 'Your comment',
+                  //       border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(10.0),
+                  //       ),
+                  //       contentPadding: EdgeInsets.symmetric(
+                  //           vertical: 100.0,
+                  //           horizontal: 100), // Adjust the padding
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                       height: 58,
-                      width: double.infinity,
+                      
+                      width: 300,
                       decoration: BoxDecoration(
                         color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          RatingApi().userRate(
+                          context: context, // Replace with actual movie name
+                          rating: rating,
+                        );
+                                    },
                         child: Text(
                           'Continue',
                           style: GoogleFonts.comfortaa(
