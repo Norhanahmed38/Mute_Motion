@@ -68,7 +68,7 @@ class RatingApi {
       showRatingDialog(
         context: context,
         title: 'Error',
-        content: 'An error occurred: $e',
+        content: ' An error occurred ',
       );
     }
   }
