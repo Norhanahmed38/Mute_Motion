@@ -18,7 +18,7 @@ class TranslatorViewBody extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          'Translator',
+          'Interpreter Mode',
           style: GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
         ),
         /* leading: const Icon(
@@ -51,7 +51,7 @@ class TranslatorViewBody extends StatelessWidget {
               children: [
                 Image.asset('assets/images/translator.png'),
                 Text(
-                  'Sound to Text',
+                  'Sign Language Support',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.comfortaa(
                       fontSize: 26,
@@ -62,7 +62,7 @@ class TranslatorViewBody extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'Start translation to connect with your driver by translating your Sound to Text ',
+                  'Just a heads up! Our driver communicates in sign language. We’re translating their messages for you ',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.comfortaa(
                     fontSize: 14,
@@ -84,7 +84,7 @@ class TranslatorViewBody extends StatelessWidget {
                             builder: (context) => TextToSign()));
                       },
                       child: Text(
-                        "Start Translation",
+                        "Start Chatting",
                         style: GoogleFonts.comfortaa(
                             fontSize: 20, color: Colors.white),
                       )),

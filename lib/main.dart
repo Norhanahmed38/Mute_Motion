@@ -3,6 +3,8 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/l
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
+import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreenView(),
+      home: TextToSign(),
     );
   }
 }
