@@ -1,5 +1,7 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
@@ -8,8 +10,102 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/w
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateUserAPI {
-  static const String baseUrl = 'https://mutemotion.onrender.com/api/';
-  static const String createUserUrl = "${baseUrl}v1/passenger/signup";
+  static const String baseUrl = 'https://mutemotion.onrender.com/api/v1';
+  static const String createUserUrl = "${baseUrl}/passenger/signup";
+  
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  CreateUserAPI() {
+    _initFirebaseMessaging();
+    _initializeLocalNotifications();
+  }
+
+  void _initializeLocalNotifications() {
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+    );
+
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  void _initFirebaseMessaging() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+        _showNotification(
+            message.notification!.title, message.notification!.body);
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      // Handle the notification tapped logic here
+    });
+  }
+
+  Future<void> _showNotification(String? title, String? body) async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'your_channel_id',
+      'your_channel_name',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      body,
+      platformChannelSpecifics,
+      payload: 'item x',
+    );
+  }
+
+  Future<String?> getFcmToken() async {
+    try {
+      FirebaseMessaging messaging = FirebaseMessaging.instance;
+      String? token = await messaging.getToken();
+      print("FCM Token: $token");
+      return token;
+    } catch (e) {
+      print("Failed to get FCM token: $e");
+      return null;
+    }
+  }
+
+  Future<void> updateFCMToken({required String userId, required String fcmToken}) async {
+    try {
+      Map<String, dynamic> requestBody = {
+        "userId": userId,
+        "fcmToken": fcmToken,
+      };
+        print(requestBody);
+      Response response = await Dio().post("${baseUrl}/passenger/updateFCMToken", data: requestBody);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print('FCM token updated successfully');
+      } else {
+        print('Failed to update FCM token: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (e is DioException) {
+        print('Dio error: ${e.response?.data}');
+      } else {
+        print('Request failed with error: $e');
+      }
+    }
+  }
 
   Future<void> createUser({
     required BuildContext context,
@@ -26,6 +122,7 @@ class CreateUserAPI {
   }) async {
     try {
       print('before');
+      String? fcmToken = await getFcmToken();
       Map<String, dynamic> requestBody = {
         "firstname": firstnameCont.text,
         "lastname": lastnameCont.text,
@@ -49,6 +146,7 @@ class CreateUserAPI {
         );
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("_id", response.data["user"]["_id"]);
+        await updateFCMToken(userId: response.data["user"]["_id"], fcmToken: fcmToken!);
         String? id = prefs.getString("_id");
         print("Id is : $id");
 
