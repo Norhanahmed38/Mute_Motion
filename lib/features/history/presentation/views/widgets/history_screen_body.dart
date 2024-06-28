@@ -52,15 +52,6 @@ class HistoryScreenBody extends StatelessWidget {
                 datee: '9:20 - 25 April',
                 Cost: '120',
               ),
-              newmsg(
-                req: 'Transport Request',
-                driverName: 'Hassan Mahmoud',
-                rate: "4.8",
-                psg_loc: 'Elfath Street-Nasr City-Cairo',
-                destination: 'Salah Eldeen Street-Elzamalek',
-                datee: '9:20 - 25 April',
-                Cost: '120',
-              ),
               newmssg(
                 req: 'City to City Request',
                 driverName: 'Ahmed Essam',

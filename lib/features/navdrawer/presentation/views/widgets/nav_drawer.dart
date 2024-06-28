@@ -26,7 +26,9 @@ class NavDrawer extends StatelessWidget {
         width: screenWidth,
         child: SingleChildScrollView(
           child: Column(children: [
-            HadWidget(darkGreen: kPrimaryColor),
+            HadWidget(
+              darkGreen: kPrimaryColor,
+            ),
             SizedBox(
               height: 45,
             ),

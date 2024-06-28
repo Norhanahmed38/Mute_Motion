@@ -6,6 +6,7 @@ import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/profile/model/model.dart';
 import 'package:mute_motion_passenger/features/profile/presentation/views/widgets/icon.dart';
+import 'package:mute_motion_passenger/features/profile/presentation/views/widgets/info.dart';
 import 'package:mute_motion_passenger/features/profile/service/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -116,19 +117,6 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          star(),
-                          star(),
-                          star(),
-                          star(),
-                          star(),
-                        ],
-                      ),
                       SizedBox(
                         height: 5,
                       ),
@@ -306,44 +294,6 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                 ),
               ],
             ),
-    );
-  }
-}
-
-class Info extends StatelessWidget {
-  const Info({
-    super.key,
-    required this.title,
-    required this.subTitle,
-  });
-  final String title;
-  final String subTitle;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 17, color: kPrimaryColor),
-      ),
-      subtitle: Text(
-        subTitle,
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
-class star extends StatelessWidget {
-  const star({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Icon(
-      Icons.star,
-      color: Colors.amber,
-      size: 20,
     );
   }
 }

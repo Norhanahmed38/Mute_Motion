@@ -81,7 +81,7 @@ class newmssg extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.only(right: 22, left: 15),
             padding: EdgeInsets.all(9),
-            height: 290,
+            height: 265,
             width: 320,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -180,34 +180,6 @@ class newmssg extends StatelessWidget {
                     ),
                     Text(
                       destination,
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'To:',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Salah Eldeen Street-Elzamalek',
                       style: TextStyle(
                         color: kPrimaryColor,
                         fontFamily: 'Comfortaa',
