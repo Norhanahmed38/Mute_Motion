@@ -13,7 +13,6 @@ class newmsg extends StatelessWidget {
     required this.Cost,
   });
 
-  static int num = 0;
   final String req;
   final String driverName;
   final String rate;
@@ -40,23 +39,23 @@ class newmsg extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 12,
-                      backgroundColor: Colors.white,
-                    ),
-                    Text(
-                      '${++num}',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  ],
-                ),
+                // Stack(
+                //   alignment: Alignment.center,
+                //   children: [
+                //     CircleAvatar(
+                //       radius: 12,
+                //       backgroundColor: Colors.white,
+                //     ),
+                //     Text(
+                //       'New',
+                //       style: TextStyle(
+                //         color: kPrimaryColor,
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
-                  width: 50,
+                  width: 70,
                 ),
                 Text(
                   req,

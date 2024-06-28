@@ -16,6 +16,7 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/w
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateProfileScreenBody extends StatefulWidget {
   CreateProfileScreenBody({super.key});

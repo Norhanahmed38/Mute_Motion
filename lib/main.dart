@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mute_motion_passenger/features/history/presentation/views/history_screen_view.dart';
+
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
-import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -54,9 +56,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: TextToSign(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: LoginScreenView(),
+        );
+      },
     );
   }
 }
