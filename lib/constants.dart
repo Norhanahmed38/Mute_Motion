@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const kPrimaryColor = Color(0xff003248);
 const baseUrl = 'https://mutemotion.onrender.com/';
 const chatColorMe = Color(0xffffd700);
+
 Widget myDivider() => Padding(
-      padding: const EdgeInsetsDirectional.only(
-        start: 20,
-        end: 20,
+      padding: EdgeInsetsDirectional.only(
+        start: 20.w, // Adapted for ScreenUtil
+        end: 20.w, // Adapted for ScreenUtil
       ),
       child: Container(
         width: double.infinity,
-        height: 1,
+        height: 1.h, // Adapted for ScreenUtil
         color: kPrimaryColor,
       ),
     );
@@ -22,7 +24,7 @@ void navigateTo(context, widget) => Navigator.pushReplacement(
       ),
     );
 
-Widget defaultFormFeild({
+Widget defaultFormField({
   required TextEditingController? controller,
   required TextInputType? type,
   int? min,
@@ -56,20 +58,22 @@ Widget defaultFormFeild({
       decoration: InputDecoration(
         labelStyle: TextStyle(
           fontFamily: 'comfortaa',
-          fontSize: 15,
+          fontSize: 15.sp, // Adapted for ScreenUtil
           color: kPrimaryColor,
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             color: kPrimaryColor,
           ),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15.r), // Adapted for ScreenUtil
         ),
         labelText: label,
         // prefixIcon: Icon(prefix),
         suffixIcon: suffix != null
             ? IconButton(
-                icon: Icon(suffix, color: kPrimaryColor, size: 20),
+                icon: Icon(suffix,
+                    color: kPrimaryColor,
+                    size: 20.sp), // Adapted for ScreenUtil
                 onPressed: () {
                   iconButton!();
                 },
@@ -77,9 +81,12 @@ Widget defaultFormFeild({
             : null,
       ),
     );
+
 String? userEmail;
 String? driverId;
+
 setUserEmail(String? mail) => userEmail = mail;
+
 String? getUserEmail() {
   return userEmail;
 }

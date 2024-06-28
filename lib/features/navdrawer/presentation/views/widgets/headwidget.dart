@@ -1,8 +1,7 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mute_motion_passenger/constants.dart';
-import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/create_profile_screen_Body.dart';
 
 class HadWidget extends StatefulWidget {
   const HadWidget({
@@ -19,19 +18,34 @@ class HadWidget extends StatefulWidget {
 class _HadWidgetState extends State<HadWidget> {
   String userName = '';
   String useremail = '';
+  Uint8List? _userImageBytes; // Variable to store user image bytes
 
   @override
   void initState() {
     super.initState();
-    _getUserName();
+    _getUserDataAndImage();
   }
 
-  Future<void> _getUserName() async {
+  Future<void> _getUserDataAndImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       userName = prefs.getString('firstname') ?? '';
       useremail = prefs.getString('email') ?? '';
     });
+
+    // Load user image from SharedPreferences
+    await _loadUserImage();
+  }
+
+  Future<void> _loadUserImage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('_id');
+    String? base64Image = prefs.getString('profile_image_$userId');
+    if (base64Image != null) {
+      setState(() {
+        _userImageBytes = base64Decode(base64Image);
+      });
+    }
   }
 
   @override
@@ -51,7 +65,9 @@ class _HadWidgetState extends State<HadWidget> {
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 35,
-                  backgroundImage: AssetImage('assets/images/woman.png'),
+                  backgroundImage: _userImageBytes != null
+                      ? MemoryImage(_userImageBytes!)
+                      : AssetImage('assets/images/pic.PNG') as ImageProvider,
                 ),
               ),
               Column(
@@ -86,7 +102,7 @@ class _HadWidgetState extends State<HadWidget> {
                 padding: EdgeInsets.only(top: 35),
                 child: IconButton(
                   onPressed: () {
-                    navigateTo(context, ProfileScreenView());
+                    // Navigate to profile screen or any other action
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,

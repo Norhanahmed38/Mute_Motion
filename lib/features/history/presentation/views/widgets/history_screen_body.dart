@@ -3,7 +3,6 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/history/presentation/views/widgets/newmsg.dart';
-import 'package:mute_motion_passenger/features/history/presentation/views/widgets/newmssg.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 
 class HistoryScreenBody extends StatelessWidget {
@@ -11,7 +10,7 @@ class HistoryScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int num = 1;
+    int num = 0;
 
     return Scaffold(
       drawer: NavDrawerView(),
@@ -51,17 +50,6 @@ class HistoryScreenBody extends StatelessWidget {
                 destination: 'Salah Eldeen Street-Elzamalek',
                 datee: '9:20 - 25 April',
                 Cost: '120',
-              ),
-              newmssg(
-                req: 'City to City Request',
-                driverName: 'Ahmed Essam',
-                rate: "4.6",
-                psg_loc: 'Elfath Street-Nasr City-Cairo',
-                destination: 'Salah Eldeen Street-Elzamalek',
-                datee: '9:20 - 25 April',
-                Cost: '120',
-                no_bags: '4',
-                no_pass: '8',
               ),
             ],
           ),

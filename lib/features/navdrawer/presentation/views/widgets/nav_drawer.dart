@@ -13,7 +13,6 @@ import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widg
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../contactUs/presentation/views/contact_us_screenView.dart';
-import '../../../../notification/presentation/views/notification_view.dart';
 
 class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -85,21 +84,7 @@ class NavDrawer extends StatelessWidget {
                       onpressed: () {
                         navigateTo(context, MapScreen());
                       }),
-                  Divider(
-                    indent: 20,
-                    endIndent: 30,
-                    color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
-                  ),
-                  pages(
-                    darkGreen: kPrimaryColor,
-                    pagename: 'Notification',
-                    icone: Icons.notifications_none,
-                    onpressed: () {
-                      navigateTo(context, NotificationScreenView());
-                    },
-                  ),
+
                   Divider(
                     indent: 20,
                     endIndent: 30,
