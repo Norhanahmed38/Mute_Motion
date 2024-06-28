@@ -66,7 +66,7 @@ class NavDrawer extends StatelessWidget {
                   ),
                   pages(
                       darkGreen: kPrimaryColor,
-                      pagename: 'Translator',
+                      pagename: 'Interpreter Mode',
                       icone: Icons.camera_alt_rounded,
                       onpressed: () {
                         navigateTo(context, TranslatorView());

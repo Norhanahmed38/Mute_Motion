@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/core/styles.dart';
+import 'package:mute_motion_passenger/features/chat/controller/chat_controller.dart';
+import 'package:mute_motion_passenger/features/chat/model/messages.dart';
+import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/message_item.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -16,13 +24,28 @@ class TextToSignBody extends StatefulWidget {
 }
 
 class _TextToSignBodyState extends State<TextToSignBody> {
+  String ip = '';
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
   String? record;
+  TextEditingController msgController = TextEditingController();
+  TextEditingController ipController = TextEditingController();
+  ChatController chatController = ChatController();
+  var formKey = GlobalKey<FormState>();
+  late IO.Socket socket;
+  String Time = '';
   @override
   void initState() {
     // TODO: implement initState
+    socket = IO.io(
+        'https://mutemotion.onrender.com/',
+        IO.OptionBuilder()
+            .setTransports(['websocket'])
+            .disableAutoConnect()
+            .build());
+    socket.connect();
+    setUpSocketListener();
     super.initState();
     _initSpeech();
   }
@@ -36,18 +59,15 @@ class _TextToSignBodyState extends State<TextToSignBody> {
   void _startListening() async {
     await _speechToText.listen(
       onResult: _onSpeechResult,
-      localeId: 'ar_EG',
     );
     setState(() {});
   }
 
-  /// Manually stop the active speech recognition session
-  /// Note that there are also timeouts that each platform enforces
-  /// and the SpeechToText plugin supports setting timeouts on the
-  /// listen method.
   void _stopListening() async {
     await _speechToText.stop();
-    setState(() {});
+    setState(() {
+      sendMessage(record!);
+    });
   }
 
   /// This is the callback that the SpeechToText plugin calls when
@@ -62,108 +82,185 @@ class _TextToSignBodyState extends State<TextToSignBody> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController messageController = TextEditingController();
     return Scaffold(
-      drawer: NavDrawerView(),
-      backgroundColor: Color(0xff003248),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text(
-          'Speech to text',
-          style: GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
-        ),
-        elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            iconSize: 30,
+            onPressed: () {
+              navigateTo(context, TranslatorView());
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: kPrimaryColor,
+            )),
+        title: Text(
+          'Driver',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.lato(
+            color: kPrimaryColor,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed:
             // If not yet listening for speech start, otherwise stop
             _speechToText.isNotListening ? _startListening : _stopListening,
         tooltip: 'Listen',
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         child: Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
       ),
-      body: Form(
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 160),
+        child: Obx(
+          () => ListView.builder(
+              itemCount: chatController.chatMessages.length,
+              itemBuilder: (context, index) {
+                var currentItem = chatController.chatMessages[index];
+                DateTime now = DateTime.now();
+                String formattedTime = DateFormat('h:mm a').format(now);
+                Time = formattedTime;
+                print(formattedTime);
+                return MessageItem(
+                  sentByMe: currentItem.sentByMe == socket.id,
+                  message: currentItem.message,
+                  time: Time,
+                );
+              }),
+        ),
+      ),
+      bottomSheet: Form(
+        key: formKey,
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          color: kPrimaryColor,
+          height: 160,
           width: double.infinity,
-          padding: const EdgeInsets.only(
-            top: 20,
-          ),
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              )),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  _speechEnabled
-                      ? 'Tap the microphone to start listening...'
-                      : 'Speech not available',
-                ),
                 const SizedBox(
                   height: 10,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: kPrimaryColor, // Set border color here
-                        width: 1, // Set border width here
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                      // color: kPrimaryColor,
-                    ),
-                    padding: EdgeInsets.all(5),
-                    child: Text(
-                      _lastWords,
-                      style: GoogleFonts.comfortaa(
-                        fontSize: 20,
-                        color: kPrimaryColor,
+                      child: TextFormField(
+                        validator: (value) {
+                          final bool emailValid = RegExp(
+                                  r'^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.'
+                                  r'(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.'
+                                  r'(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.'
+                                  r'(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$')
+                              .hasMatch(value!);
+                          if (value!.isEmpty) {
+                            return "IP can't be empty";
+                          } else if (emailValid == false) {
+                            return "IP format not valid";
+                          }
+                          return null;
+                        },
+                        cursorColor: kPrimaryColor,
+                        controller: ipController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: 'Enter IP address',
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  ip = ipController.text;
+                                  print(ip);
+                                  ipController.text = "";
+                                }
+                              },
+                              icon: const FaIcon(
+                                FontAwesomeIcons.solidPaperPlane,
+                                color: kPrimaryColor,
+                              )),
+                          hintStyle: GoogleFonts.comfortaa(
+                            color: Colors.black.withOpacity(0.65),
+                            fontSize: 12,
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
+                      child: TextFormField(
+                        cursorColor: kPrimaryColor,
+                        controller: msgController,
+                        decoration: InputDecoration(
+                          hintText: 'Message',
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                sendMessage(msgController.text);
+                                msgController.text = "";
+                              },
+                              icon: const FaIcon(
+                                FontAwesomeIcons.solidPaperPlane,
+                                color: kPrimaryColor,
+                              )),
+                          hintStyle: GoogleFonts.comfortaa(
+                            color: Colors.black.withOpacity(0.65),
+                            fontSize: 12,
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  margin: EdgeInsets.only(right: 22, left: 10),
-                  //padding: EdgeInsets.all(8),
-                  width: double.infinity,
-                  height: 58,
-                  decoration: BoxDecoration(
-                      color: const Color(0xff003248),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: MaterialButton(
-                      onPressed: () {
-                        navigateTo(
-                          context,
-                          TranslatorView(),
-                        );
-                      },
-                      child: Text(
-                        "Send",
-                        style: GoogleFonts.comfortaa(
-                            fontSize: 20, color: Colors.white),
-                      )),
-                ),
+                  height: 10,
+                )
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void sendMessage(String text) {
+    print('dxzxzxzx');
+    var messageJson = {"message": text, "sentByMe": socket.id};
+    socket.emit('message', messageJson);
+    chatController.chatMessages.add(Message.fromJson(messageJson));
+    print('sentttt');
+  }
+
+  void setUpSocketListener() {
+    socket.on('message-receive', (data) {
+      print(data);
+      chatController.chatMessages.add(Message.fromJson(data));
+    });
   }
 }
