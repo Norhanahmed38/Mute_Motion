@@ -10,6 +10,7 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/l
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/headwidget.dart';
+import 'package:mute_motion_passenger/features/web%20page/webpage_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../contactUs/presentation/views/contact_us_screenView.dart';
@@ -120,6 +121,21 @@ class NavDrawer extends StatelessWidget {
                     thickness: 1,
                     height: 2,
                   ),
+                  
+                  pages(
+                      darkGreen: kPrimaryColor,
+                      pagename: 'Learn Sign Language',
+                      icone: Icons.sign_language,
+                      onpressed: () async {
+                       navigateTo(context, WebPageScreen());
+                      }),
+                       Divider(
+                    indent: 20,
+                    endIndent: 30,
+                    color: kPrimaryColor,
+                    thickness: 1,
+                    height: 2,
+                  ),
                   pages(
                       darkGreen: kPrimaryColor,
                       pagename: 'Logout',
@@ -138,6 +154,8 @@ class NavDrawer extends StatelessWidget {
                       }),
 
                   // navigateTo(context, ContactUsScreenView());
+                 
+
                 ],
               ),
             ),

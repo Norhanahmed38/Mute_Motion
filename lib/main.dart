@@ -10,6 +10,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
 import 'package:mute_motion_passenger/features/web%20page/webpage_screen.dart';
+import 'package:mute_motion_passenger/features/web%20page/widgets/webBody.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: LoginScreenView(),
+          home: WebPageScreen(),
         );
       },
     );
