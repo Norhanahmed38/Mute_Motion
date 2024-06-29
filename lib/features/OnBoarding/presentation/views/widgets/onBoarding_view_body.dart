@@ -45,7 +45,7 @@ class _onBoardingState extends State<onBoardingViewBody> {
                       width: 348,
                       height: 325,
                       image: AssetImage(
-                        "assets/images/checkYourRide1.png",
+                        "assets/images/SPLASHMOBILE.jpg",
                       ),
                     ),
                     const SizedBox(
@@ -53,7 +53,7 @@ class _onBoardingState extends State<onBoardingViewBody> {
                     ),
                     Center(
                       child: Text(
-                        "Check Your Ride",
+                        "Your Driver is Deaf",
                         style: GoogleFonts.comfortaa(
                           fontWeight: FontWeight.bold,
                           color: Color(0xff003248),
@@ -66,7 +66,7 @@ class _onBoardingState extends State<onBoardingViewBody> {
                     ),
                     Center(
                       child: Text(
-                        "Keep track of where you are any time",
+                        "Let's Help you Communicate Safely and Effectively",
                         style: GoogleFonts.comfortaa(
                           //fontWeight: FontWeight.bold,
                           color: kPrimaryColor,
