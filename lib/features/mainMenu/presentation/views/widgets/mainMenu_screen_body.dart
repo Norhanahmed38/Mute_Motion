@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mute_motion_passenger/constants.dart';
-import 'package:mute_motion_passenger/features/history/presentation/views/widgets/history_screen_empty_body.dart';
+import 'package:mute_motion_passenger/features/history/presentation/views/history_screen_view.dart';
 import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
 
 import '../../../../requests/presentation/views/widgets/requsts.dart';
@@ -18,7 +18,7 @@ class _MainMenuScreenBodyState extends State<MainMenuScreenBody> {
   int _selectedIndex = 0;
   final _screens = [
     Requests(),
-    HistoryScreenEmptyBody(),
+    HistoryScreenView(),
     ProfileScreenView(),
   ];
   @override

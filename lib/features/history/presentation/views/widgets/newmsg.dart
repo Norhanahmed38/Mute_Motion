@@ -9,7 +9,7 @@ class newmsg extends StatelessWidget {
     required this.rate,
     required this.destination,
     required this.psg_loc,
-    required this.datee,
+    required this.service,
     required this.Cost,
   });
 
@@ -18,7 +18,7 @@ class newmsg extends StatelessWidget {
   final String rate;
   final String destination;
   final String psg_loc;
-  final String datee;
+  final String service;
   final String Cost;
 
   @override
@@ -39,21 +39,6 @@ class newmsg extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(children: [
-                // Stack(
-                //   alignment: Alignment.center,
-                //   children: [
-                //     CircleAvatar(
-                //       radius: 12,
-                //       backgroundColor: Colors.white,
-                //     ),
-                //     Text(
-                //       'New',
-                //       style: TextStyle(
-                //         color: kPrimaryColor,
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 SizedBox(
                   width: 70,
                 ),
@@ -109,7 +94,7 @@ class newmsg extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 40,
+                      width: 65,
                     ),
                     Icon(
                       Icons.star,
@@ -190,7 +175,7 @@ class newmsg extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Date:',
+                      'Service Type:',
                       style: TextStyle(
                         color: kPrimaryColor,
                         fontFamily: 'Comfortaa',
@@ -202,7 +187,7 @@ class newmsg extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      datee,
+                      service,
                       style: TextStyle(
                         color: kPrimaryColor,
                         fontFamily: 'Comfortaa',

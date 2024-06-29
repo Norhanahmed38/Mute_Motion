@@ -36,26 +36,11 @@ class NavDrawer extends StatelessWidget {
               child: Column(
                 children: [
                   pages(
-                    darkGreen: kPrimaryColor,
-                    pagename: 'requests',
-                    icone: Icons.car_crash,
-                    onpressed: () {
-                      navigateTo(context, RequestsScreenView());
-                    },
-                  ),
-                  Divider(
-                    indent: 20,
-                    endIndent: 30,
-                    color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
-                  ),
-                  pages(
                       darkGreen: kPrimaryColor,
-                      pagename: 'History',
-                      icone: Icons.history_toggle_off,
+                      pagename: 'Map',
+                      icone: Icons.map_outlined,
                       onpressed: () {
-                        navigateTo(context, HistoryScreenView());
+                        navigateTo(context, MapScreen());
                       }),
                   Divider(
                     indent: 20,
@@ -71,6 +56,7 @@ class NavDrawer extends StatelessWidget {
                       onpressed: () {
                         navigateTo(context, TranslatorView());
                       }),
+
                   Divider(
                     indent: 20,
                     endIndent: 30,
@@ -80,12 +66,11 @@ class NavDrawer extends StatelessWidget {
                   ),
                   pages(
                       darkGreen: kPrimaryColor,
-                      pagename: 'Map',
-                      icone: Icons.map_outlined,
-                      onpressed: () {
-                        navigateTo(context, MapScreen());
+                      pagename: 'Learn Sign Language',
+                      icone: Icons.sign_language,
+                      onpressed: () async {
+                        navigateTo(context, WebPageScreen());
                       }),
-
                   Divider(
                     indent: 20,
                     endIndent: 30,
@@ -121,21 +106,7 @@ class NavDrawer extends StatelessWidget {
                     thickness: 1,
                     height: 2,
                   ),
-                  
-                  pages(
-                      darkGreen: kPrimaryColor,
-                      pagename: 'Learn Sign Language',
-                      icone: Icons.sign_language,
-                      onpressed: () async {
-                       navigateTo(context, WebPageScreen());
-                      }),
-                       Divider(
-                    indent: 20,
-                    endIndent: 30,
-                    color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
-                  ),
+
                   pages(
                       darkGreen: kPrimaryColor,
                       pagename: 'Logout',
@@ -154,8 +125,6 @@ class NavDrawer extends StatelessWidget {
                       }),
 
                   // navigateTo(context, ContactUsScreenView());
-                 
-
                 ],
               ),
             ),
