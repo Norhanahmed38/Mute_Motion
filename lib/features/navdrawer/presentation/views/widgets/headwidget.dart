@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HadWidget extends StatefulWidget {
@@ -89,7 +91,7 @@ class _HadWidgetState extends State<HadWidget> {
                       useremail.isNotEmpty ? useremail : '',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 10,
+                        fontSize: 8,
                       ),
                     ),
                   ),
@@ -99,10 +101,10 @@ class _HadWidgetState extends State<HadWidget> {
                 width: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(top: 35),
+                padding: EdgeInsets.only(top: 35, left: 10),
                 child: IconButton(
                   onPressed: () {
-                    // Navigate to profile screen or any other action
+                    navigateTo(context, ProfileScreenView());
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
