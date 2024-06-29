@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
@@ -75,7 +76,7 @@ class _HadWidgetState extends State<HadWidget> {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 55, left: 8),
+                    padding: EdgeInsets.only(top: 65, left: 50),
                     child: Text(
                       userName.isNotEmpty ? userName : 'USER',
                       style: TextStyle(
@@ -85,16 +86,16 @@ class _HadWidgetState extends State<HadWidget> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 8),
-                    child: Text(
-                      useremail.isNotEmpty ? useremail : '',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 8),
+                  //   child: Text(
+                  //     useremail.isNotEmpty ? useremail : '',
+                  //     style: TextStyle(
+                  //       color: Colors.white,
+                  //       fontSize: 8,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
               SizedBox(
