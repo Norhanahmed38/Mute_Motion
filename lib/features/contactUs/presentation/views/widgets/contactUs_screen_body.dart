@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/contactUs/repos/contactUsApi.dart';
 
 import '../../../../navdrawer/presentation/views/widgets/nav_drawer.dart';
+import 'package:mute_motion_passenger/constants.dart';
+
 import '../../../../navdrawer/presentation/views/nav_drawer_view.dart';
 
 class ContactUsScreenBody extends StatefulWidget {
@@ -18,19 +18,19 @@ class ContactUsScreenBody extends StatefulWidget {
 }
 
 class _ContactUsScreenBodyState extends State<ContactUsScreenBody> {
-   bool _isLoading = false;
+  bool _isLoading = false;
   var nameController = TextEditingController();
-
   var emailController = TextEditingController();
-
   var phoneController = TextEditingController();
-
   var messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    // Initialize ScreenUtil
+    ScreenUtil.init(context, designSize: const Size(360, 690));
+
     return ModalProgressHUD(
-       color: kPrimaryColor,
+      color: kPrimaryColor,
       inAsyncCall: _isLoading,
       child: Scaffold(
         backgroundColor: kPrimaryColor,
@@ -39,15 +39,18 @@ class _ContactUsScreenBodyState extends State<ContactUsScreenBody> {
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
             'Contact Us',
-            style:
-                TextStyle(fontSize: 22, fontFamily: 'Lato', color: Colors.white),
+            style: TextStyle(
+              fontSize: 22.sp,
+              fontFamily: 'Lato',
+              color: Colors.white,
+            ),
           ),
           centerTitle: true,
           backgroundColor: kPrimaryColor,
         ),
         body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
+          height: 1.sh,
+          width: 1.sw,
           padding: const EdgeInsets.only(
             top: 20,
           ),
@@ -61,7 +64,6 @@ class _ContactUsScreenBodyState extends State<ContactUsScreenBody> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(
-                // top: 20,
                 left: 20,
                 right: 20,
               ),
@@ -70,42 +72,43 @@ class _ContactUsScreenBodyState extends State<ContactUsScreenBody> {
                 child: Column(
                   children: [
                     Text(
-                      'Contact us by sending your message ,we will reply to you soon',
+                      'Contact us by sending your message, we will reply to you soon',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          fontFamily: 'Lato',
-                          color: kPrimaryColor),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                        fontFamily: 'Lato',
+                        color: kPrimaryColor,
+                      ),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 15.h,
                     ),
-                    defaultFormFeild(
+                    defaultFormField(
                       controller: nameController,
                       type: TextInputType.name,
                       label: 'Name',
                     ),
                     SizedBox(
-                      height: 12,
+                      height: 12.h,
                     ),
-                    defaultFormFeild(
+                    defaultFormField(
                       controller: emailController,
                       type: TextInputType.emailAddress,
                       label: 'Email',
                     ),
                     SizedBox(
-                      height: 12,
+                      height: 12.h,
                     ),
-                    defaultFormFeild(
+                    defaultFormField(
                       controller: phoneController,
                       type: TextInputType.number,
                       label: 'Phone',
                     ),
                     SizedBox(
-                      height: 12,
+                      height: 12.h,
                     ),
-                    defaultFormFeild(
+                    defaultFormField(
                       controller: messageController,
                       type: TextInputType.multiline,
                       min: 8,
@@ -113,39 +116,40 @@ class _ContactUsScreenBodyState extends State<ContactUsScreenBody> {
                       label: 'Message',
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 30.h,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20.r),
                         ),
                         backgroundColor: kPrimaryColor,
-                        minimumSize: const Size(400, 55),
+                        minimumSize: Size(400.w, 55.h),
                       ),
                       onPressed: () async {
-                        if (ContactUsScreenBody.formKey.currentState!.validate()) {
+                        if (ContactUsScreenBody.formKey.currentState!
+                            .validate()) {
                           setState(() {
                             _isLoading = true;
                           });
                           await ContactUsAPI().contactUs(
-                              context: context,
-                              nameCont: nameController,
-                              emailCont: emailController,
-                              phoneCont: phoneController,
-                              msgCont: messageController);
-                               setState(() {
-                           _isLoading =false;
+                            context: context,
+                            nameCont: nameController,
+                            emailCont: emailController,
+                            phoneCont: phoneController,
+                            msgCont: messageController,
+                          );
+                          setState(() {
+                            _isLoading = false;
+                          });
                         }
-                        ); 
-                              
-                        }
-                        
-                       
                       },
                       child: Text(
                         'Submit',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],

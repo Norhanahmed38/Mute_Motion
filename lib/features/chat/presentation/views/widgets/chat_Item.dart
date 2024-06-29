@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/styles.dart';
 
-class chatItem extends StatelessWidget {
-  const chatItem({super.key, required this.text, required this.onPressed});
+class ChatItem extends StatelessWidget {
+  const ChatItem({Key? key, required this.text, required this.onPressed}) : super(key: key);
+
   final String text;
-  final Function? onPressed;
+  final VoidCallback onPressed;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: 160,
+      height: 40.h,
+      width: 160.w,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15.w),
         color: Colors.white,
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           text,
           overflow: TextOverflow.ellipsis,

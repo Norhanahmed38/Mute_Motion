@@ -1,16 +1,18 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/profile/model/model.dart';
 import 'package:mute_motion_passenger/features/profile/presentation/views/widgets/icon.dart';
+import 'package:mute_motion_passenger/features/profile/presentation/views/widgets/info.dart';
 import 'package:mute_motion_passenger/features/profile/service/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreenViewBody extends StatefulWidget {
-  ProfileScreenViewBody({super.key});
+  ProfileScreenViewBody({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreenViewBody> createState() => _ProfileScreenViewBodyState();
@@ -31,55 +33,61 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
   @override
   void initState() {
     super.initState();
-    fetchData();
+    fetchDataAndImage();
   }
 
-  Future<void> fetchData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
+  Future<void> fetchDataAndImage() async {
+    setState(() => _isLoading = true);
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString("token");
-
+      String? userId = prefs.getString("_id"); // Assuming _id is the user's ID
       UserModel userData = await ApiService.fetchUserData(token!);
-
-      setState(() {
-        _userData = userData;
-      });
+      setState(() => _userData = userData);
+      await _loadImage(userId!);
     } catch (e) {
       print('Error: $e');
+    } finally {
+      setState(() => _isLoading = false);
     }
+  }
 
+  Future<void> _saveImage(Uint8List imageBytes, String userId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String base64Image = base64Encode(imageBytes);
+    await prefs.setString('profile_image_$userId', base64Image);
+  }
+
+  Future<void> _loadImage(String userId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? base64Image = prefs.getString('profile_image_$userId');
     setState(() {
-      _isLoading = false;
+      _selectedImageBytes =
+          base64Image != null ? base64Decode(base64Image) : null;
     });
   }
 
-  void _takePhoto() async {
+  Future<void> _takePhoto() async {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.camera);
-    // Open the camera and capture a photo
-    if (pickedFile != null) {
-      final File imageFile = File(pickedFile.path);
-      final bytes = await imageFile.readAsBytes();
-      setState(() {
-        _selectedImageBytes = bytes;
-      });
-    }
+    _processPickedImage(pickedFile);
   }
 
-  void _openGallery() async {
+  Future<void> _openGallery() async {
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
-    // Open the gallery and select an image
+    _processPickedImage(pickedFile);
+  }
+
+  void _processPickedImage(XFile? pickedFile) async {
     if (pickedFile != null) {
       final File imageFile = File(pickedFile.path);
       final bytes = await imageFile.readAsBytes();
-      setState(() {
-        _selectedImageBytes = bytes;
-      });
+      setState(() => _selectedImageBytes = bytes);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? userId = prefs.getString("_id"); // Assuming _id is the user's ID
+      _saveImage(bytes, userId!);
+      Navigator.of(context).pop(); // Close the Bottom Sheet
     }
   }
 
@@ -95,9 +103,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
         backgroundColor: Colors.transparent,
       ),
       body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? Center(child: CircularProgressIndicator())
           : Stack(
               alignment: Alignment.topCenter,
               children: [
@@ -105,44 +111,19 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                   margin: EdgeInsets.only(top: 60),
                   height: MediaQuery.of(context).size.height,
                   width: double.infinity,
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      )),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          star(),
-                          star(),
-                          star(),
-                          star(),
-                          star(),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        '(80 Reviews)',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          fontFamily: 'Comfortaa',
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      SizedBox(height: 5),
                       Stack(
                         children: [
                           Container(
@@ -167,24 +148,24 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                                       Text(
                                         '100',
                                         style: TextStyle(
-                                            fontFamily: 'Comfortaa',
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w800,
-                                            color: Colors.white),
+                                          fontFamily: 'Comfortaa',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w800,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                       Text(
                                         ' Count of Req.',
                                         style: TextStyle(
-                                            fontFamily: 'Comfortaa',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white),
+                                          fontFamily: 'Comfortaa',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    width: 40,
-                                  ),
+                                  SizedBox(width: 40),
                                   VerticalDivider(
                                     color: Colors.white,
                                     thickness: 2,
@@ -197,18 +178,20 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                                       Text(
                                         ' EGP 2500',
                                         style: TextStyle(
-                                            fontFamily: 'Comfortaa',
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w800,
-                                            color: Colors.white),
+                                          fontFamily: 'Comfortaa',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w800,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                       Text(
                                         ' Cost of Rides',
                                         style: TextStyle(
-                                            fontFamily: 'Comfortaa',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white),
+                                          fontFamily: 'Comfortaa',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -218,46 +201,19 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      SizedBox(height: 20),
                       Info(title: 'Name', subTitle: _userData.fullName),
                       Divider(
-                        indent: 5,
-                        endIndent: 5,
-                        thickness: 0.5,
-                        height: 2,
-                      ),
-                      Info(
-                        title: 'Email',
-                        subTitle: _userData.email,
-                      ),
+                          indent: 5, endIndent: 5, thickness: 0.5, height: 2),
+                      Info(title: 'Email', subTitle: _userData.email),
                       Divider(
-                        indent: 5,
-                        endIndent: 5,
-                        thickness: 0.5,
-                        height: 2,
-                      ),
-                      Info(
-                        title: 'Phone',
-                        subTitle: _userData.phone,
-                      ),
+                          indent: 5, endIndent: 5, thickness: 0.5, height: 2),
+                      Info(title: 'Phone', subTitle: _userData.phone),
                       Divider(
-                        indent: 5,
-                        endIndent: 5,
-                        thickness: 0.5,
-                        height: 2,
-                      ),
-                      Info(
-                        title: 'Gender',
-                        subTitle: _userData.gender,
-                      ),
+                          indent: 5, endIndent: 5, thickness: 0.5, height: 2),
+                      Info(title: 'Gender', subTitle: _userData.gender),
                       Divider(
-                        indent: 5,
-                        endIndent: 5,
-                        thickness: 0.5,
-                        height: 2,
-                      ),
+                          indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                     ],
                   ),
                 ),
@@ -269,7 +225,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                       backgroundColor: Colors.white,
                       backgroundImage: _selectedImageBytes != null
                           ? MemoryImage(_selectedImageBytes!)
-                          : AssetImage('assets/images/woman.png')
+                          : AssetImage('assets/images/pic.PNG')
                               as ImageProvider<Object>?,
                     ),
                     Stack(
@@ -282,17 +238,19 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                         IconButton(
                           onPressed: () {
                             showModalBottomSheet(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(20.0),
                                   topRight: Radius.circular(20.0),
-                                )),
-                                isScrollControlled: true,
-                                context: context,
-                                builder: ((builder) => ButtomSheet(
-                                      takePhoto: _takePhoto,
-                                      openGallery: _openGallery,
-                                    )));
+                                ),
+                              ),
+                              isScrollControlled: true,
+                              context: context,
+                              builder: ((builder) => BottomSheetContent(
+                                    takePhoto: _takePhoto,
+                                    openGallery: _openGallery,
+                                  )),
+                            );
                           },
                           icon: Icon(
                             Icons.camera,
@@ -310,40 +268,33 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
   }
 }
 
-class Info extends StatelessWidget {
-  const Info({
-    super.key,
-    required this.title,
-    required this.subTitle,
-  });
-  final String title;
-  final String subTitle;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 17, color: kPrimaryColor),
-      ),
-      subtitle: Text(
-        subTitle,
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
+class BottomSheetContent extends StatelessWidget {
+  final VoidCallback takePhoto;
+  final VoidCallback openGallery;
 
-class star extends StatelessWidget {
-  const star({
-    super.key,
+  const BottomSheetContent({
+    required this.takePhoto,
+    required this.openGallery,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      Icons.star,
-      color: Colors.amber,
-      size: 20,
+    return Container(
+      height: 120,
+      child: Column(
+        children: [
+          ListTile(
+            leading: Icon(Icons.photo_camera),
+            title: Text('Take Photo'),
+            onTap: takePhoto,
+          ),
+          ListTile(
+            leading: Icon(Icons.photo_library),
+            title: Text('Open Gallery'),
+            onTap: openGallery,
+          ),
+        ],
+      ),
     );
   }
 }
