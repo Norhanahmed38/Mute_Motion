@@ -1,9 +1,14 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:intl/intl.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,6 +29,7 @@ class TextToSignBody extends StatefulWidget {
 
 class _TextToSignBodyState extends State<TextToSignBody> {
   String ip = '';
+   http.Client client = http.Client();
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
@@ -34,19 +40,43 @@ class _TextToSignBodyState extends State<TextToSignBody> {
   var formKey = GlobalKey<FormState>();
   late IO.Socket socket;
   String Time = '';
+  Timer? _timer;
+  List<String> receivedMessages = [];
+   void _fetchLabels() async {
+    try {
+      final response = await client.get(Uri.parse('http://$ip:5000/test_labels'));
+      if (response.statusCode == 200) {
+        final labels = json.decode(response.body) as Map<String, dynamic>;
+        final String newMessage = labels['gesture'] ?? 'None';
+        if (newMessage != 'None' && (receivedMessages.isEmpty || receivedMessages.last != newMessage)) {
+          setState(() {
+             receivedMessages.add(newMessage);
+             var messageJson = {"message": newMessage, "sentByMe": '2'};
+          chatController.chatMessages.add(Message.fromJson(messageJson));
+           
+          });
+        }
+      } else {
+        print('Failed to fetch labels: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching labels: $e');
+    }
+  }
   @override
   void initState() {
     // TODO: implement initState
-    socket = IO.io(
+    /* socket = IO.io(
         'https://mutemotion.onrender.com/',
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .disableAutoConnect()
             .build());
     socket.connect();
-    setUpSocketListener();
+    setUpSocketListener(); */
     super.initState();
     _initSpeech();
+     _timer = Timer.periodic(Duration(seconds: 5), (Timer t) => _fetchLabels());
   }
 
   void _initSpeech() async {
@@ -67,6 +97,13 @@ class _TextToSignBodyState extends State<TextToSignBody> {
     setState(() {
       sendMessage(record!);
     });
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+     _timer?.cancel();
+    client.close();
   }
 
   /// This is the callback that the SpeechToText plugin calls when
@@ -125,7 +162,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                 Time = formattedTime;
                 print(formattedTime);
                 return MessageItem(
-                  sentByMe: currentItem.sentByMe == socket.id,
+                  sentByMe: currentItem.sentByMe == "1",
                   message: currentItem.message,
                   time: Time,
                 );
@@ -171,13 +208,14 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                         controller: ipController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'Enter IP address',
+                          hintText: 'Enter IP address to connect to the server',
                           suffixIcon: IconButton(
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   ip = ipController.text;
+                                   print('asasdasdas');
                                   print(ip);
-                                  ipController.text = "";
+                                 // ipController.text = "";
                                 }
                               },
                               icon: const FaIcon(
@@ -199,7 +237,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -248,18 +286,35 @@ class _TextToSignBodyState extends State<TextToSignBody> {
     );
   }
 
-  void sendMessage(String text) {
+  void sendMessage(String text) async {
     print('dxzxzxzx');
-    var messageJson = {"message": text, "sentByMe": socket.id};
-    socket.emit('message', messageJson);
-    chatController.chatMessages.add(Message.fromJson(messageJson));
+   // var messageJson = {"message": text, "sentByMe": socket.id};
+   // socket.emit('message', messageJson);
+   // chatController.chatMessages.add(Message.fromJson(messageJson));
+    try {
+      final response = await client.post(
+        Uri.parse('http://$ip:5000/send'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'message': text}),
+      );
+      if (response.statusCode != 200) {
+        print('Failed to send message: ${response.statusCode}');
+      } else {
+        setState(() {
+          var messageJson = {"message": text, "sentByMe": "1"};
+          chatController.chatMessages.add(Message.fromJson(messageJson));
+        });
+      }
+    } catch (e) {
+      print('Error sending message: $e');
+    }
     print('sentttt');
   }
 
-  void setUpSocketListener() {
+  /* void setUpSocketListener() {
     socket.on('message-receive', (data) {
       print(data);
       chatController.chatMessages.add(Message.fromJson(data));
     });
-  }
+  } */
 }
