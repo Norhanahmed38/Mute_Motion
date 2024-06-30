@@ -26,10 +26,6 @@ class _WebBodyState extends State<WebBody> {
           'Learn Sign Language',
           style: GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
         ),
-        /* leading: const Icon(
-          Icons.menu,
-          color: Colors.white,
-        ), */
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -51,7 +47,6 @@ class _WebBodyState extends State<WebBody> {
                   image: AssetImage(
                     "assets/images/SPLASH1.jpg",
                   ),
-                  // borderRadius: BorderRadius.circular(10.0),
                 ),
                 const SizedBox(
                   height: 60,

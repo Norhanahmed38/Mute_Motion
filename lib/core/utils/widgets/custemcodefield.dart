@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class custemcodefield extends StatelessWidget {
   custemcodefield({
@@ -10,10 +11,10 @@ class custemcodefield extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //color: Color(0xD9D9D9),
-      width: 80, height: 78,
+      width: 80.w, height: 78.h,
       decoration: BoxDecoration(
           color: Color(0xD9D9D9),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
           boxShadow: const [
             BoxShadow(color: Colors.black12, blurRadius: 1, spreadRadius: 2)
           ]),

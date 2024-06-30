@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
-import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/features/aboutUs/presentation/views/aboutUs_screen_view.dart';
-import 'package:mute_motion_passenger/features/history/presentation/views/history_screen_view.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/pages.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
-import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/headwidget.dart';
 import 'package:mute_motion_passenger/features/web%20page/webpage_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../contactUs/presentation/views/contact_us_screenView.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -30,7 +26,7 @@ class NavDrawer extends StatelessWidget {
               darkGreen: kPrimaryColor,
             ),
             SizedBox(
-              height: 45,
+              height: 45.h,
             ),
             Container(
               child: Column(
@@ -42,13 +38,7 @@ class NavDrawer extends StatelessWidget {
                       onpressed: () {
                         navigateTo(context, MapScreen());
                       }),
-                  Divider(
-                    indent: 20,
-                    endIndent: 30,
-                    color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
-                  ),
+                  CustomDivider(),
                   pages(
                       darkGreen: kPrimaryColor,
                       pagename: 'Interpreter Mode',
@@ -56,14 +46,7 @@ class NavDrawer extends StatelessWidget {
                       onpressed: () {
                         navigateTo(context, TranslatorView());
                       }),
-
-                  Divider(
-                    indent: 20,
-                    endIndent: 30,
-                    color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
-                  ),
+                  CustomDivider(),
                   pages(
                       darkGreen: kPrimaryColor,
                       pagename: 'Learn Sign Language',
@@ -71,13 +54,7 @@ class NavDrawer extends StatelessWidget {
                       onpressed: () async {
                         navigateTo(context, WebPageScreen());
                       }),
-                  Divider(
-                    indent: 20,
-                    endIndent: 30,
-                    color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
-                  ),
+                  CustomDivider(),
                   pages(
                       darkGreen: kPrimaryColor,
                       pagename: 'About us',
@@ -85,13 +62,7 @@ class NavDrawer extends StatelessWidget {
                       onpressed: () {
                         navigateTo(context, AboutUsScreenView());
                       }),
-                  Divider(
-                    indent: 20,
-                    endIndent: 30,
-                    color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
-                  ),
+                  CustomDivider(),
                   pages(
                       darkGreen: kPrimaryColor,
                       pagename: 'Contact us',
@@ -99,14 +70,7 @@ class NavDrawer extends StatelessWidget {
                       onpressed: () {
                         navigateTo(context, ContactUsScreenView());
                       }),
-                  Divider(
-                    indent: 20,
-                    endIndent: 30,
-                    color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
-                  ),
-
+                  CustomDivider(),
                   pages(
                       darkGreen: kPrimaryColor,
                       pagename: 'Logout',
@@ -123,14 +87,29 @@ class NavDrawer extends StatelessWidget {
                           (Route route) => false,
                         );
                       }),
-
-                  // navigateTo(context, ContactUsScreenView());
                 ],
               ),
             ),
           ]),
         ),
       ),
+    );
+  }
+}
+
+class CustomDivider extends StatelessWidget {
+  const CustomDivider({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      indent: 20.w,
+      endIndent: 30.w,
+      color: kPrimaryColor,
+      thickness: 1,
+      height: 2.h,
     );
   }
 }

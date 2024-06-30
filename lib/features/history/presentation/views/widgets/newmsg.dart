@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mute_motion_passenger/features/history/presentation/views/widgets/custommtext.dart';
 
 class newmsg extends StatelessWidget {
   newmsg({
@@ -25,22 +27,21 @@ class newmsg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: EdgeInsets.only(top: 8.h),
           child: Container(
             decoration: BoxDecoration(
               color: kPrimaryColor,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.r),
             ),
-            height: 44,
-            width: 320,
+            height: 44.h,
+            width: 300.w,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(children: [
                 SizedBox(
-                  width: 70,
+                  width: 70.w,
                 ),
                 Text(
                   req,
@@ -48,7 +49,7 @@ class newmsg extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Comfortaa',
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -57,182 +58,122 @@ class newmsg extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 5),
+          padding: EdgeInsets.only(left: 5.w),
           child: Container(
-            margin: EdgeInsets.only(right: 22, left: 15),
+            margin: EdgeInsets.only(right: 22.w, left: 15.w),
             padding: EdgeInsets.all(9),
-            height: 220,
-            width: 320,
+            height: 203.h,
+            width: 300.w,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.r),
               border: Border.all(color: kPrimaryColor),
             ),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Text(
-                      'Driver:',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    custommtext(
+                      text: 'Driver:',
+                      fontWeight: FontWeight.w600,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
-                    Text(
-                      driverName,
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    custommtext(
+                      text: driverName,
+                      fontWeight: FontWeight.w400,
                     ),
                     SizedBox(
-                      width: 65,
+                      width: 65.w,
                     ),
                     Icon(
                       Icons.star,
                       color: Colors.amber,
                     ),
                     SizedBox(
-                      width: 5,
+                      width: 5.w,
                     ),
-                    Text(
-                      rate,
-                      style: TextStyle(
-                        fontFamily: ' Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    custommtext(
+                      text: rate,
+                      fontWeight: FontWeight.w400,
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 10.h,
                 ),
                 Row(
                   children: [
-                    Text(
-                      'From:',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    custommtext(text: 'From:', fontWeight: FontWeight.w600),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
-                    Text(
-                      psg_loc,
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+                    custommtext(text: psg_loc, fontWeight: FontWeight.w400),
                   ],
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 10.h,
                 ),
                 Row(
                   children: [
-                    Text(
-                      'To:',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    custommtext(
+                      text: 'To:',
+                      fontWeight: FontWeight.w600,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
-                    Text(
-                      destination,
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    custommtext(
+                      text: destination,
+                      fontWeight: FontWeight.w400,
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 10.h,
                 ),
                 Row(
                   children: [
-                    Text(
-                      'Service Type:',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    custommtext(
+                      text: 'Service:',
+                      fontWeight: FontWeight.w600,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
-                    Text(
-                      service,
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    custommtext(
+                      text: service,
+                      fontWeight: FontWeight.w400,
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 15.h,
                 ),
                 Divider(
-                  indent: 10,
-                  endIndent: 10,
+                  indent: 10.w,
+                  endIndent: 10.w,
                   color: kPrimaryColor,
-                  thickness: 1,
-                  height: 2,
+                  thickness: 1.h,
+                  height: 2.h,
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 12.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Cost:',
-                      style: TextStyle(
-                        color: kPrimaryColor,
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    custommtext(
+                      text: 'Cost:',
+                      fontWeight: FontWeight.w600,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
-                    Text(
-                      'EGP $Cost',
-                      style: TextStyle(
-                        color: Colors.green[700],
-                        fontFamily: 'Comfortaa',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    custommtext(
+                      text: 'EGP $Cost',
+                      fontWeight: FontWeight.w400,
                     ),
                   ],
                 ),

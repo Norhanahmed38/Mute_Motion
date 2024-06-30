@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class pages extends StatelessWidget {
   const pages({
@@ -18,21 +19,21 @@ class pages extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icone,
-        size: 25,
+        size: 25.sp,
         color: darkGreen,
       ),
       trailing: IconButton(
         onPressed: onpressed,
         icon: Icon(
           Icons.play_arrow_rounded,
-          size: 20,
+          size: 20.sp,
           color: darkGreen,
         ),
       ),
       title: Text(
         pagename,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: 15.sp,
           color: darkGreen,
         ),
       ),

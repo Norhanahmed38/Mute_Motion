@@ -26,7 +26,7 @@ class _ContactUsScreenBodyState extends State<ContactUsScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize ScreenUtil
+
     ScreenUtil.init(context, designSize: const Size(360, 690));
 
     return ModalProgressHUD(

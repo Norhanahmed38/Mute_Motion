@@ -5,10 +5,7 @@ import 'package:mute_motion_passenger/features/history/presentation/views/widget
 import 'package:mute_motion_passenger/features/history/presentation/views/widgets/model/order.dart';
 import 'package:mute_motion_passenger/features/history/presentation/views/widgets/newmsg.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
-
-import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HistoryScreenBody extends StatefulWidget {
   @override
@@ -26,6 +23,7 @@ class _HistoryScreenBodyState extends State<HistoryScreenBody> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(360, 690));
     return Scaffold(
       drawer: NavDrawerView(),
       backgroundColor: Color(0xff003248),
@@ -33,8 +31,8 @@ class _HistoryScreenBodyState extends State<HistoryScreenBody> {
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'History',
-          style:
-              TextStyle(fontSize: 24, fontFamily: 'Lato', color: Colors.white),
+          style: TextStyle(
+              fontSize: 24.sp, fontFamily: 'Lato', color: Colors.white),
         ),
         elevation: 0,
         centerTitle: true,
@@ -43,12 +41,12 @@ class _HistoryScreenBodyState extends State<HistoryScreenBody> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
-        padding: const EdgeInsets.only(top: 20),
-        decoration: const BoxDecoration(
+        padding: EdgeInsets.only(top: 20.h),
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20.r),
+            topRight: Radius.circular(20.r),
           ),
         ),
         child: FutureBuilder<List<CompletedOrder>>(
@@ -66,17 +64,17 @@ class _HistoryScreenBodyState extends State<HistoryScreenBody> {
                     Text(
                       'No Requests yet',
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontFamily: 'Comfortaa',
                           color: kPrimaryColor),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     Text(
                       'Start your first ride & request now!',
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontFamily: 'Comfortaa',
                           color: kPrimaryColor),
                     ),
@@ -99,7 +97,7 @@ class _HistoryScreenBodyState extends State<HistoryScreenBody> {
                         service: order.serviceType,
                         Cost: order.cost,
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 10.h),
                     ],
                   );
                 },
