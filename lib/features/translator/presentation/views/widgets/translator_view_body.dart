@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../navdrawer/presentation/views/nav_drawer_view.dart';
 
 class TranslatorViewBody extends StatelessWidget {
@@ -19,34 +19,30 @@ class TranslatorViewBody extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'Interpreter Mode',
-          style: GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
+          style: GoogleFonts.comfortaa(fontSize: 20.sp, color: Colors.white),
         ),
-        /* leading: const Icon(
-          Icons.menu,
-          color: Colors.white,
-        ), */
         elevation: 0,
         centerTitle: true,
         backgroundColor: Colors.transparent,
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          padding: const EdgeInsets.only(
-            top: 20,
-            left: 15,
-          ),
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              )),
-          child: Padding(
-            padding:
-                const EdgeInsets.only(right: 20, top: 40, bottom: 20, left: 10),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        padding: EdgeInsets.only(
+          top: 20.h,
+          left: 15.w,
+        ),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.r),
+              topRight: Radius.circular(20.r),
+            )),
+        child: Padding(
+          padding:
+              EdgeInsets.only(right: 20.w, top: 30.h, bottom: 20.h, left: 10.w),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             child: Column(
               children: [
                 Image.asset('assets/images/translator.png'),
@@ -54,30 +50,30 @@ class TranslatorViewBody extends StatelessWidget {
                   'Sign Language Support',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.comfortaa(
-                      fontSize: 26,
+                      fontSize: 26.sp,
                       fontWeight: FontWeight.bold,
                       color: kPrimaryColor),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   'Just a heads up! Our driver communicates in sign language. We’re translating their messages for you ',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.comfortaa(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: kPrimaryColor,
                   ),
                 ),
-                const SizedBox(
-                  height: 100,
+                SizedBox(
+                  height: 50.h,
                 ),
                 Container(
                   width: double.infinity,
-                  height: 58,
+                  height: 60.h,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(15.r)),
                   child: MaterialButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -86,11 +82,11 @@ class TranslatorViewBody extends StatelessWidget {
                       child: Text(
                         "Start Chatting",
                         style: GoogleFonts.comfortaa(
-                            fontSize: 20, color: Colors.white),
+                            fontSize: 20.sp, color: Colors.white),
                       )),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
               ],
             ),

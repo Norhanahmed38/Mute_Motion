@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/styles.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/customtextfield.dart';
-
 import 'package:mute_motion_passenger/features/registration/data/repos/create_user.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/OTP_screen_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/add_card_view.dart';
@@ -14,8 +12,6 @@ import 'package:mute_motion_passenger/features/registration/presentation/views/l
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/add_card_view_body.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/custom_drop_down.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateProfileScreenBody extends StatefulWidget {
@@ -43,6 +39,10 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
   bool showVerifPassword = true;
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: Size(360, 680),
+    );
     return ModalProgressHUD(
       inAsyncCall: _isLoading,
       child: Scaffold(
@@ -50,7 +50,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
           elevation: 0,
           backgroundColor: Colors.white,
           leading: IconButton(
-              iconSize: 25,
+              iconSize: 25.sp,
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => LoginScreenView()));
@@ -65,7 +65,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
             style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
                 color: kPrimaryColor,
-                fontSize: 20),
+                fontSize: 20.sp),
           ),
         ),
         body: Padding(
@@ -78,8 +78,8 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: 10.h,
                       ),
                       Text(
                         'Welcome,',
@@ -89,13 +89,13 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                       Text(
                         'Let us know some information about you!!',
                         style: Styles.textStyle15
-                            .copyWith(fontSize: 12, color: kPrimaryColor),
+                            .copyWith(fontSize: 12.sp, color: kPrimaryColor),
                       ),
-                      const SizedBox(
-                        height: 45,
+                      SizedBox(
+                        height: 45.h,
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.85,
+                        height: MediaQuery.of(context).size.height * 0.9,
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: kPrimaryColor,
@@ -107,14 +107,13 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const SizedBox(height: 70),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 60.h),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 45,
+                                  height: 45.h,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     color: Colors.white,
                                   ),
                                   child: CustomTextField(
@@ -127,9 +126,9 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
+                                  height: 50.h,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     color: Colors.white,
                                   ),
                                   child: CustomTextField(
@@ -142,9 +141,9 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
+                                  height: 50.h,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     color: Colors.white,
                                   ),
                                   child: TextFormField(
@@ -165,7 +164,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                       hintText: 'Email',
                                       hintStyle: GoogleFonts.comfortaa(
                                         color: Colors.black.withOpacity(0.65),
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                       ),
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -184,9 +183,9 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
+                                  height: 50.h,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     color: Colors.white,
                                   ),
                                   child: TextFormField(
@@ -202,7 +201,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                       hintText: 'Phone',
                                       hintStyle: GoogleFonts.comfortaa(
                                         color: Colors.black.withOpacity(0.65),
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                       ),
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -221,9 +220,9 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
+                                  height: 50.h,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     color: Colors.white,
                                   ),
                                   child: TextFormField(
@@ -252,7 +251,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                       hintText: 'password',
                                       hintStyle: GoogleFonts.comfortaa(
                                         color: Colors.black.withOpacity(0.65),
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                       ),
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -271,9 +270,9 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
+                                  height: 50.h,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     color: Colors.white,
                                   ),
                                   child: TextFormField(
@@ -303,7 +302,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                       hintText: 'Verify your password',
                                       hintStyle: GoogleFonts.comfortaa(
                                         color: Colors.black.withOpacity(0.65),
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                       ),
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -323,9 +322,9 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 50,
+                                  height: 50.h,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                     color: Colors.white,
                                   ),
                                   child: Row(
@@ -345,10 +344,6 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                                       IconButton(
                                           onPressed: () {
                                             buildShowModalBottomSheet(context);
-                                            // Navigator.of(context).push(
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             AddCardView()));
                                           },
                                           icon: Icon(Icons.arrow_right)),
                                     ],
@@ -359,17 +354,17 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
+                      SizedBox(
+                        height: 30.h,
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 22, left: 10),
+                        margin: EdgeInsets.only(right: 22.w, left: 10.w),
                         //padding: EdgeInsets.all(8),
                         width: double.infinity,
-                        height: 58,
+                        height: 58.h,
                         decoration: BoxDecoration(
                             color: const Color(0xff003248),
-                            borderRadius: BorderRadius.circular(15)),
+                            borderRadius: BorderRadius.circular(15.r)),
                         child: MaterialButton(
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
@@ -404,12 +399,12 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                     ],
                   ),
                   Positioned(
-                    bottom: 705,
-                    left: 130,
-                    child: const CircleAvatar(
+                    bottom: 645.h,
+                    left: 130.w,
+                    child: CircleAvatar(
                       backgroundColor: Colors.white,
                       backgroundImage: AssetImage('assets/images/person.png'),
-                      radius: 55,
+                      radius: 50.r,
                     ),
                   ),
                 ],

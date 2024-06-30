@@ -10,6 +10,7 @@ import 'package:mute_motion_passenger/features/profile/presentation/views/widget
 import 'package:mute_motion_passenger/features/profile/presentation/views/widgets/info.dart';
 import 'package:mute_motion_passenger/features/profile/service/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileScreenViewBody extends StatefulWidget {
   ProfileScreenViewBody({Key? key}) : super(key: key);
@@ -93,6 +94,10 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: Size(360, 780),
+    );
     return Scaffold(
       drawer: NavDrawerView(),
       backgroundColor: Color(0xff003248),
@@ -108,35 +113,35 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
               alignment: Alignment.topCenter,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 60),
+                  margin: EdgeInsets.only(top: 60.h),
                   height: MediaQuery.of(context).size.height,
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
                     ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 5),
+                      SizedBox(height: 55.h),
                       Stack(
                         children: [
                           Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: kPrimaryColor,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                             ),
-                            width: 320,
-                            height: 75,
+                            width: 320.w,
+                            height: 75.h,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 16, left: 25),
+                            padding: EdgeInsets.only(top: 16.h, left: 25.w),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -149,7 +154,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                                         '100',
                                         style: TextStyle(
                                           fontFamily: 'Comfortaa',
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           fontWeight: FontWeight.w800,
                                           color: Colors.white,
                                         ),
@@ -158,14 +163,14 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                                         ' Count of Req.',
                                         style: TextStyle(
                                           fontFamily: 'Comfortaa',
-                                          fontSize: 15,
+                                          fontSize: 15.sp,
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(width: 40),
+                                  SizedBox(width: 50.w),
                                   VerticalDivider(
                                     color: Colors.white,
                                     thickness: 2,
@@ -179,7 +184,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                                         ' EGP 2500',
                                         style: TextStyle(
                                           fontFamily: 'Comfortaa',
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           fontWeight: FontWeight.w800,
                                           color: Colors.white,
                                         ),
@@ -188,7 +193,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                                         ' Cost of Rides',
                                         style: TextStyle(
                                           fontFamily: 'Comfortaa',
-                                          fontSize: 15,
+                                          fontSize: 15.sp,
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
                                         ),
@@ -201,7 +206,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       Info(title: 'Name', subTitle: _userData.fullName),
                       Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
@@ -221,7 +226,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                   alignment: AlignmentDirectional.bottomEnd,
                   children: [
                     CircleAvatar(
-                      radius: 70,
+                      radius: 70.r,
                       backgroundColor: Colors.white,
                       backgroundImage: _selectedImageBytes != null
                           ? MemoryImage(_selectedImageBytes!)
@@ -232,7 +237,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                       alignment: AlignmentDirectional.center,
                       children: [
                         CircleAvatar(
-                          radius: 15,
+                          radius: 15.r,
                           backgroundColor: kPrimaryColor,
                         ),
                         IconButton(
@@ -240,8 +245,8 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                             showModalBottomSheet(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20.0),
-                                  topRight: Radius.circular(20.0),
+                                  topLeft: Radius.circular(20.r),
+                                  topRight: Radius.circular(20.r),
                                 ),
                               ),
                               isScrollControlled: true,
@@ -255,7 +260,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                           icon: Icon(
                             Icons.camera,
                             color: Colors.white,
-                            size: 24,
+                            size: 24.sp,
                           ),
                         ),
                       ],
@@ -280,7 +285,7 @@ class BottomSheetContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
+      height: 120.h,
       child: Column(
         children: [
           ListTile(

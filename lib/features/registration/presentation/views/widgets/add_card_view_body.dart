@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddCardViewBody extends StatefulWidget {
   const AddCardViewBody({super.key});
@@ -21,33 +22,9 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return
-        // Scaffold(
-        // appBar: AppBar(
-        //   leading: IconButton(
-        //       icon: const Icon(
-        //         Icons.arrow_back_ios,
-        //         color: kPrimaryColor,
-        //       ),
-        //       onPressed: () {
-        //         Navigator.of(context).push(MaterialPageRoute(
-        //             builder: (context) => CreateProfileScreenView()));
-        //       }),
-        //   title: const Text(
-        //     'Setup Credit Card',
-        //     style: TextStyle(
-        //       fontSize: 21,
-        //       fontFamily: 'Lato',
-        //       color: kPrimaryColor,
-        //     ),
-        //   ),
-        //   centerTitle: true,
-        //   backgroundColor: Colors.white,
-        // ),
-        // body:
-        SizedBox(
-      height: 466,
-      width: 430,
+    return SizedBox(
+      height: 440.h,
+      width: 430.w,
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: Form(
@@ -58,34 +35,34 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    const Text(
+                    Text(
                       'Card Types Accepted',
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 15.sp,
                           fontFamily: 'Comfortaa',
                           color: Color(0xff003248)),
                     ),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
                     Image.asset('assets/images/visa.png'),
                     SizedBox(
-                      width: 10,
+                      width: 10.w,
                     ),
                     SizedBox(
-                        height: 36,
-                        width: 40,
+                        height: 36.h,
+                        width: 40.w,
                         child: Image.asset('assets/images/mastercard.png')),
                   ],
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               Text(
                 'Card Number',
                 style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontFamily: 'Comfortaa',
                     color: kPrimaryColor),
               ),
@@ -95,7 +72,7 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
                   hintText: '2222 3333 4444 5555',
                   hintStyle: GoogleFonts.comfortaa(
                     color: Colors.black.withOpacity(0.65),
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ),
                 controller: cardNumberController,
@@ -107,7 +84,7 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
                 },
               ),
               SizedBox(
-                height: 30,
+                height: 30.h,
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -124,13 +101,13 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
                               color: kPrimaryColor),
                         ),
                         Container(
-                          width: 150, // Set a finite width
+                          width: 150.w, // Set a finite width
                           child: TextFormField(
                             decoration: InputDecoration(
                               hintText: '2 / 2025',
                               hintStyle: GoogleFonts.comfortaa(
                                 color: Colors.black.withOpacity(0.65),
-                                fontSize: 12,
+                                fontSize: 12.sp,
                               ),
                             ),
                             controller: expiryDateController,
@@ -145,28 +122,28 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
                       ],
                     ),
                     SizedBox(
-                      width: 30,
+                      width: 30.w,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'CVV',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontFamily: 'Comfortaa',
                             color: kPrimaryColor,
                           ),
                         ),
                         Container(
-                          width: 150, // Set a finite width
+                          width: 150.w, // Set a finite width
                           child: TextFormField(
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               hintText: '123',
                               hintStyle: GoogleFonts.comfortaa(
                                 color: Colors.black.withOpacity(0.65),
-                                fontSize: 12,
+                                fontSize: 12.sp,
                               ),
                             ),
                             controller: cvvController,
@@ -183,23 +160,23 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 30.h,
               ),
-              const Text(
+              Text(
                 'We will securely store this card for a faster payment experience',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontFamily: 'Comfortaa',
                   color: kPrimaryColor,
                 ),
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: 30.h,
               ),
               Container(
                 width: double.infinity,
-                height: 58,
+                height: 58.h,
                 decoration: BoxDecoration(
                     color: kPrimaryColor,
                     borderRadius: BorderRadius.circular(15)),
@@ -211,7 +188,7 @@ class _AddCardViewBodyState extends State<AddCardViewBody> {
                     child: Text(
                       "Add Card",
                       style: GoogleFonts.comfortaa(
-                          fontSize: 20, color: Colors.white),
+                          fontSize: 20.sp, color: Colors.white),
                     )),
               ),
             ],

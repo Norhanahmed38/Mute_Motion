@@ -5,12 +5,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
-import 'package:mute_motion_passenger/core/utils/widgets/custom_button.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../../core/utils/widgets/custemOTPbar.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/widgets/custemcodefield.dart';
 import '../../../data/repos/verification.dart';
 
@@ -58,7 +55,7 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
             textAlign: TextAlign.center,
             style: GoogleFonts.lato(
               color: kPrimaryColor,
-              fontSize: 22,
+              fontSize: 22.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -71,16 +68,16 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 56,
+                  SizedBox(
+                    height: 56.h,
                   ),
                   Text(
                     "Please enter the 4-digit code sent via email to\n ${getUserEmail()}",
                     style: GoogleFonts.comfortaa(
-                        color: kPrimaryColor, fontSize: 15),
+                        color: kPrimaryColor, fontSize: 15.sp),
                   ),
-                  const SizedBox(
-                    height: 19,
+                  SizedBox(
+                    height: 19.h,
                   ),
                   TextButton(
                     onPressed: () {
@@ -92,12 +89,12 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
                       "Edit your Email",
                       style: GoogleFonts.comfortaa(
                           color: kPrimaryColor,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const SizedBox(
-                    height: 71,
+                  SizedBox(
+                    height: 71.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -116,11 +113,11 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 79,
+                  SizedBox(
+                    height: 79.h,
                   ),
                   Container(
-                    height: 58,
+                    height: 58.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -149,13 +146,13 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
                         style: GoogleFonts.comfortaa(
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: 30.h,
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -164,7 +161,7 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
                       children: [
                         Text("Haven’t received OTP code? ",
                             style: GoogleFonts.comfortaa(
-                              fontSize: 12,
+                              fontSize: 12.sp,
                             )),
                         TextButton(
                             onPressed: () {
@@ -174,7 +171,7 @@ class _OTPScreenBodyState extends State<OTPScreenBody> {
                               "Resend OTP",
                               style: GoogleFonts.comfortaa(
                                   color: kPrimaryColor,
-                                  fontSize: 12,
+                                  fontSize: 12.sp,
                                   fontWeight: FontWeight.bold),
                             )),
                       ],

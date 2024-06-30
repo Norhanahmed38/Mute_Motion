@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
@@ -8,8 +7,8 @@ import 'package:mute_motion_passenger/features/requests/presentation/custonservi
 import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
-
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/stack.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RequestsBody extends StatefulWidget {
   const RequestsBody({super.key});
@@ -28,7 +27,6 @@ class _RequestsBodyState extends State<RequestsBody> {
   static var formKey = GlobalKey<FormState>();
   var locationController = TextEditingController();
   var destinationController = TextEditingController();
-  //var timeController = TextEditingController();
   var dateAndTimeController = TextEditingController();
   var costController = TextEditingController();
   var paymentController = TextEditingController();
@@ -37,6 +35,10 @@ class _RequestsBodyState extends State<RequestsBody> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: Size(370, 690),
+    );
     final format = DateFormat("yyyy-MM-dd HH:mma");
     bool _isLoading = false;
 
@@ -58,7 +60,7 @@ class _RequestsBodyState extends State<RequestsBody> {
           title: Text(
             'Requests',
             style: TextStyle(
-                fontSize: 24, fontFamily: 'Lato', color: Colors.white),
+                fontSize: 24.sp, fontFamily: 'Lato', color: Colors.white),
           ),
           elevation: 0,
           centerTitle: true,
@@ -67,10 +69,10 @@ class _RequestsBodyState extends State<RequestsBody> {
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
-          padding: const EdgeInsets.only(
-            top: 20,
-            left: 15,
-            right: 15,
+          padding: EdgeInsets.only(
+            top: 20.h,
+            left: 15.w,
+            right: 15.w,
           ),
           decoration: const BoxDecoration(
               color: Colors.white,
@@ -86,13 +88,15 @@ class _RequestsBodyState extends State<RequestsBody> {
                   Text(
                     'Choose which service you want',
                     style: TextStyle(
-                        fontSize: 20, fontFamily: 'Lato', color: kPrimaryColor),
+                        fontSize: 20.sp,
+                        fontFamily: 'Lato',
+                        color: kPrimaryColor),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 20.h,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 10.w, right: 10.w),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -102,19 +106,19 @@ class _RequestsBodyState extends State<RequestsBody> {
                             child: stack_model(
                                 color: Color(0xff316F89),
                                 top: -20,
-                                hight: 55,
+                                hight: 55.h,
                                 image: 'assets/images/rafiki.png',
                                 type: 'Transport',
                                 widdget: RequestsScreenView()),
                           ),
-                          const SizedBox(
-                            width: 10,
+                          SizedBox(
+                            width: 10.w,
                           ),
                           SizedBox(
                             child: stack_model(
                                 color: kPrimaryColor,
                                 top: -25,
-                                hight: 50,
+                                hight: 50.h,
                                 image: 'assets/images/cuate.png',
                                 type: 'City to city',
                                 widdget: RequestsScreenVieww()),
@@ -124,17 +128,17 @@ class _RequestsBodyState extends State<RequestsBody> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   Divider(
-                    indent: 20,
-                    endIndent: 20,
+                    indent: 20.w,
+                    endIndent: 20.w,
                     color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
+                    thickness: 1.h,
+                    height: 2.h,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   TextFormField(
                     controller: locationController,
@@ -149,14 +153,14 @@ class _RequestsBodyState extends State<RequestsBody> {
                         color: kPrimaryColor,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(15.r),
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
                       hintText: 'location',
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   TextFormField(
                     controller: destinationController,
@@ -171,14 +175,14 @@ class _RequestsBodyState extends State<RequestsBody> {
                         color: kPrimaryColor,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(15.r),
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
                       hintText: 'Destination',
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   TextFormField(
                     controller: costController,
@@ -190,14 +194,14 @@ class _RequestsBodyState extends State<RequestsBody> {
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(15.r),
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
                       hintText: 'Expected Cost',
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   TextFormField(
                     controller: passengersController,
@@ -209,14 +213,14 @@ class _RequestsBodyState extends State<RequestsBody> {
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(15.r),
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
                       hintText: 'No of Passenger',
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   TextFormField(
                     controller: bagsController,
@@ -228,14 +232,14 @@ class _RequestsBodyState extends State<RequestsBody> {
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(15.r),
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
                       hintText: 'No of bags',
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   CustomDropDownn(
                     items: ["VISA", "CASH"],
@@ -246,7 +250,7 @@ class _RequestsBodyState extends State<RequestsBody> {
                     },
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   CustomServiceTypeDropDown(
                     items: ['economic', 'comfort', 'luxury'],
@@ -257,16 +261,16 @@ class _RequestsBodyState extends State<RequestsBody> {
                     },
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 20.h,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
+                    padding: EdgeInsets.only(bottom: 10.h),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20.r),
                         ),
-                        minimumSize: const Size(350, 60),
+                        minimumSize: Size(350.w, 60.h),
                         backgroundColor: kPrimaryColor,
                       ),
                       onPressed: () async {
@@ -290,13 +294,13 @@ class _RequestsBodyState extends State<RequestsBody> {
                       child: btnPressed == false
                           ? Text(
                               'Find Driver',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 20.sp, color: Colors.white),
                             )
                           : Text(
                               'Waiting For A Driver',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 20.sp, color: Colors.white),
                             ),
                     ),
                   ),
@@ -328,14 +332,13 @@ void _showErrorDialog(
       return AlertDialog(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(20.0.r),
         ),
         content: Text(
           message,
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
-          // ),
+              fontSize: 20.sp, fontFamily: 'Comfortaa', color: kPrimaryColor),
         ),
         actions: [
           TextButton(
@@ -349,23 +352,21 @@ void _showErrorDialog(
               cost.clear();
               time.clear();
               Navigator.of(context).pop();
-              // navigateTo(context, RequestsBody());
-              // Close the dialog
             },
             child: Container(
-              width: 120,
-              height: 45,
+              width: 120.w,
+              height: 45.h,
               decoration: BoxDecoration(
                 color: kPrimaryColor,
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(20.0.r),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(top: 5.h),
                 child: Text(
                   'Try Again',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontFamily: 'Comfortaa',
                       color: Colors.white),
                 ),

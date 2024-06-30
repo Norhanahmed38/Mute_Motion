@@ -1,5 +1,3 @@
-import 'package:get/get_connect/http/src/response/response.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
@@ -15,6 +13,7 @@ import 'package:mute_motion_passenger/features/requests/presentation/views/widge
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/stack.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Requests extends StatefulWidget {
   const Requests({super.key});
@@ -40,6 +39,10 @@ class _RequestsState extends State<Requests> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: Size(370, 690),
+    );
     int currentIndex = 0;
 
     bool _isLoading = false;
@@ -54,7 +57,7 @@ class _RequestsState extends State<Requests> {
           title: Text(
             'Requests',
             style: TextStyle(
-                fontSize: 24, fontFamily: 'Lato', color: Colors.white),
+                fontSize: 24.sp, fontFamily: 'Lato', color: Colors.white),
           ),
           elevation: 0,
           centerTitle: true,
@@ -63,10 +66,10 @@ class _RequestsState extends State<Requests> {
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
-          padding: const EdgeInsets.only(
-            top: 20,
-            left: 15,
-            right: 15,
+          padding: EdgeInsets.only(
+            top: 20.h,
+            left: 15.w,
+            right: 15.w,
           ),
           decoration: const BoxDecoration(
               color: Colors.white,
@@ -82,13 +85,15 @@ class _RequestsState extends State<Requests> {
                   Text(
                     'Choose which service you want',
                     style: TextStyle(
-                        fontSize: 20, fontFamily: 'Lato', color: kPrimaryColor),
+                        fontSize: 20.sp,
+                        fontFamily: 'Lato',
+                        color: kPrimaryColor),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 20.h,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 10.w, right: 10.w),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -97,20 +102,20 @@ class _RequestsState extends State<Requests> {
                           SizedBox(
                             child: stack_model(
                                 color: kPrimaryColor,
-                                top: -20,
-                                hight: 55,
+                                top: -20.h,
+                                hight: 55.h,
                                 image: 'assets/images/rafiki.png',
                                 type: 'Transport',
                                 widdget: RequestsScreenView()),
                           ),
-                          const SizedBox(
-                            width: 10,
+                          SizedBox(
+                            width: 10.w,
                           ),
                           SizedBox(
                             child: stack_model(
                                 color: Color(0xff316F89),
-                                top: -25,
-                                hight: 50,
+                                top: -25.h,
+                                hight: 50.h,
                                 image: 'assets/images/cuate.png',
                                 type: 'City to city',
                                 widdget: RequestsScreenVieww()),
@@ -120,17 +125,17 @@ class _RequestsState extends State<Requests> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   Divider(
-                    indent: 20,
-                    endIndent: 20,
+                    indent: 20.w,
+                    endIndent: 20.w,
                     color: kPrimaryColor,
-                    thickness: 1,
-                    height: 2,
+                    thickness: 1.h,
+                    height: 2.h,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   TextFormField(
                     controller: locationController,
@@ -148,14 +153,15 @@ class _RequestsState extends State<Requests> {
                         color: kPrimaryColor,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(
+                            15.r), // استخدام ScreenUtil هنا
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
                       hintText: 'location',
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h, // استخدام ScreenUtil هنا
                   ),
                   TextFormField(
                     controller: destinationnController,
@@ -173,14 +179,15 @@ class _RequestsState extends State<Requests> {
                         color: kPrimaryColor,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(
+                            15.r), // استخدام ScreenUtil هنا
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
                       hintText: 'Destination',
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h, // استخدام ScreenUtil هنا
                   ),
                   TextFormField(
                     controller: costController,
@@ -192,14 +199,15 @@ class _RequestsState extends State<Requests> {
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(
+                            15.r), // استخدام ScreenUtil هنا
                         borderSide: BorderSide(color: kPrimaryColor),
                       ),
                       hintText: 'Expected Cost',
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h, // استخدام ScreenUtil هنا
                   ),
                   CustomDropDownn(
                     items: ["VISA", "CASH"],
@@ -210,7 +218,7 @@ class _RequestsState extends State<Requests> {
                     },
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h, // استخدام ScreenUtil هنا
                   ),
                   CustomServiceTypeDropDown(
                     items: ['economic', 'comfort', 'luxury'],
@@ -221,17 +229,20 @@ class _RequestsState extends State<Requests> {
                     },
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 20.h, // استخدام ScreenUtil هنا
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
+                    padding: EdgeInsets.only(
+                        bottom: 10.0.h), // استخدام ScreenUtil هنا
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(
+                              20.r), // استخدام ScreenUtil هنا
                         ),
                         backgroundColor: kPrimaryColor,
-                        minimumSize: const Size(350, 60),
+                        minimumSize:
+                            Size(350.w, 60.h), // استخدام ScreenUtil هنا
                       ),
                       onPressed: () async {
                         setState(() {
@@ -264,13 +275,17 @@ class _RequestsState extends State<Requests> {
                       child: btnPressed == false
                           ? Text(
                               'Find Driver',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 20.sp,
+                                  color:
+                                      Colors.white), // استخدام ScreenUtil هنا
                             )
                           : Text(
                               'Waiting For a Driver',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 20.sp,
+                                  color:
+                                      Colors.white), // استخدام ScreenUtil هنا
                             ),
                     ),
                   ),

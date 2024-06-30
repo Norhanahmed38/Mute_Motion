@@ -5,7 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../data/rating_api.dart';
 
 class RatingViewBody extends StatefulWidget {
@@ -34,7 +34,7 @@ class _RatingViewBodyState extends State<RatingViewBody> {
       appBar: AppBar(
         title: Text(
           'Rate',
-          style: GoogleFonts.lato(fontSize: 20, color: Colors.white),
+          style: GoogleFonts.lato(fontSize: 20.sp, color: Colors.white),
         ),
         leading: Icon(
           Icons.menu,
@@ -47,16 +47,16 @@ class _RatingViewBodyState extends State<RatingViewBody> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
-        padding: const EdgeInsets.only(
-          top: 30,
-          left: 8,
-          right: 8,
+        padding: EdgeInsets.only(
+          top: 30.h,
+          left: 8.w,
+          right: 8.w,
         ),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+              topLeft: Radius.circular(20.r),
+              topRight: Radius.circular(20.r),
             )),
         child: SingleChildScrollView(
           child: Column(
@@ -66,12 +66,12 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                 'Provide your feedback about your ride with this driver',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lato(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: kPrimaryColor,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 100,
+                height: 100.h,
               ),
               RatingBar.builder(
                 glow: true,
@@ -80,7 +80,7 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.w),
                 itemBuilder: (context, _) => FaIcon(
                   Icons.star,
                   color: Colors.amber,
@@ -103,7 +103,7 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                 },
               ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               Text(
                 '$rateComment',
@@ -111,41 +111,19 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                     fontSize: 24, fontFamily: 'Lato', color: kPrimaryColor),
               ),
               SizedBox(
-                height: 7,
+                height: 7.w,
               ),
-              // Text(
-              //   'You rated your Driver',
-              //   style: GoogleFonts.lato(fontSize: 14, color: kPrimaryColor),
-              // ),
               SizedBox(
-                height: 70,
+                height: 70.h,
               ),
-              // Padding(
-              //   padding: const EdgeInsets.all(20.0),
-              //   child: TextFormField(
-              //     style: TextStyle(
-              //       fontSize: 18.0, // Set the font size
-              //       // You can also set other style properties here
-              //     ),
-              //     decoration: InputDecoration(
-              //       hintText: 'Your comment',
-              //       border: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(10.0),
-              //       ),
-              //       contentPadding: EdgeInsets.symmetric(
-              //           vertical: 100.0,
-              //           horizontal: 100), // Adjust the padding
-              //     ),
-              //   ),
-              // ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
-                  height: 58,
-                  width: 300,
+                  height: 58.h,
+                  width: 300.w,
                   decoration: BoxDecoration(
                     color: kPrimaryColor,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: TextButton(
                     onPressed: () {
@@ -161,7 +139,7 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                       style: GoogleFonts.comfortaa(
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                       ),
                     ),
                   ),
@@ -172,7 +150,8 @@ class _RatingViewBodyState extends State<RatingViewBody> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'You rated your Driver',
-                    style: GoogleFonts.lato(fontSize: 14, color: kPrimaryColor),
+                    style:
+                        GoogleFonts.lato(fontSize: 14.sp, color: kPrimaryColor),
                   ),
                 ),
             ],

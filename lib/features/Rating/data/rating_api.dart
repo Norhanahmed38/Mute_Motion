@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RatingApi {
   static const String baseUrl =
@@ -56,10 +57,8 @@ class RatingApi {
         showRatingDialog(
           context: context,
           title: 'Error',
-
           content:
               'Failed to submit rating. Status code: ${response.statusCode}',
-
         );
       }
     } catch (e) {
@@ -93,7 +92,7 @@ class RatingApi {
           ),
           content: Text(
             content,
-            style: TextStyle(color: kPrimaryColor, fontSize: 15),
+            style: TextStyle(color: kPrimaryColor, fontSize: 15.sp),
           ),
           actions: <Widget>[
             TextButton(
@@ -108,7 +107,7 @@ class RatingApi {
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 17,
+                  fontSize: 17.sp,
                 ),
               ),
             ),

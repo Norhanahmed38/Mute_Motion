@@ -8,12 +8,10 @@ class AboutUsScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     ScreenUtil.init(
       context,
-      designSize: Size(360, 690), 
+      designSize: Size(360, 690),
     );
-
     return Scaffold(
       backgroundColor: kPrimaryColor,
       drawer: const NavDrawerView(),
@@ -21,7 +19,8 @@ class AboutUsScreenBody extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           'About Us',
-          style: TextStyle(fontSize: 22.sp, fontFamily: 'Lato', color: Colors.white),
+          style: TextStyle(
+              fontSize: 22.sp, fontFamily: 'Lato', color: Colors.white),
         ),
         centerTitle: true,
         backgroundColor: kPrimaryColor,
@@ -31,19 +30,22 @@ class AboutUsScreenBody extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.w), // Using ScreenUtil for rounded corners
+            topLeft:
+                Radius.circular(20.w), // Using ScreenUtil for rounded corners
             topRight: Radius.circular(20.w),
           ),
         ),
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w), // Using ScreenUtil for padding
+          padding: EdgeInsets.symmetric(
+              vertical: 20.h, horizontal: 10.w), // Using ScreenUtil for padding
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'Let’s introduce ourselves!',
-                style: TextStyle(fontSize: 22.sp, fontFamily: 'Lato', color: kPrimaryColor),
+                style: TextStyle(
+                    fontSize: 22.sp, fontFamily: 'Lato', color: kPrimaryColor),
               ),
               SizedBox(height: 10.h),
               Image.asset(
@@ -65,7 +67,10 @@ class AboutUsScreenBody extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Text(
                     'The "MuteMotion" project aims to create an innovative smart taxi service catering specifically to deaf and mute drivers. It involves the development of advanced driver assistance systems (ADAS) using artificial intelligence (AI) and mobile application technologies. By enhancing safety features, communication tools, and convenience, MuteMotion seeks to empower the deaf/mute community with job opportunities and effective interaction platforms.',
-                    style: TextStyle(fontSize: 16.sp, fontFamily: 'Comfortaa', color: kPrimaryColor),
+                    style: TextStyle(
+                        fontSize: 16.sp,
+                        fontFamily: 'Comfortaa',
+                        color: kPrimaryColor),
                   ),
                 ),
               ),
@@ -76,4 +81,3 @@ class AboutUsScreenBody extends StatelessWidget {
     );
   }
 }
-
