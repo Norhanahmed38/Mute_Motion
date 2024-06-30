@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBorder extends StatelessWidget {
   const CustomBorder({super.key});
@@ -11,8 +12,8 @@ class CustomBorder extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Screen Name',
-          style:
-              TextStyle(fontSize: 25, fontFamily: 'Lato', color: Colors.white),
+          style: TextStyle(
+              fontSize: 25.sp, fontFamily: 'Lato', color: Colors.white),
         ),
         leading: Icon(
           Icons.menu,
@@ -25,15 +26,15 @@ class CustomBorder extends StatelessWidget {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
-        padding: const EdgeInsets.only(
-          top: 20,
-          left: 15,
+        padding: EdgeInsets.only(
+          top: 20.h,
+          left: 15.w,
         ),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+              topLeft: Radius.circular(20.r),
+              topRight: Radius.circular(20.r),
             )),
         child: Column(
           children: [],

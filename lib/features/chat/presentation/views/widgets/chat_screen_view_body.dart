@@ -75,7 +75,6 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize ScreenUtil with the design size
     ScreenUtil.init(context, designSize: Size(360, 690));
 
     return Scaffold(

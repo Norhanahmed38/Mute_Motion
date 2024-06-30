@@ -8,10 +8,10 @@ class AboutUsScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize ScreenUtil for responsive design
+  
     ScreenUtil.init(
       context,
-      designSize: Size(360, 690), // Design size based on your requirements
+      designSize: Size(360, 690), 
     );
 
     return Scaffold(

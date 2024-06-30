@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/profile/presentation/views/profile_screen_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HadWidget extends StatefulWidget {
   const HadWidget({
@@ -20,7 +21,7 @@ class HadWidget extends StatefulWidget {
 
 class _HadWidgetState extends State<HadWidget> {
   String userName = '';
-  String useremail = '';
+
   Uint8List? _userImageBytes; // Variable to store user image bytes
 
   @override
@@ -33,10 +34,8 @@ class _HadWidgetState extends State<HadWidget> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       userName = prefs.getString('firstname') ?? '';
-      useremail = prefs.getString('email') ?? '';
     });
 
-    // Load user image from SharedPreferences
     await _loadUserImage();
   }
 
@@ -55,8 +54,8 @@ class _HadWidgetState extends State<HadWidget> {
   Widget build(BuildContext context) {
     return Container(
       color: widget.darkGreen,
-      height: 150,
-      width: 380,
+      height: 150.h,
+      width: 380.w,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -64,10 +63,10 @@ class _HadWidgetState extends State<HadWidget> {
           child: Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(top: 20.h),
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
-                  radius: 35,
+                  radius: 35.r,
                   backgroundImage: _userImageBytes != null
                       ? MemoryImage(_userImageBytes!)
                       : AssetImage('assets/images/pic.PNG') as ImageProvider,
@@ -76,40 +75,30 @@ class _HadWidgetState extends State<HadWidget> {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 65, left: 50),
+                    padding: EdgeInsets.only(top: 65.h, left: 50.w),
                     child: Text(
                       userName.isNotEmpty ? userName : 'USER',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.only(left: 8),
-                  //   child: Text(
-                  //     useremail.isNotEmpty ? useremail : '',
-                  //     style: TextStyle(
-                  //       color: Colors.white,
-                  //       fontSize: 8,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
               SizedBox(
-                width: 10,
+                width: 10.w,
               ),
               Padding(
-                padding: EdgeInsets.only(top: 35, left: 10),
+                padding: EdgeInsets.only(top: 35.h, left: 10.w),
                 child: IconButton(
                   onPressed: () {
                     navigateTo(context, ProfileScreenView());
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
-                    size: 18,
+                    size: 18.sp,
                     color: Colors.white,
                   ),
                 ),

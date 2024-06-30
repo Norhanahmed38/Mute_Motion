@@ -7,12 +7,12 @@ const chatColorMe = Color(0xffffd700);
 
 Widget myDivider() => Padding(
       padding: EdgeInsetsDirectional.only(
-        start: 20.w, // Adapted for ScreenUtil
-        end: 20.w, // Adapted for ScreenUtil
+        start: 20.w,
+        end: 20.w,
       ),
       child: Container(
         width: double.infinity,
-        height: 1.h, // Adapted for ScreenUtil
+        height: 1.h,
         color: kPrimaryColor,
       ),
     );
@@ -58,22 +58,20 @@ Widget defaultFormField({
       decoration: InputDecoration(
         labelStyle: TextStyle(
           fontFamily: 'comfortaa',
-          fontSize: 15.sp, // Adapted for ScreenUtil
+          fontSize: 15.sp,
           color: kPrimaryColor,
         ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             color: kPrimaryColor,
           ),
-          borderRadius: BorderRadius.circular(15.r), // Adapted for ScreenUtil
+          borderRadius: BorderRadius.circular(15.r),
         ),
         labelText: label,
         // prefixIcon: Icon(prefix),
         suffixIcon: suffix != null
             ? IconButton(
-                icon: Icon(suffix,
-                    color: kPrimaryColor,
-                    size: 20.sp), // Adapted for ScreenUtil
+                icon: Icon(suffix, color: kPrimaryColor, size: 20.sp),
                 onPressed: () {
                   iconButton!();
                 },

@@ -20,7 +20,7 @@ class ApiService {
         Map<String, dynamic> body = {
           'sessionId': sessionId,
         };
-        print('Sending request...');
+        print('Sending request');
         http.Response response = await http.post(
           Uri.parse('https://mutemotion.onrender.com/api/v1/sendrequest'),
           headers: headers,
@@ -51,7 +51,7 @@ void _showErrorDialog(
   BuildContext context,
   String message,
 ) {
-  print('Showing dialog: $message'); // تأكيد عرض الحوار
+  print('Showing dialog: $message'); 
   showDialog(
     context: context,
     builder: (BuildContext context) {

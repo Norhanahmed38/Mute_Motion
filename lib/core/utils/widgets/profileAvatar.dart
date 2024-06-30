@@ -11,7 +11,6 @@ class ProfileAvatar extends StatelessWidget {
     return CircleAvatar(
       radius: radius,
 
-      //backgroundImage: AssetImage('assets/images/driver.png'),
     );
   }
 }

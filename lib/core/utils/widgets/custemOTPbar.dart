@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class custemOTPbar extends StatelessWidget {
   const custemOTPbar({super.key});
@@ -12,7 +13,7 @@ class custemOTPbar extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.white,
       leading: IconButton(
-          iconSize: 30,
+          iconSize: 30.sp,
           onPressed: () {},
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -24,7 +25,7 @@ class custemOTPbar extends StatelessWidget {
         style: GoogleFonts.lato(
             fontWeight: FontWeight.bold,
             color: Color(0xff003248),
-            fontSize: 22),
+            fontSize: 22.sp),
       ),
     );
   }

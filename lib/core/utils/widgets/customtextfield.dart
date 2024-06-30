@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
   CustomTextField(
@@ -35,7 +37,7 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: GoogleFonts.comfortaa(
           color: Colors.black.withOpacity(0.65),
-          fontSize: 12,
+          fontSize: 12.sp,
         ),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
