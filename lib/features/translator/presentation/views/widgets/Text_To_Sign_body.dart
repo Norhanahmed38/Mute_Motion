@@ -6,11 +6,10 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mute_motion_passenger/constants.dart';
-import 'package:mute_motion_passenger/core/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mute_motion_passenger/features/chat/controller/chat_controller.dart';
 import 'package:mute_motion_passenger/features/chat/model/messages.dart';
 import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/message_item.dart';
-import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -55,7 +54,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
     setState(() {});
   }
 
-  /// Each time to start a speech recognition session
+
   void _startListening() async {
     await _speechToText.listen(
       onResult: _onSpeechResult,
@@ -88,7 +87,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(
-            iconSize: 30,
+            iconSize: 30.sp,
             onPressed: () {
               navigateTo(context, TranslatorView());
             },
@@ -101,7 +100,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
           textAlign: TextAlign.center,
           style: GoogleFonts.lato(
             color: kPrimaryColor,
-            fontSize: 22,
+            fontSize: 22.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -115,7 +114,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
         child: Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(bottom: 160),
+        padding:  EdgeInsets.only(bottom: 160.h),
         child: Obx(
           () => ListView.builder(
               itemCount: chatController.chatMessages.length,
@@ -137,7 +136,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
         key: formKey,
         child: Container(
           color: kPrimaryColor,
-          height: 160,
+          height: 160.h,
           width: double.infinity,
           child: SingleChildScrollView(
             child: Column(
@@ -150,7 +149,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                   child: Container(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(15.r),
                         color: Colors.white,
                       ),
                       child: TextFormField(
@@ -187,7 +186,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                               )),
                           hintStyle: GoogleFonts.comfortaa(
                             color: Colors.black.withOpacity(0.65),
-                            fontSize: 12,
+                            fontSize: 12.sp,
                           ),
                           border: const OutlineInputBorder(
                             borderSide: BorderSide(
@@ -200,14 +199,14 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(15.r),
                         color: Colors.white,
                       ),
                       child: TextFormField(
@@ -226,7 +225,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                               )),
                           hintStyle: GoogleFonts.comfortaa(
                             color: Colors.black.withOpacity(0.65),
-                            fontSize: 12,
+                            fontSize: 12.sp,
                           ),
                           border: const OutlineInputBorder(
                             borderSide: BorderSide(
@@ -239,7 +238,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 )
               ],
             ),

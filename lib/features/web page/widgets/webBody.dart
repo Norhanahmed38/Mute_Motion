@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WebBody extends StatefulWidget {
   const WebBody({super.key});
@@ -17,6 +18,10 @@ class _WebBodyState extends State<WebBody> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: Size(360, 690),
+    );
     return Scaffold(
       drawer: NavDrawerView(),
       backgroundColor: kPrimaryColor,
@@ -24,7 +29,7 @@ class _WebBodyState extends State<WebBody> {
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'Learn Sign Language',
-          style: GoogleFonts.comfortaa(fontSize: 20, color: Colors.white),
+          style: GoogleFonts.comfortaa(fontSize: 20.sp, color: Colors.white),
         ),
         elevation: 0,
         centerTitle: true,
@@ -33,23 +38,23 @@ class _WebBodyState extends State<WebBody> {
       body: Container(
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 41),
+          padding: EdgeInsets.symmetric(horizontal: 41.w),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 60,
+                SizedBox(
+                  height: 15.h,
                 ),
-                const Image(
-                  width: 348,
-                  height: 325,
+                Image(
+                  width: 348.w,
+                  height: 325.h,
                   image: AssetImage(
                     "assets/images/SPLASH1.jpg",
                   ),
                 ),
-                const SizedBox(
-                  height: 60,
+                SizedBox(
+                  height: 40.h,
                 ),
                 Center(
                   child: Text(
@@ -57,20 +62,19 @@ class _WebBodyState extends State<WebBody> {
                     style: GoogleFonts.comfortaa(
                       fontWeight: FontWeight.bold,
                       color: kPrimaryColor,
-                      fontSize: 22,
+                      fontSize: 22.sp,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 16,
+                SizedBox(
+                  height: 16.h,
                 ),
                 Center(
                   child: Text(
                     "Learn Sign Language on our Website to Better Connect with Our Deaf Drivers",
                     style: GoogleFonts.comfortaa(
-                      //fontWeight: FontWeight.bold,
                       color: kPrimaryColor,
-                      fontSize: 15,
+                      fontSize: 15.sp,
                     ),
                   ),
                 ),
@@ -79,10 +83,10 @@ class _WebBodyState extends State<WebBody> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  height: 58,
+                  height: 58.h,
                   decoration: BoxDecoration(
                       color: kPrimaryColor,
-                      borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(15.r)),
                   child: MaterialButton(
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: lineToCopy));
@@ -94,7 +98,7 @@ class _WebBodyState extends State<WebBody> {
                       child: Text(
                         "Copy link",
                         style: GoogleFonts.comfortaa(
-                            fontSize: 20, color: Colors.white),
+                            fontSize: 20.sp, color: Colors.white),
                       )),
                 ),
                 SizedBox(

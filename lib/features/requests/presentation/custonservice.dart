@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class CustomServiceTypeDropDown extends StatefulWidget {
   final List<String> items;
@@ -22,18 +24,18 @@ class _CustomServiceTypeDropDownState extends State<CustomServiceTypeDropDown> {
       child: InputDecorator(
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(15.r),
             borderSide: BorderSide(color: kPrimaryColor),
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
             isExpanded: true,
-            hint: const Text(
+            hint:  Text(
               'Service Type',
               style: TextStyle(
-                fontSize: 17,
+                fontSize: 17.sp,
               ),
             ),
             value: dropdownValue,
@@ -51,7 +53,7 @@ class _CustomServiceTypeDropDownState extends State<CustomServiceTypeDropDown> {
                 child: Text(
                   value,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                   ),
                 ),
               );

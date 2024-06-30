@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/registration/data/repos/forgotyourPass.dart';
 import 'package:mute_motion_passenger/features/registration/data/repos/login_user.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/create_Profile_screen.dart';
-import 'package:mute_motion_passenger/features/registration/data/repos/api_provider.dart';
-
 import '../../../../mainMenu/presentation/views/mainMenu_screen_view.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreenViewBody extends StatefulWidget {
   const LoginScreenViewBody({super.key});
@@ -36,19 +34,19 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
             key: formKey,
             child: ListView(
               children: [
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: 5.h,
                 ),
-                const Center(
+                Center(
                     child: Text("Login",
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 22.sp,
                             fontFamily: 'Comfortaa',
                             fontWeight: FontWeight.bold,
                             color: kPrimaryColor))),
                 Divider(thickness: 2),
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.h,
                 ),
                 TextFormField(
                   controller: emailCont,
@@ -83,8 +81,8 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                     prefixIconColor: kPrimaryColor,
                   ),
                 ),
-                const SizedBox(
-                  height: 18,
+                SizedBox(
+                  height: 15.h,
                 ),
                 TextFormField(
                   controller: passCont,
@@ -107,7 +105,7 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                         color: kPrimaryColor,
                       ),
                     ),
-                    border: const OutlineInputBorder(
+                    border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: kPrimaryColor,
                       ),
@@ -125,8 +123,8 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Container(
                   alignment: Alignment.topLeft,
@@ -152,15 +150,15 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 Container(
-                  height: 58,
+                  height: 58.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: const Color(0xff003248),
-                      borderRadius: BorderRadius.circular(20)),
+                      borderRadius: BorderRadius.circular(20.r)),
                   child: MaterialButton(
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
@@ -177,28 +175,28 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                               passcont: passCont);
                         }
                         setState(() {
-                            _isLoading = false;
-                          });
+                          _isLoading = false;
+                        });
                       },
-                      child: const Text(
+                      child: Text(
                         "Login",
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontFamily: 'Comfortaa',
                             color: Colors.white),
                       )),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Don't have an account? ",
+                      Text("Don't have an account? ",
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             fontFamily: 'Comfortaa',
                           )),
                       TextButton(
@@ -208,11 +206,11 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                               CreateProfileScreenView(),
                             );
                           },
-                          child: const Text(
+                          child: Text(
                             "Register now",
                             style: TextStyle(
                                 color: kPrimaryColor,
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontFamily: 'Comfortaa',
                                 fontWeight: FontWeight.bold),
                           )),

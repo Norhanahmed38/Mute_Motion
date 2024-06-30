@@ -9,6 +9,7 @@ import 'package:mute_motion_passenger/features/registration/data/repos/login_use
 import 'package:mute_motion_passenger/features/registration/data/repos/resend_pass_code.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ForgotPasswordBody extends StatefulWidget {
   const ForgotPasswordBody({super.key});
@@ -47,27 +48,27 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
             key: formKey,
             child: ListView(
               children: [
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: 5.h,
                 ),
-                const Center(
+                Center(
                     child: Text("Reset Your Password",
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 22.sp,
                             fontFamily: 'Comfortaa',
                             fontWeight: FontWeight.bold,
                             color: kPrimaryColor))),
                 Divider(thickness: 2),
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.h,
                 ),
                 Text(
                   "Please enter the 4-digit code sent via email to\n ${getUserEmail()}",
                   style:
                       GoogleFonts.comfortaa(color: kPrimaryColor, fontSize: 15),
                 ),
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -86,8 +87,8 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.h,
                 ),
                 TextFormField(
                   controller: emailCont,
@@ -122,8 +123,8 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
                     prefixIconColor: kPrimaryColor,
                   ),
                 ),
-                const SizedBox(
-                  height: 18,
+                SizedBox(
+                  height: 18.h,
                 ),
                 TextFormField(
                   controller: passCont,
@@ -164,7 +165,7 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 18),
+                SizedBox(height: 18.h),
                 TextFormField(
                   controller: verifpassCont,
                   validator: (value) {
@@ -207,15 +208,15 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 Container(
-                  height: 58,
+                  height: 58.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: const Color(0xff003248),
-                      borderRadius: BorderRadius.circular(20)),
+                      color: Color(0xff003248),
+                      borderRadius: BorderRadius.circular(20.r)),
                   child: MaterialButton(
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
@@ -236,25 +237,25 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
                           });
                         }
                       },
-                      child: const Text(
+                      child: Text(
                         "Reset your Password",
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontFamily: 'Comfortaa',
                             color: Colors.white),
                       )),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("The code will expire automatically in ",
+                      Text("The code will expire automatically in ",
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 15.h,
                             fontFamily: 'Comfortaa',
                           )),
                       Countdown(
@@ -285,14 +286,12 @@ class _ForgotPasswordState extends State<ForgotPasswordBody> {
                           _isLoading = false;
                         });
                         counterCont.restart();
-
-                        //_visible= false;
                       },
-                      child: const Text(
+                      child: Text(
                         "Resend Code",
                         style: TextStyle(
                             color: kPrimaryColor,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontFamily: 'Comfortaa',
                             fontWeight: FontWeight.bold),
                       )),

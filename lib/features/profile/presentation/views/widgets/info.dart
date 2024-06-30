@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class Info extends StatelessWidget {
   final String title;
@@ -15,11 +17,11 @@ class Info extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: TextStyle(fontSize: 17, color: kPrimaryColor),
+        style: TextStyle(fontSize: 17.sp, color: kPrimaryColor),
       ),
       subtitle: Text(
         subTitle,
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
       ),
     );
   }

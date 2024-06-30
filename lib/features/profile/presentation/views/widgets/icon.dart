@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ButtomSheet extends StatelessWidget {
   const ButtomSheet(
@@ -10,20 +11,20 @@ class ButtomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.0,
+      height: 100.h,
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
+        horizontal: 20.h,
+        vertical: 20.w,
       ),
       child: Column(
         children: [
           Text(
             "Choose Profile photo",
-            style: TextStyle(fontSize: 20.0, color: kPrimaryColor),
+            style: TextStyle(fontSize: 20.sp, color: kPrimaryColor),
           ),
           SizedBox(
-            height: 20,
+            height: 20.h,
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -37,12 +38,12 @@ class ButtomSheet extends StatelessWidget {
                 'Camera',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontFamily: 'Comfortaa',
                 ),
               ),
               SizedBox(
-                width: 70,
+                width: 70.h,
               ),
               IconButton(
                   color: kPrimaryColor,
@@ -52,7 +53,7 @@ class ButtomSheet extends StatelessWidget {
                 'Gallery',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontFamily: 'Comfortaa',
                 ),
               ),
