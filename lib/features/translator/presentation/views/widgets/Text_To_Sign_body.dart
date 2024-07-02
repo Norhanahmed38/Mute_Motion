@@ -44,7 +44,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
   List<String> receivedMessages = [];
    void _fetchLabels() async {
     try {
-      final response = await client.get(Uri.parse('http://$ip:5000/test_labels'));
+      final response = await client.get(Uri.parse('http://$ip:5000/labels'));
       if (response.statusCode == 200) {
         final labels = json.decode(response.body) as Map<String, dynamic>;
         final String newMessage = labels['gesture'] ?? 'None';
