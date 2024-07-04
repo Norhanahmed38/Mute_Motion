@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mute_motion_passenger/features/chat/presentation/views/chat_screen_view.dart';
 import 'package:mute_motion_passenger/features/payment/persentation/paymentCompletedview.dart';
 import 'package:mute_motion_passenger/features/payment/persentation/widgets/PaymentCompleted.dart';
 import 'package:mute_motion_passenger/features/payment/persentation/widgets/payment.dart';
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: TextToSignBody(),
+          home: LoginScreenView(),
         );
       },
     );
