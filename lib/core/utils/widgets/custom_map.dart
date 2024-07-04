@@ -56,8 +56,8 @@ class _MapScreenState extends State<MapScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Location Not Found'),
-            content: Text('The entered location could not be found.'),
+            title:const Text('Location Not Found'),
+            content: const Text('The entered location could not be found.'),
             actions: [
               TextButton(
                 onPressed: () {
