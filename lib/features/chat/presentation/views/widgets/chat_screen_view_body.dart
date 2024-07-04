@@ -251,22 +251,26 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
   bool _speechEnabled = false;
   String _lastWords = '';
   String? record;
-  String? id;
-  String? driverId ;
+  String id = '';
+  String driverId = '' ;
   TextEditingController msgController = TextEditingController();
   ChatController chatController = ChatController();
   late IO.Socket socket;
   String Time = '';
   bool isTyping = false;
   bool isDriverTyping = false;
-
-  @override
-  void initState() async {
-    super.initState();
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    id= prefs.getString("_id");
-    driverId = prefs.getString("driver_id");
+   void fetchIds() async {
+     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    id= prefs.getString("_id")!;
+    print(id);
+    driverId = prefs.getString("driver_id")!;
       print(driverId);
+      chatController.fetchChatHistory(id, driverId);
+   }
+  @override
+  void initState()  {
+    super.initState();
+    fetchIds();
     socket = IO.io(
       'https://mutemotion.onrender.com/',
       IO.OptionBuilder()
@@ -285,7 +289,11 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
     _initSpeech();
 
     // Fetch chat history when the screen is initialized
-    chatController.fetchChatHistory(id!, driverId!);
+    print('before');
+    print(id);
+    print(driverId);
+    //chatController.fetchChatHistory(id, driverId);
+    print('after fetching');
   }
 
   @override
