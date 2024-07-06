@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -9,8 +8,10 @@ import '../../../../constants.dart';
 import '../../../mainMenu/presentation/views/mainMenu_screen_view.dart';
 
 class LoginUserApi {
-  static const loginUserUrl = "https://mutemotion.onrender.com/api/v1/passenger/login";
-  static const updateFcmTokenUrl = "https://mutemotion.onrender.com/api/v1/passenger/updateFCMToken";
+  static const loginUserUrl =
+      "https://mutemotion.onrender.com/api/v1/passenger/login";
+  static const updateFcmTokenUrl =
+      "https://mutemotion.onrender.com/api/v1/passenger/updateFCMToken";
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -53,7 +54,8 @@ class LoginUserApi {
     } catch (e) {
       if (e is DioException) {
         print(e.response?.data);
-        _showErrorDialog(context, 'Email or password aren\'t correct', emailcont, passcont);
+        _showErrorDialog(
+            context, 'Email or password aren\'t correct', emailcont, passcont);
       }
     }
   }
@@ -76,7 +78,8 @@ class LoginUserApi {
         'fcmToken': fcmToken,
       };
 
-      Response response = await Dio().post(updateFcmTokenUrl, data: requestBody);
+      Response response =
+          await Dio().post(updateFcmTokenUrl, data: requestBody);
       if (response.statusCode == 200) {
         print("FCM token updated successfully");
       } else {
@@ -172,7 +175,8 @@ class LoginUserApi {
             message.notification!.title, message.notification!.body);
 
         // Check for the specific notification message and navigate accordingly
-        if (message.notification!.body == 'Your ride request has been accepted by the driver.') {
+        if (message.notification!.body ==
+            'Your ride request has been accepted by the driver.') {
           navigateToMapScreen(); // Navigate to map screen
         }
       }
@@ -192,7 +196,6 @@ class LoginUserApi {
   }
 
   void navigateToMapScreen() {
-   
     print('Navigating to Map Screen automatically...');
   }
 

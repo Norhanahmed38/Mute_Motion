@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
-import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/features/aboutUs/presentation/views/aboutUs_screen_view.dart';
 import 'package:mute_motion_passenger/features/deleting_account/presentation/view/delete_my_screen.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/widgets/pages.dart';

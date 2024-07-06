@@ -11,7 +11,7 @@ class newmsg extends StatelessWidget {
     required this.rate,
     required this.destination,
     required this.psg_loc,
-    required this.service,
+    required this.paymentMethod,
     required this.Cost,
   });
 
@@ -20,7 +20,7 @@ class newmsg extends StatelessWidget {
   final String rate;
   final String destination;
   final String psg_loc;
-  final String service;
+  final String paymentMethod;
   final String Cost;
 
   @override
@@ -136,14 +136,14 @@ class newmsg extends StatelessWidget {
                 Row(
                   children: [
                     custommtext(
-                      text: 'Service:',
+                      text: 'payment Method:',
                       fontWeight: FontWeight.w600,
                     ),
                     SizedBox(
                       width: 10.w,
                     ),
                     custommtext(
-                      text: service,
+                      text: paymentMethod,
                       fontWeight: FontWeight.w400,
                     ),
                   ],
