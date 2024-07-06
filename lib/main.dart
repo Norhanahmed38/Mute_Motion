@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mute_motion_passenger/features/chat/presentation/views/chat_screen_view.dart';
-import 'package:mute_motion_passenger/features/payment/persentation/paymentCompletedview.dart';
-import 'package:mute_motion_passenger/features/payment/persentation/widgets/PaymentCompleted.dart';
-import 'package:mute_motion_passenger/features/payment/persentation/widgets/payment.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/add_card_view.dart';
 import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/widgets/add_card_view_body.dart';
-import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
-import 'package:mute_motion_passenger/features/translator/presentation/views/widgets/Text_To_Sign_body.dart';
+
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
