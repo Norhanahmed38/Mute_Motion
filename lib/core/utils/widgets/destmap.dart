@@ -146,7 +146,7 @@ class _DestMapState extends State<DestMap> {
                       children: [
                         Text(
                           'Dest Name: $destinationName',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -155,7 +155,7 @@ class _DestMapState extends State<DestMap> {
                     SizedBox(width: 10.0),
                     ElevatedButton(
                       onPressed: () async {
-                        navigateto(context, MainMenuScreenView());
+                        navigateto(context, const MainMenuScreenView());
 
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
@@ -163,7 +163,6 @@ class _DestMapState extends State<DestMap> {
                             'destinationName', destinationName);
                         await prefs.setDouble('lat', lat);
                         await prefs.setDouble('long', long);
-                        print(lat);
                         destinationnController.text = destinationName;
                       },
                       child: Text('ok'),

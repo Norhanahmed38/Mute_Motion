@@ -180,10 +180,15 @@ class LoginUserApi {
         // Check for the specific notification message and navigate accordingly
         if (message.notification!.body ==
             'Your ride request has been accepted by the driver.') {
+               Navigator.push(
+                                    context!,
+                                    MaterialPageRoute(
+                                      builder: (context) => RouteScreen(),
+                                    ),
+                                  );
 //           navigateToRouteScreen();
 
 //           navigateToMapScreen(); // Navigate to map screen
- 
         }
       }
       print(message.notification!.body);
@@ -197,20 +202,22 @@ class LoginUserApi {
       // Check for the specific notification message and navigate accordingly
       if (message.notification!.body ==
           'Your ride request has been accepted by the driver.') {
-        navigateToRouteScreen();
+        Navigator.push(
+          context!,
+          MaterialPageRoute(
+            builder: (context) => RouteScreen(),
+          ),
+        );
       }
       // Handle the notification tapped logic here
     });
-
   }
 
   void navigateToRouteScreen() {
     Navigator.push(
       context!,
       MaterialPageRoute(
-        builder: (context) => RouteScreen(
-
-        ),
+        builder: (context) => RouteScreen(),
       ),
     );
   }

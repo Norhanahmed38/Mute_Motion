@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
-<
 import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
 import 'package:mute_motion_passenger/features/trip_track/provider/map_provider.dart';
 import 'package:provider/provider.dart';

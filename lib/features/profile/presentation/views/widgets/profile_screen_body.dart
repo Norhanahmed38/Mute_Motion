@@ -166,16 +166,16 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                       ),
                       SizedBox(height: 20.h),
                       Info(title: 'Name', subTitle: _userData.fullName),
-                      Divider(
+                      const Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                       Info(title: 'Email', subTitle: _userData.email),
-                      Divider(
+                      const Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                       Info(title: 'Phone', subTitle: _userData.phone),
-                      Divider(
+                      const Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                       Info(title: 'Gender', subTitle: _userData.gender),
-                      Divider(
+                      const Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                     ],
                   ),
@@ -235,7 +235,7 @@ class BottomSheetContent extends StatelessWidget {
   final VoidCallback takePhoto;
   final VoidCallback openGallery;
 
-  const BottomSheetContent({
+  const BottomSheetContent({super.key, 
     required this.takePhoto,
     required this.openGallery,
   });
