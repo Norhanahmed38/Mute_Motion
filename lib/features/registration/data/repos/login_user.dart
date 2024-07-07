@@ -6,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constants.dart';
 import '../../../mainMenu/presentation/views/mainMenu_screen_view.dart';
-import '../../../trip_track/view/map_screen.dart';
 
 class LoginUserApi {
   static const loginUserUrl =
@@ -22,8 +21,6 @@ class LoginUserApi {
     _initFirebaseMessaging();
     _initializeLocalNotifications();
   }
-
-  BuildContext? get context => null;
 
   Future<void> userLogin({
     required BuildContext context,
@@ -180,45 +177,21 @@ class LoginUserApi {
         // Check for the specific notification message and navigate accordingly
         if (message.notification!.body ==
             'Your ride request has been accepted by the driver.') {
-               Navigator.push(
-                                    context!,
-                                    MaterialPageRoute(
-                                      builder: (context) => RouteScreen(),
-                                    ),
-                                  );
-//           navigateToRouteScreen();
-
-//           navigateToMapScreen(); // Navigate to map screen
+          navigateToMapScreen(); // Navigate to map screen
         }
       }
-      print(message.notification!.body);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
-      _showNotification(
-          message.notification!.title, message.notification!.body);
-
-      // Check for the specific notification message and navigate accordingly
-      if (message.notification!.body ==
-          'Your ride request has been accepted by the driver.') {
-        Navigator.push(
-          context!,
-          MaterialPageRoute(
-            builder: (context) => RouteScreen(),
-          ),
-        );
-      }
       // Handle the notification tapped logic here
     });
   }
 
-  void navigateToRouteScreen() {
+  void navigateTo(BuildContext context, Widget destination) {
     Navigator.push(
-      context!,
-      MaterialPageRoute(
-        builder: (context) => RouteScreen(),
-      ),
+      context,
+      MaterialPageRoute(builder: (context) => destination),
     );
   }
 

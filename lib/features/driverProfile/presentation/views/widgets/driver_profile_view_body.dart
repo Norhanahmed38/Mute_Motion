@@ -268,14 +268,13 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                                     style: TextStyle(
                                         fontSize: 20.sp, color: Colors.white)),
                                 onPressed: () {
-                                  ApiService.sendRequest(context);
-
                                   // Navigator.push(
                                   //   context,
                                   //   MaterialPageRoute(
                                   //     builder: (context) => RouteScreen(),
                                   //   ),
                                   // );
+                                  ApiService.sendRequest(context);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(

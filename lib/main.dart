@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mute_motion_passenger/features/splash/presentation/views/splash_view.dart';
-import 'package:mute_motion_passenger/features/translator/presentation/views/Text_to_sign.dart';
 import 'package:mute_motion_passenger/features/trip_track/provider/map_provider.dart';
 import 'package:provider/provider.dart';
-
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -58,16 +55,15 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       builder: (context, child) {
-
         return MultiProvider(
           providers: [
-            ChangeNotifierProvider<MapProvider>(create: (context) => MapProvider()),
+            ChangeNotifierProvider<MapProvider>(
+                create: (context) => MapProvider()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             home: SplashView(),
           ),
-
         );
       },
     );
