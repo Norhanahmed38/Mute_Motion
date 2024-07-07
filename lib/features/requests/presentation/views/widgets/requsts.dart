@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
@@ -12,8 +13,13 @@ import 'package:mute_motion_passenger/features/requests/presentation/views/reque
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/c_request_view.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/stack.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../trip_track/provider/map_provider.dart';
+import '../../../../trip_track/view/map_screen.dart';
+import '../../../data/models/driver_model.dart';
 
 class Requests extends StatefulWidget {
   const Requests({super.key});
@@ -248,30 +254,34 @@ class _RequestsState extends State<Requests> {
                         setState(() {
                           _isLoading = true;
                         });
-                        final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
+                        final SharedPreferences prefs = await SharedPreferences.getInstance();
                         latitude = prefs.getDouble('latitude') ?? 0.0;
                         longitude = prefs.getDouble('longitude') ?? 0.0;
                         lat = prefs.getDouble('lat') ?? 0.0;
                         long = prefs.getDouble('long') ?? 0.0;
-                        if (formKey.currentState!.validate()) {
-                          final SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
+                        Provider.of<MapProvider>(context,listen: false).getMyData(
+                          myLocation: LatLng(latitude, longitude),
+                          myDestination: LatLng(lat, long),
+                          myCost: costController.text,
+                        );
 
-                          TransportApi().sendTransportRequest(
-                            context: context,
-                            costCont: costController,
-                            startLon: longitude,
-                            startLat: latitude,
-                            destLon: long,
-                            destLat: lat,
-                            destCont: destinationnController,
-                            locationCont: locationController,
-                            paymentCont: selectedDropdownValue,
-                            servType: serviceType,
+                        if (formKey.currentState!.validate()) {
+                          final SharedPreferences prefs = await SharedPreferences.getInstance();
+                          // Navigate to the DriverProfileViewBodyState with location, destination, and cost
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DriverProfileViewBody(
+                                location:locationController.text ,
+                                destination: destinationnController.text,
+                                cost:costController.text,
+                                driverModel: null,
+                              ),
+                            ),
                           );
                         }
                       },
+
                       child: btnPressed == false
                           ? Text(
                               'Find Driver',

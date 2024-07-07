@@ -5,7 +5,10 @@ import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/driverProfile/presentation/views/DriverProfileView.dart';
 import 'package:mute_motion_passenger/features/driverProfile/presentation/views/widgets/driver_profile_view_body.dart';
 import 'package:mute_motion_passenger/features/requests/data/models/driver_model.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../trip_track/provider/map_provider.dart';
 
 class TransportApi {
   static const transportUrl =
@@ -63,7 +66,8 @@ class TransportApi {
 
         if (response.data != null) {
           final driverModel = DriverModel.fromJson(response.data);
-          navigateTo(context, DriverProfileViewBody(driverModel: driverModel));
+          Provider.of<MapProvider>(context,listen: false).getDriverModel(driverModel);
+          navigateTo(context, DriverProfileViewBody(driverModel: driverModel, location: '', destination: '', cost: '',));
         } else {
           _showErrorDialog(
             context,

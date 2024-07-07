@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,10 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../constants.dart';
 import '../../../mainMenu/presentation/views/mainMenu_screen_view.dart';
+import '../../../trip_track/view/map_screen.dart';
 
 class LoginUserApi {
-  static const loginUserUrl = "https://mutemotion.onrender.com/api/v1/passenger/login";
-  static const updateFcmTokenUrl = "https://mutemotion.onrender.com/api/v1/passenger/updateFCMToken";
+  static const loginUserUrl =
+      "https://mutemotion.onrender.com/api/v1/passenger/login";
+  static const updateFcmTokenUrl =
+      "https://mutemotion.onrender.com/api/v1/passenger/updateFCMToken";
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -20,6 +22,8 @@ class LoginUserApi {
     _initFirebaseMessaging();
     _initializeLocalNotifications();
   }
+
+  BuildContext? get context => null;
 
   Future<void> userLogin({
     required BuildContext context,
@@ -53,7 +57,8 @@ class LoginUserApi {
     } catch (e) {
       if (e is DioException) {
         print(e.response?.data);
-        _showErrorDialog(context, 'Email or password aren\'t correct', emailcont, passcont);
+        _showErrorDialog(
+            context, 'Email or password aren\'t correct', emailcont, passcont);
       }
     }
   }
@@ -76,7 +81,8 @@ class LoginUserApi {
         'fcmToken': fcmToken,
       };
 
-      Response response = await Dio().post(updateFcmTokenUrl, data: requestBody);
+      Response response =
+          await Dio().post(updateFcmTokenUrl, data: requestBody);
       if (response.statusCode == 200) {
         print("FCM token updated successfully");
       } else {
@@ -172,27 +178,40 @@ class LoginUserApi {
             message.notification!.title, message.notification!.body);
 
         // Check for the specific notification message and navigate accordingly
-        if (message.notification!.body == 'Your ride request has been accepted by the driver.') {
-          navigateToMapScreen(); // Navigate to map screen
+        if (message.notification!.body ==
+            'Your ride request has been accepted by the driver.') {
+          navigateToRouteScreen();
         }
       }
+      print(message.notification!.body);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
+      _showNotification(
+          message.notification!.title, message.notification!.body);
+
+      // Check for the specific notification message and navigate accordingly
+      if (message.notification!.body ==
+          'Your ride request has been accepted by the driver.') {
+        navigateToRouteScreen();
+      }
       // Handle the notification tapped logic here
     });
   }
 
-  void navigateTo(BuildContext context, Widget destination) {
+  void navigateToRouteScreen() {
     Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => destination),
+      context!,
+      MaterialPageRoute(
+        builder: (context) => RouteScreen(
+
+        ),
+      ),
     );
   }
 
   void navigateToMapScreen() {
-   
     print('Navigating to Map Screen automatically...');
   }
 
