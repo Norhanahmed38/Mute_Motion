@@ -29,6 +29,7 @@ class ApiService {
         print('Response received: ${response.statusCode}');
 
         if (response.statusCode == 200 || response.statusCode == 201) {
+          print(response.body);
           print('Request sent successfully');
           _showErrorDialog(context, 'Request sent successfully');
         } else {
@@ -51,7 +52,7 @@ void _showErrorDialog(
   BuildContext context,
   String message,
 ) {
-  print('Showing dialog: $message'); 
+  print('Showing dialog: $message');
   showDialog(
     context: context,
     builder: (BuildContext context) {

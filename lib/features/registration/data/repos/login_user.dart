@@ -182,10 +182,10 @@ class LoginUserApi {
       }
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
-      // Handle the notification tapped logic here
-    });
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   print('A new onMessageOpenedApp event was published!');
+    //   // Handle the notification tapped logic here
+    // });
   }
 
   void navigateTo(BuildContext context, Widget destination) {
