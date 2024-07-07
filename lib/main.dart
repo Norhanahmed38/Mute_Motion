@@ -59,6 +59,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       builder: (context, child) {
+
         return MultiProvider(
           providers: [
             ChangeNotifierProvider<MapProvider>(create: (context) => MapProvider()),
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: SplashView(),
           ),
+
         );
       },
     );
