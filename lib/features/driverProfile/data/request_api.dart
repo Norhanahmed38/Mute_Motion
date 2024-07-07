@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/features/trip_track/view/map_screen.dart';
+
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,6 +33,12 @@ class ApiService {
         if (response.statusCode == 200 || response.statusCode == 201) {
           print(response.body);
           print('Request sent successfully');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RouteScreen(),
+            ),
+          );
           _showErrorDialog(context, 'Request sent successfully');
         } else {
           print('Failed to send request');

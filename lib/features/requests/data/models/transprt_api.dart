@@ -8,7 +8,6 @@ import 'package:mute_motion_passenger/features/requests/data/models/driver_model
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../trip_track/provider/map_provider.dart';
 
 class TransportApi {
   static const transportUrl =

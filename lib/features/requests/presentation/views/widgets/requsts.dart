@@ -12,6 +12,7 @@ import 'package:mute_motion_passenger/features/requests/presentation/views/widge
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/custom_drop_downn.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/stack.dart';
 import 'package:mute_motion_passenger/features/trip_track/provider/map_provider.dart';
+// import 'package:mute_motion_passenger/features/trip_track/provider/map_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -261,6 +262,11 @@ class _RequestsState extends State<Requests> {
                           myDestination: LatLng(lat, long),
                           myCost: costController.text,
                         );
+                        // Provider.of<MapProvider>(context,listen: false).getlocationsname(
+                        //   myLocationname: locationController.text,
+                        //   myDestinationname: destinationnController.text,
+
+                        // );
                         if (formKey.currentState!.validate()) {
                           final SharedPreferences prefs =
                               await SharedPreferences.getInstance();
