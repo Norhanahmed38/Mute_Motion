@@ -17,7 +17,13 @@ Widget myDivider() => Padding(
       ),
     );
 
-void navigateTo(context, widget) => Navigator.pushReplacement(
+void navigateTo(context, widget) => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => widget,
+      ),
+    );
+    void navigateto(context, widget) => Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => widget,

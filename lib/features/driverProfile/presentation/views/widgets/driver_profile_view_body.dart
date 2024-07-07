@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/features/Rating/presentation/views/rating_view.dart';
+import 'package:mute_motion_passenger/features/chat/presentation/views/chat_screen_view.dart';
+import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/chat_screen_view_body.dart';
+import 'package:mute_motion_passenger/features/driverProfile/presentation/views/widgets/customtext.dart';
+import 'package:mute_motion_passenger/features/requests/data/models/driver_model.dart';
+import 'package:mute_motion_passenger/features/driverProfile/data/request_api.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../constants.dart';
@@ -265,20 +272,48 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                             minimumSize: Size(60.w, 60.h),
                           ),
                         ),
-                        SizedBox(
-                          width: 30.w,
-                        ),
-                        ElevatedButton(
-                          child: Text(
-                            "Confirm Request",
-                            style: TextStyle(fontSize: 20.sp, color: Colors.white),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RouteScreen(
 
+                      SizedBox(
+                        height: 40.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 10.h, left: 5.w),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                child: Text("Cancel",
+                                    style: TextStyle(
+                                        fontSize: 20.sp, color: Colors.white)),
+                                onPressed: () {
+                                  navigateTo(context, ChatScreenView());
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.r),
+                                  ),
+                                  backgroundColor: kPrimaryColor,
+                                  minimumSize: Size(60.w, 60.h),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 30.w,
+                              ),
+                              ElevatedButton(
+                                child: Text("confirm request",
+                                    style: TextStyle(
+                                        fontSize: 20.sp, color: Colors.white)),
+                                onPressed: () {
+                                  print('Button pressed');
+                                  ApiService.sendRequest(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.r),
+                                  ),
+                                  backgroundColor: kPrimaryColor,
+                                  minimumSize: Size(60.w, 60.h),
                                 ),
                               ),
                             );

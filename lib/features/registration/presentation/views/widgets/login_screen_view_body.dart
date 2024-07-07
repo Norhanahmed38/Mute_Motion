@@ -161,6 +161,8 @@ class _LoginScreenViewBodyState extends State<LoginScreenViewBody> {
                       borderRadius: BorderRadius.circular(20.r)),
                   child: MaterialButton(
                       onPressed: () async {
+                        print(emailCont.text);
+                        print(passCont.text);
                         if (formKey.currentState!.validate()) {
                           setState(() {
                             _isLoading = true;

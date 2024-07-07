@@ -15,7 +15,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mute_motion_passenger/features/chat/controller/chat_controller.dart';
 import 'package:mute_motion_passenger/features/chat/model/messages.dart';
 import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/message_item.dart';
+import 'package:mute_motion_passenger/features/translator/controller/translator_controller.dart';
+import 'package:mute_motion_passenger/features/translator/model/tranlator_messages.dart';
 import 'package:mute_motion_passenger/features/translator/presentation/views/translator_view.dart';
+import 'package:mute_motion_passenger/features/translator/presentation/views/widgets/translator_message_item.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -36,7 +39,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
   String? record;
   TextEditingController msgController = TextEditingController();
   TextEditingController ipController = TextEditingController();
-  ChatController chatController = ChatController();
+  TranslatorController chatController = TranslatorController();
   var formKey = GlobalKey<FormState>();
   late IO.Socket socket;
   String Time = '';
@@ -52,7 +55,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
           setState(() {
              receivedMessages.add(newMessage);
              var messageJson = {"message": newMessage, "sentByMe": '2'};
-          chatController.chatMessages.add(Message.fromJson(messageJson));
+          chatController.chatMessages.add(TranslatorMessage.fromJson(messageJson));
            
           });
         }
@@ -161,7 +164,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
                 String formattedTime = DateFormat('h:mm a').format(now);
                 Time = formattedTime;
                 print(formattedTime);
-                return MessageItem(
+                return TranslatorMessageItem(
                   sentByMe: currentItem.sentByMe == "1",
                   message: currentItem.message,
                   time: Time,
@@ -302,7 +305,7 @@ class _TextToSignBodyState extends State<TextToSignBody> {
       } else {
         setState(() {
           var messageJson = {"message": text, "sentByMe": "1"};
-          chatController.chatMessages.add(Message.fromJson(messageJson));
+          chatController.chatMessages.add(TranslatorMessage.fromJson(messageJson));
         });
       }
     } catch (e) {

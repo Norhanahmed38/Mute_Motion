@@ -390,7 +390,7 @@ class _CreateProfileScreenBodyState extends State<CreateProfileScreenBody> {
                             });
                           },
                           child: Text(
-                            "Done",
+                            "Register",
                             style: GoogleFonts.comfortaa(
                                 fontSize: 20, color: Colors.white),
                           ),

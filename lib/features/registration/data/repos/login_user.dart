@@ -180,7 +180,10 @@ class LoginUserApi {
         // Check for the specific notification message and navigate accordingly
         if (message.notification!.body ==
             'Your ride request has been accepted by the driver.') {
-          navigateToRouteScreen();
+//           navigateToRouteScreen();
+
+//           navigateToMapScreen(); // Navigate to map screen
+ 
         }
       }
       print(message.notification!.body);
@@ -198,6 +201,7 @@ class LoginUserApi {
       }
       // Handle the notification tapped logic here
     });
+
   }
 
   void navigateToRouteScreen() {
