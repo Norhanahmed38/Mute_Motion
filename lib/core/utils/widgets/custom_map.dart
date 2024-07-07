@@ -156,7 +156,7 @@ class _MapScreenState extends State<MapScreen> {
                     children: [
                       Text(
                         'Location Name: $locationName',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -165,7 +165,7 @@ class _MapScreenState extends State<MapScreen> {
                   SizedBox(width: 10.0),
                   ElevatedButton(
                     onPressed: () async {
-                      navigateto(context, MainMenuScreenView());
+                      navigateto(context, const MainMenuScreenView());
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       await prefs.setString('locationName', locationName);
