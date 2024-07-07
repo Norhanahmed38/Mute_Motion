@@ -94,7 +94,7 @@ class _HadWidgetState extends State<HadWidget> {
                 padding: EdgeInsets.only(top: 35.h, left: 10.w),
                 child: IconButton(
                   onPressed: () {
-                    navigateTo(context, ProfileScreenView());
+                    navigateTo(context, const ProfileScreenView());
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,

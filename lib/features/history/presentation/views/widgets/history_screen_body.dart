@@ -94,7 +94,7 @@ class _HistoryScreenBodyState extends State<HistoryScreenBody> {
                         rate: "3.2",
                         psg_loc: order.locationName,
                         destination: order.destinationName,
-                        service: order.serviceType,
+                        paymentMethod: order.paymentMethod,
                         Cost: order.cost,
                       ),
                       SizedBox(height: 10.h),

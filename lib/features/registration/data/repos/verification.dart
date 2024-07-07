@@ -1,11 +1,8 @@
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
-import 'package:mute_motion_passenger/features/registration/data/models/verification_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:mute_motion_passenger/features/requests/presentation/views/requests_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../presentation/views/create_Profile_screen.dart';
 
 class Verification {
   String verificationUrl =
@@ -71,7 +68,7 @@ class Verification {
         print('Request successful');
         print('Response: ${response.data}');
       } else {
-        print('NOOOO');
+     
         _showErrorDialog(
             context, 'Invalid verification code', code1, code2, code3, code4);
       }

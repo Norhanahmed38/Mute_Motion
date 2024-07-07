@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/navdrawer/presentation/views/nav_drawer_view.dart';
@@ -25,6 +26,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
     email: '',
     phone: '',
     gender: '',
+    balance: '',
   );
 
   bool _isLoading = false;
@@ -42,7 +44,7 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString("token");
-      String? userId = prefs.getString("_id"); // Assuming _id is the user's ID
+      String? userId = prefs.getString("_id");
       UserModel userData = await ApiService.fetchUserData(token!);
       setState(() => _userData = userData);
       await _loadImage(userId!);
@@ -141,64 +143,20 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                             height: 75.h,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 16.h, left: 25.w),
+                            padding: EdgeInsets.only(top: 25.h, left: 25.w),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        '100',
-                                        style: TextStyle(
-                                          fontFamily: 'Comfortaa',
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Text(
-                                        ' Count of Req.',
-                                        style: TextStyle(
-                                          fontFamily: 'Comfortaa',
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(width: 50.w),
-                                  VerticalDivider(
-                                    color: Colors.white,
-                                    thickness: 2,
-                                    endIndent: 0,
-                                    indent: 20,
-                                    width: 10,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        ' EGP 2500',
-                                        style: TextStyle(
-                                          fontFamily: 'Comfortaa',
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Text(
-                                        ' Cost of Rides',
-                                        style: TextStyle(
-                                          fontFamily: 'Comfortaa',
-                                          fontSize: 15.sp,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
+                                  Text(
+                                    'My Balance :  ${_userData.balance} EGP',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -208,16 +166,16 @@ class _ProfileScreenViewBodyState extends State<ProfileScreenViewBody> {
                       ),
                       SizedBox(height: 20.h),
                       Info(title: 'Name', subTitle: _userData.fullName),
-                      Divider(
+                      const Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                       Info(title: 'Email', subTitle: _userData.email),
-                      Divider(
+                      const Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                       Info(title: 'Phone', subTitle: _userData.phone),
-                      Divider(
+                      const Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                       Info(title: 'Gender', subTitle: _userData.gender),
-                      Divider(
+                      const Divider(
                           indent: 5, endIndent: 5, thickness: 0.5, height: 2),
                     ],
                   ),
@@ -277,7 +235,7 @@ class BottomSheetContent extends StatelessWidget {
   final VoidCallback takePhoto;
   final VoidCallback openGallery;
 
-  const BottomSheetContent({
+  const BottomSheetContent({super.key, 
     required this.takePhoto,
     required this.openGallery,
   });

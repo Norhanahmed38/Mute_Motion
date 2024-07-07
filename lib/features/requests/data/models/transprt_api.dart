@@ -66,8 +66,7 @@ class TransportApi {
 
         if (response.data != null) {
           final driverModel = DriverModel.fromJson(response.data);
-          Provider.of<MapProvider>(context,listen: false).getDriverModel(driverModel);
-          navigateTo(context, DriverProfileViewBody(driverModel: driverModel, location: '', destination: '', cost: '',));
+          navigateTo(context, DriverProfileViewBody(driverModel: driverModel));
         } else {
           _showErrorDialog(
             context,

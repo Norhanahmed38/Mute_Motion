@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
@@ -17,6 +18,29 @@ class _DestMapState extends State<DestMap> {
   String destinationName = '';
   double lat = 0.0;
   double long = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    // تحديد موقع مستشفى الزقازيق الجامعي
+    final initialLatitude = 30.5965;
+    final initialLongitude = 31.4894;
+
+    // إضافة marker لموقع مستشفى الزقازيق الجامعي
+    markers.add(
+      Marker(
+        markerId: MarkerId('Zagazig University Hospital'),
+        position: LatLng(initialLatitude, initialLongitude),
+      ),
+    );
+
+    // تحديث الحالة الأولية للخريطة
+    setState(() {
+      lat = initialLatitude;
+      long = initialLongitude;
+      destinationName = '';
+    });
+  }
 
   @override
   void dispose() {
@@ -53,8 +77,8 @@ class _DestMapState extends State<DestMap> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Location Not Found'),
-            content: Text('The entered location could not be found.'),
+            title: const Text('Location Not Found'),
+            content: const Text('The entered location could not be found.'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -82,7 +106,7 @@ class _DestMapState extends State<DestMap> {
               mapController = controller;
             },
             initialCameraPosition: CameraPosition(
-              target: LatLng(0, 0),
+              target: LatLng(lat, long),
               zoom: 10.0,
             ),
             markers: markers,
@@ -122,7 +146,7 @@ class _DestMapState extends State<DestMap> {
                       children: [
                         Text(
                           'Dest Name: $destinationName',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -131,7 +155,7 @@ class _DestMapState extends State<DestMap> {
                     SizedBox(width: 10.0),
                     ElevatedButton(
                       onPressed: () async {
-                        navigateTo(context, Requests());
+                        navigateto(context, const MainMenuScreenView());
 
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
@@ -139,7 +163,6 @@ class _DestMapState extends State<DestMap> {
                             'destinationName', destinationName);
                         await prefs.setDouble('lat', lat);
                         await prefs.setDouble('long', long);
-                        print(lat);
                         destinationnController.text = destinationName;
                       },
                       child: Text('ok'),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart';
+import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
@@ -56,8 +57,8 @@ class _MapScreenState extends State<MapScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Location Not Found'),
-            content: Text('The entered location could not be found.'),
+            title: const Text('Location Not Found'),
+            content: const Text('The entered location could not be found.'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -155,7 +156,7 @@ class _MapScreenState extends State<MapScreen> {
                     children: [
                       Text(
                         'Location Name: $locationName',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -164,7 +165,7 @@ class _MapScreenState extends State<MapScreen> {
                   SizedBox(width: 10.0),
                   ElevatedButton(
                     onPressed: () async {
-                      navigateTo(context, Requests());
+                      navigateto(context, const MainMenuScreenView());
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       await prefs.setString('locationName', locationName);
