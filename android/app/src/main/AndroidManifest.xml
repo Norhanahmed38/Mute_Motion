@@ -50,8 +50,12 @@
         <meta-data android:name="flutterEmbedding" android:value="2"/>
 
         <!-- Meta-data for Google Maps API key -->
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDj_BNAFpTh9nIMK5lxMJYC8AzOXXh0RaY"/>
 
+        <meta-data
+            android:name="com.google.android.gms.v3.API_KEY"
+            android:value="AIzaSyC2tJzxfaITv3Nt7WhQczl4q75P5-EVhl4" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC2tJzxfaITv3Nt7WhQczl4q75P5-EVhl4" />
         <!-- Meta-data for Google Play services version -->
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
     </application>
