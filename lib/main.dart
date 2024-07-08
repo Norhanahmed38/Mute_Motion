@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mute_motion_passenger/features/registration/presentation/views/login_screen_view.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

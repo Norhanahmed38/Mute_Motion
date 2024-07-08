@@ -157,21 +157,40 @@ class CreateUserAPI {
         _showErrorDialog(
             context,
             "This Email Already Exists",
-            firstName,
-            lastName,
-            email,
-            pass,
-            verifPass,
-            cardNumberController,
-            expiryDateController,
-            cvvController,
-            phone);
+            firstnameCont,
+            lastnameCont,
+            emailCont,
+            passwordCont,
+            passwordConfirmCont,
+            cardNumberCont,
+            expiryDateCont,
+            cvvCont,
+            phoneCont);
 
         print('Request failed with status: ${response.statusCode}');
         print('Response: ${response.data}');
       }
     } catch (error) {
-      print('Error: $error');
+      if (error is DioException) {
+        print('DioException: ${error.response?.data}');
+        if (error.response?.statusCode == 400) {
+          _showErrorDialog(
+            context,
+            "This Email Already Exists",
+            firstnameCont,
+            lastnameCont,
+            emailCont,
+            passwordCont,
+            passwordConfirmCont,
+            cardNumberCont,
+            expiryDateCont,
+            cvvCont,
+            phoneCont,
+          );
+        }
+      } else {
+        print('Error: $error');
+      }
     }
   }
 }
@@ -202,7 +221,6 @@ void _showErrorDialog(
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, fontFamily: 'Comfortaa', color: kPrimaryColor),
-          // ),
         ),
         actions: [
           TextButton(

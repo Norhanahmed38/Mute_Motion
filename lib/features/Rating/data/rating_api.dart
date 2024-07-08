@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/features/history/presentation/views/history_screen_view.dart';
+import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -97,7 +99,7 @@ class RatingApi {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                navigateTo(context, MainMenuScreenView());
               },
               style: TextButton.styleFrom(
                 foregroundColor: kPrimaryColor,
