@@ -28,8 +28,8 @@ class MapProvider extends ChangeNotifier {
   }
 
   getlocationsname({String? myLocationname, String? myDestinationname}) {
-    locationname = myLocationname;
-    destinationname = myDestinationname;
+    var locationname = myLocationname;
+    var destinationname = myDestinationname;
   }
 
   LocationData? currentLocation;
