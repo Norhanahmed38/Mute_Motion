@@ -49,7 +49,7 @@ class AboutUsScreenBody extends StatelessWidget {
               ),
               SizedBox(height: 10.h),
               Image.asset(
-                'assets/imaages/US.jpg',
+                'assets/images/US.jpg',
                 height: 200.h, // Using ScreenUtil for image height
                 fit: BoxFit.cover,
               ),

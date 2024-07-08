@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -17,11 +18,18 @@ class MapProvider extends ChangeNotifier {
   LatLng? destination;
   String? cost;
 
+
   void getMyData({LatLng? myLocation, LatLng? myDestination, String? myCost}) {
+
     location = myLocation;
     destination = myDestination;
     cost = myCost;
     notifyListeners();
+  }
+
+  getlocationsname({String? myLocationname, String? myDestinationname}) {
+    locationname = myLocationname;
+    destinationname = myDestinationname;
   }
 
   LocationData? currentLocation;
