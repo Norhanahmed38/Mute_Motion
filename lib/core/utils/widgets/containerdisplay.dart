@@ -4,8 +4,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:mute_motion_passenger/core/utils/widgets/custembutten.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/cutemfield.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
+import 'package:mute_motion_passenger/features/trip_track/provider/map_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../features/chat/presentation/views/chat_screen_view.dart';
 
 class maindisplay extends StatelessWidget {
   const maindisplay({
@@ -91,7 +95,7 @@ class StartDrive extends StatelessWidget {
           SizedBox(
             height: 18,
           ),
-          Text('1 hr 10 min \(10km\)',
+          Text('1 hr 30 min \(200km\)',
               style: TextStyle(
                   fontSize: 21,
                   fontFamily: 'comfortaa',
@@ -135,35 +139,40 @@ class setLocationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 18,
+        const SizedBox(
+          height: 10,
         ),
-        Text('Set your loction',
+        const Text(' your ride',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 21,
                 fontFamily: 'comfortaa',
                 color: Color(0xffffffff))),
 
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 29.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 29.0),
           child: Divider(
             color: Color(0xFFFFFFFF),
           ),
         ),
-        SizedBox(
-          height: 24,
+        const SizedBox(
+          height: 15,
         ),
-        custemlabel(icon: Icons.location_on_sharp, Place: 'Elzamalk - Egypt'),
-        SizedBox(
-          height: 24,
+        custemlabel(icon: Icons.location_on_sharp, Place: locationController.text),
+        const SizedBox(
+          height: 15,
         ),
         custemlabel(
             icon: FontAwesomeIcons.locationArrow,
-            Place: 'Cairo Festival Mall - Nasr City'),
-        SizedBox(
-          height: 24,
+            Place: destinationnController.text),
+        const SizedBox(
+          height: 15,
         ),
+        const custemlabel(icon: Icons.monetization_on, Place: "900 EGP"),
+        const SizedBox(
+          height: 15,
+        ),
+
         //TextField(e),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -173,21 +182,25 @@ class setLocationWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: 51,
+                  height: 45,
                   width: 171,
                   decoration: BoxDecoration(
                       color: const Color(0xffffffff),
                       borderRadius: BorderRadius.circular(15)),
                   child: custembuttenWhite(
                     googleMapController: googleMapControllerconfirm,
-                    text: 'Confirm',
-                    onPressed: onPressed,
+                    text: 'Chat',
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ChatScreenView()),
+                      );
+                    },
                   ),
                 ),
                 SizedBox(
                   width: 20,
                 ),
-                custembuttensearch()
               ],
             ),
           ),
