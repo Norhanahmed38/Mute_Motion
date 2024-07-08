@@ -270,12 +270,12 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                                 onPressed: () {
                                   ApiService.sendRequest(context);
 
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => RouteScreen(),
-                                  //   ),
-                                  // );
+                                  Navigator.push(
+                                   context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RouteScreen(),
+                                    ),
+                                  );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
