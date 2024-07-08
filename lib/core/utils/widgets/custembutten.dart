@@ -15,7 +15,7 @@ class custembuttensearch extends StatelessWidget {
       width: 171,
       decoration:ShapeDecoration(
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 2.50, color: Color(0xFFF8F8F8)),
+          side: const BorderSide(width: 2.50, color: Color(0xFFF8F8F8)),
           borderRadius: BorderRadius.circular(15),
         ),
       ),
@@ -39,7 +39,6 @@ late  bool isconfirm;
     final VoidCallback onPressed;
 get confirm{
   return isconfirm;
-  print(isconfirm);
 }
 
    @override

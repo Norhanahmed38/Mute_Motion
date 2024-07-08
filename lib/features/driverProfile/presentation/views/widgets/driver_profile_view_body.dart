@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mute_motion_passenger/constants.dart';
+import 'package:mute_motion_passenger/core/utils/widgets/custom_map.dart';
 import 'package:mute_motion_passenger/features/Rating/presentation/views/rating_view.dart';
 import 'package:mute_motion_passenger/features/chat/presentation/views/chat_screen_view.dart';
 import 'package:mute_motion_passenger/features/chat/presentation/views/widgets/chat_screen_view_body.dart';
 import 'package:mute_motion_passenger/features/driverProfile/presentation/views/widgets/customtext.dart';
+import 'package:mute_motion_passenger/features/map/map.dart';
 import 'package:mute_motion_passenger/features/requests/data/models/driver_model.dart';
 import 'package:mute_motion_passenger/features/driverProfile/data/request_api.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -118,10 +121,15 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          FaIcon(
-                            FontAwesomeIcons.solidStar,
-                            color: Color(0xffF7B731),
-                            size: 15.sp,
+                          GestureDetector(
+                            onTap: () {
+                              navigateTo(context, MapScreenn());
+                            },
+                            child: FaIcon(
+                              FontAwesomeIcons.solidStar,
+                              color: Color(0xffF7B731),
+                              size: 15.sp,
+                            ),
                           ),
                           Text(
                             " $displayedRating (${widget.driverModel?.driver?.numberOfReviews}Reviewers)",
