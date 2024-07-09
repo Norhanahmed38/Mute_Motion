@@ -853,17 +853,10 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
                     cursorColor: kPrimaryColor,
                     controller: msgController,
                     onChanged: (text) {
-                      if (text.isNotEmpty && !isTyping) {
-                        sendTypingEvent();
-                        setState(() {
-                          isTyping = true;
-                        });
-                      } else if (text.isEmpty && isTyping) {
-                        sendStopTypingEvent();
-                        setState(() {
-                          isTyping = false;
-                        });
-                      }
+                     sendTypingEvent();
+                    },
+                    onFieldSubmitted: (text){
+                       sendStopTypingEvent();
                     },
                     decoration: InputDecoration(
                       hintText: 'Message',
@@ -918,7 +911,9 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
       "receiverId": driverId,
       "senderType": "passenger"
     };
-    socket.emit('typing', typingEvent);
+    socket.emit('typing', {"senderId": id,
+      "receiverId": driverId,
+      "senderType": "passenger"});
   }
 
   void sendStopTypingEvent() {
@@ -927,6 +922,8 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
       "receiverId": driverId,
       "senderType": "passenger"
     };
-    socket.emit('stop-typing', stopTypingEvent);
+    socket.emit('stop-typing', {"senderId": id,
+      "receiverId": driverId,
+      "senderType": "passenger"});
   }
 }
