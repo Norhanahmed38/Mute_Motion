@@ -125,10 +125,20 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                             onTap: () {
                               navigateTo(context, MapScreenn());
                             },
-                            child: FaIcon(
-                              FontAwesomeIcons.solidStar,
-                              color: Color(0xffF7B731),
-                              size: 15.sp,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RouteScreen(),
+                                  ),
+                                );
+                              },
+                              child: FaIcon(
+                                FontAwesomeIcons.solidStar,
+                                color: Color(0xffF7B731),
+                                size: 15.sp,
+                              ),
                             ),
                           ),
                           Text(
@@ -277,14 +287,6 @@ class _DriverProfileViewBodyState extends State<DriverProfileViewBody> {
                                         fontSize: 20.sp, color: Colors.white)),
                                 onPressed: () {
                                   ApiService.sendRequest(context);
-
-                                  Navigator.push(
-                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => RouteScreen(),
-                                    ),
-                                  );
-
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
