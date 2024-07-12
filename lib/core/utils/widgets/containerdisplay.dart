@@ -118,7 +118,7 @@ class StartDrive extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)),
               child: custembuttenWhite(
                 googleMapController: googleMapControllerstartdrive,
-                text: 'Rate your driver',
+                text: 'Rate your Driver',
                 onPressed: () {
                   Navigator.push(
                     context,

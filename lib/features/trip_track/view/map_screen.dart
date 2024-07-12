@@ -33,7 +33,7 @@ class RouteScreen extends StatelessWidget {
                 initialCameraPosition: CameraPosition(
                   target: LatLng(provider.currentLocation!.latitude!,
                       provider.currentLocation!.longitude!),
-                  zoom: 14.0,
+                  zoom: 14,
                 ),
                 polylines: provider.polylines,
               ),
@@ -41,7 +41,7 @@ class RouteScreen extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: maindisplay(),
+                child:maindisplay(),
               ),
             ],
           ),

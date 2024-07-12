@@ -187,8 +187,8 @@ class MapProvider extends ChangeNotifier {
               ),
             );
             controller?.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
-              target: destinationPoint,
-              zoom: 12,
+              target: destinationPoint ,
+              zoom: 13,
             )));
             notifyListeners();
             break; // Exit loop if successful
