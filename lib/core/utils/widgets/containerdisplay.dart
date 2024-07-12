@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import 'package:mute_motion_passenger/core/utils/widgets/custembutten.dart';
 import 'package:mute_motion_passenger/core/utils/widgets/cutemfield.dart';
 import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
-import 'package:mute_motion_passenger/features/trip_track/provider/map_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../features/Rating/presentation/views/widgets/rating_view_body.dart';
 import '../../../features/chat/presentation/views/chat_screen_view.dart';
 
@@ -122,7 +119,8 @@ class StartDrive extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RatingViewBody()),
+                    MaterialPageRoute(
+                        builder: (context) => const RatingViewBody()),
                   );
                 },
               ))
@@ -154,7 +152,6 @@ class setLocationWidget extends StatelessWidget {
                 fontSize: 21,
                 fontFamily: 'comfortaa',
                 color: Color(0xffffffff))),
-
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 29.0),
           child: Divider(
@@ -164,7 +161,8 @@ class setLocationWidget extends StatelessWidget {
         const SizedBox(
           height: 15,
         ),
-        custemlabel(icon: Icons.location_on_sharp, Place: locationController.text),
+        custemlabel(
+            icon: Icons.location_on_sharp, Place: locationController.text),
         const SizedBox(
           height: 15,
         ),
@@ -174,12 +172,6 @@ class setLocationWidget extends StatelessWidget {
         const SizedBox(
           height: 15,
         ),
-        const custemlabel(icon: Icons.monetization_on, Place: "900 EGP"),
-        const SizedBox(
-          height: 15,
-        ),
-
-        //TextField(e),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: SingleChildScrollView(
@@ -196,15 +188,15 @@ class setLocationWidget extends StatelessWidget {
                   child: custembuttenWhite(
                     googleMapController: googleMapControllerconfirm,
                     text: 'Chat',
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ChatScreenView()),
+                        MaterialPageRoute(
+                            builder: (context) => const ChatScreenView()),
                       );
                     },
                   ),
                 ),
-
                 SizedBox(
                   width: 20,
                 ),
@@ -218,7 +210,6 @@ class setLocationWidget extends StatelessWidget {
                     googleMapController: googleMapControllerconfirm,
                     text: 'arrival time',
                     onPressed: onPressed,
-
                   ),
                 ),
               ],
