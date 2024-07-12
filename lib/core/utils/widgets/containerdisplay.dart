@@ -9,6 +9,7 @@ import 'package:mute_motion_passenger/features/trip_track/provider/map_provider.
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../features/Rating/presentation/views/widgets/rating_view_body.dart';
 import '../../../features/chat/presentation/views/chat_screen_view.dart';
 
 class maindisplay extends StatelessWidget {
@@ -117,8 +118,13 @@ class StartDrive extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)),
               child: custembuttenWhite(
                 googleMapController: googleMapControllerstartdrive,
-                text: 'Start Drive',
-                onPressed: () {},
+                text: 'Rate your driver',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RatingViewBody()),
+                  );
+                },
               ))
         ],
       ),
@@ -198,8 +204,22 @@ class setLocationWidget extends StatelessWidget {
                     },
                   ),
                 ),
+
                 SizedBox(
                   width: 20,
+                ),
+                Container(
+                  height: 45,
+                  width: 171,
+                  decoration: BoxDecoration(
+                      color: const Color(0xffffffff),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: custembuttenWhite(
+                    googleMapController: googleMapControllerconfirm,
+                    text: 'arrival time',
+                    onPressed: onPressed,
+
+                  ),
                 ),
               ],
             ),

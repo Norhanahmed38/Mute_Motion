@@ -46,7 +46,7 @@ class RouteScreen extends StatelessWidget {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: provider.getRoute,
+            onPressed: provider.getRoute1,
             child: const Icon(Icons.directions),
           ),
         ),

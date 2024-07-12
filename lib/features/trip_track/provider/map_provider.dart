@@ -27,10 +27,6 @@ class MapProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getlocationsname({String? myLocationname, String? myDestinationname}) {
-    var locationname = myLocationname;
-    var destinationname = myDestinationname;
-  }
 
   LocationData? currentLocation;
   final String apiKey = 'AIzaSyCzJMVMlvGMUOEmy5Dzpy2mrbicp_gylHk';
@@ -38,7 +34,8 @@ class MapProvider extends ChangeNotifier {
   Set<Polyline> polylines = {};
 
   void initState() {
-    getCurrentLocation();
+   getCurrentLocation();
+
   }
 
   Future<void> getCurrentLocation() async {
@@ -158,8 +155,8 @@ class MapProvider extends ChangeNotifier {
             'origin': {
               'location': {
                 'latLng': {
-                  'latitude': currentLocation!.latitude,
-                  'longitude': currentLocation!.longitude
+                  'latitude': location!.latitude,
+                  'longitude': location!.longitude
                 }
               }
             },
