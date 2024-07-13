@@ -8,7 +8,6 @@ import 'package:mute_motion_passenger/features/requests/data/models/driver_model
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class TransportApi {
   static const transportUrl =
       'https://mutemotion.onrender.com/api/v1/findNearestDriver';
@@ -58,6 +57,12 @@ class TransportApi {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('Request successful');
         print(response);
+
+        // تنظيف الكنترولرز هنا بعد نجاح الطلب
+        locationCont.clear();
+        destCont.clear();
+        costCont.clear();
+
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString("sessionId", response.data["sessionId"]);
         await prefs.setString("driver_id", response.data["driver"]["_id"]);
