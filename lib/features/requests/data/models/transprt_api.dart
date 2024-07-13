@@ -58,9 +58,7 @@ class TransportApi {
         print('Request successful');
         print(response);
 
-        // تنظيف الكنترولرز هنا بعد نجاح الطلب
-        locationCont.clear();
-        destCont.clear();
+       
         costCont.clear();
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -132,10 +130,7 @@ class TransportApi {
           actions: [
             TextButton(
               onPressed: () {
-                destination.clear();
-                location.clear();
                 cost.clear();
-
                 Navigator.of(context).pop();
               },
               child: Container(

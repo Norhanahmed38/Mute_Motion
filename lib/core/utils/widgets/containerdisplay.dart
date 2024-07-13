@@ -26,9 +26,6 @@ class displaydetailscontaine extends StatefulWidget {
   const displaydetailscontaine({
     super.key,
   });
-
-  //static final GoogleMapController? googleMapController;
-
   @override
   State<displaydetailscontaine> createState() => _displaydetailscontaineState();
 }

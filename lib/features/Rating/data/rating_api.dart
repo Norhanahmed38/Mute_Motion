@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mute_motion_passenger/constants.dart';
 import 'package:mute_motion_passenger/features/history/presentation/views/history_screen_view.dart';
 import 'package:mute_motion_passenger/features/mainMenu/presentation/views/mainMenu_screen_view.dart';
+import 'package:mute_motion_passenger/features/requests/presentation/views/widgets/requsts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -100,6 +101,10 @@ class RatingApi {
             TextButton(
               onPressed: () {
                 navigateTo(context, MainMenuScreenView());
+                locationController.clear();
+                destinationnController.clear();
+                //  destination.clear();
+                // location.clear();
               },
               style: TextButton.styleFrom(
                 foregroundColor: kPrimaryColor,
