@@ -714,11 +714,11 @@ class _ChatScreenViewBodyState extends State<ChatScreenViewBody> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: IconButton(
+        /* leading: IconButton(
           iconSize: 30.w,
           onPressed: () {},
           icon: const Icon(Icons.arrow_back_ios, color: kPrimaryColor),
-        ),
+        ), */
         title: Text(
           'Driver',
           textAlign: TextAlign.center,
