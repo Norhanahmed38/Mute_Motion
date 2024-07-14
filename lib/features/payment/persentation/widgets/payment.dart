@@ -93,7 +93,7 @@ class _PaymentBodyState extends State<PaymentBody> {
                           width: 150.w,
                           child: CustomTextFormField(
                             controller: expdateController,
-                            hintText: '2 / 2025',
+                            hintText: '5/2028',
                             labelText: 'Expiry Date',
                             validatorMessage: 'Expiry Date must not be empty',
                           ),

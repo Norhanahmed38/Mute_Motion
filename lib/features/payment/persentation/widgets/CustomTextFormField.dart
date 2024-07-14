@@ -37,6 +37,15 @@ class CustomTextFormField extends StatelessWidget {
         if (value == null || value.isEmpty) {
           return validatorMessage;
         }
+        if (labelText == 'Card Number' && value.length != 16) {
+          return 'Card Number must be 16 digits';
+        }
+        if (labelText == 'CVV' && value.length != 3) {
+          return 'CVV must be 3 digits';
+        }
+        if (labelText == 'Expiry Date' && !RegExp(r'^(0?[1-9]|1[012])\/([0-9]{4})$').hasMatch(value)) {
+          return 'Expiry Date must be in MM/YYYY format';
+        }
         return null;
       },
     );
